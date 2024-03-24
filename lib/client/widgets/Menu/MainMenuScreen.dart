@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/widgets/GameCard/GameCardState.dart';
 import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
@@ -15,8 +16,7 @@ class MainMenuSceenWidget extends StatelessWidget {
 
     return ChangeNotifierProvider<GameCardWidgetState>(
         create: (context) => GameCardWidgetState(),
-        builder: (context, rre) {
-          return Scaffold(
+        child: Scaffold(
             backgroundColor: palette.backgroundMain,
             body: ResponsiveScreen(
               squarishMainArea: Center(
@@ -37,6 +37,13 @@ class MainMenuSceenWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FilledButton(
+                    child: const Text('Играть'),
+                    onPressed: () {
+                      context.go('/game');
+                    },
+                  ),
+                  _gap,
+                  FilledButton(
                     child: const Text('Сценарии'),
                     onPressed: () {},
                   ),
@@ -53,8 +60,8 @@ class MainMenuSceenWidget extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        });
+          )
+    );
   }
 
   static const _gap = SizedBox(height: 10);

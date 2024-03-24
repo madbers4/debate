@@ -21,9 +21,8 @@ class GameCardWidget extends StatelessWidget {
 
           final front = Card(
             child: Container(
-              // 89 x 57
-              height: 267,
-              width: 171,
+              height: MediaQuery.of(context).size.width * 0.087 * 1.8,
+              width: MediaQuery.of(context).size.width * 0.057 * 1.8,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(

@@ -17,8 +17,8 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: Container(
-      height: 400,
-      width: 600,
+      height: MediaQuery.of(context).size.width * 0.4 / 1.7,
+      width: MediaQuery.of(context).size.width * 0.6 / 1.7,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
