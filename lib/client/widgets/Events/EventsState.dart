@@ -1,0 +1,3 @@
+class EventsState {
+  // List events;
+}
