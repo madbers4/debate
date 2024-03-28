@@ -22,7 +22,7 @@ class GamesScreen extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: Center(
                 child: Text(
-                  'Select level',
+                  'Выбор сценариев  ',
                   style:
                       TextStyle(fontFamily: 'Permanent Marker', fontSize: 30),
                 ),
@@ -51,7 +51,7 @@ class GamesScreen extends StatelessWidget {
           onPressed: () {
             GoRouter.of(context).go('/');
           },
-          child: const Text('Back'),
+          child: const Text('Назад'),
         ),
       ),
     );

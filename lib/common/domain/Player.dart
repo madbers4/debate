@@ -1,17 +1,17 @@
-import 'package:v1/common/domain/Id.dart';
+import 'package:v1/common/domain/DTO.dart';
 
-class Player implements Id {
+class Player implements DTO {
   String name;
   String id;
 
   Player({required this.id, required this.name});
-  
-  Player.fromJson(Map<String, dynamic> json) 
+
+  Player.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'] as String,
         name = json['name'] as String;
 
   Map toJson() => {
-      'id': id,
-      'name': name,
-  };
+        'id': id,
+        'name': name,
+      };
 }

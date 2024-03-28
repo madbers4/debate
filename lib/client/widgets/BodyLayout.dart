@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:v1/client/widgets/Events/EventsWidget.dart';
 import 'package:v1/client/widgets/Timer.dart';
-
 
 class BodyLayout extends StatelessWidget {
   const BodyLayout({
@@ -12,7 +12,18 @@ class BodyLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TopTimer(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TopTimer(),
+            FilledButton(
+              onPressed: () {
+                GoRouter.of(context).go('/');
+              },
+              child: const Text('Меню'),
+            ),
+          ],
+        ),
         const EventsWidget(),
       ],
     );

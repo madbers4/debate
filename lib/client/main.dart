@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/AppState.dart';
 import 'package:v1/client/Router.dart';
+import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/widgets/style/palette.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(create: (context) => Palette()),
+        ChangeNotifierProvider(create: (context) => AppState()),
       ],
       child: MaterialApp.router(
         title: 'Namer App',
