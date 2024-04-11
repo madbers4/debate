@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/AppState.dart';
-import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/widgets/GameCard/GameCardState.dart';
 import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
 import 'package:v1/client/widgets/style/palette.dart';
@@ -15,7 +13,6 @@ class MainMenuSceenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
-    final appState = context.watch<AppState>();
 
     return ChangeNotifierProvider<GameCardWidgetState>(
         create: (context) => GameCardWidgetState(),
@@ -26,7 +23,7 @@ class MainMenuSceenWidget extends StatelessWidget {
               child: Transform.rotate(
                 angle: -0.1,
                 child: Text(
-                  appState.player == null ? 'Дебаты' : appState.player!.name,
+                  'Дебаты',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontFamily: 'Permanent Marker',

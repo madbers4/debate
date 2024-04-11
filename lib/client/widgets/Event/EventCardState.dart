@@ -1,4 +1,4 @@
-import 'package:v1/common/domain/GameCard.dart';
+import 'package:v1/common/GameCard.dart';
 
 class EventsState {
   Set<GameCard> cards;

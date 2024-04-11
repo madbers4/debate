@@ -1,35 +1,34 @@
-import 'dart:convert';
-
 import 'package:socket_io/socket_io.dart';
-import 'package:v1/common/domain/Player.dart';
-import 'package:v1/common/domain/SocketDTO.dart';
+import 'package:v1/common/features/infrastructure/Provider.dart';
+import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
+import 'package:v1/common/features/infrastructure/service/SocketService.dart';
+import 'package:v1/server/features/autorization/AutorizationService.dart';
+import 'package:v1/server/features/rooms/RoomsService.dart';
 
 handler(data) {}
 
 void main(List<String> arguments) {
-  // Dart server
-  var io = Server();
+  final io = Server();
+  final socketServiceProvider = Provider<SocketService>();
 
-  // var nsp = io.of('/some');
-  // nsp.on('conn(client) {
-  //   print('connection /some');
-  //   client.on('msg', (data) {
-  //     print('data from /some => $data');
-  //     client.emit('fromServer', "hello world 2");
-  //   });
-  // });ection',
+  socketServiceProvider
+      .add(RoomsService(serviceProvider: socketServiceProvider));
+  socketServiceProvider
+      .add(AutorizationService(serviceProvider: socketServiceProvider));
 
   io.on('connection', (client) {
     print('connection default namespace');
-    client.on('data', (data) {
-      print('data from default => ');
-      print(Player.fromJson(jsonDecode(data)));
-      // client.emit('fromServer', "hello world");
-    });
+    final socketClient = SocketClient(io: client);
 
-    final player = Player(id: '1', name: 'Furina');
-    final bus = SocketBus(player.toJson(), '/', 'player');
-    client.emit('data', jsonEncode(bus.toJson()));
+    for (final service in socketServiceProvider.getAll()) {
+      service.addClient(socketClient);
+    }
+
+    client.on('disconnect', (_) {
+      for (final service in socketServiceProvider.getAll()) {
+        service.removeClient(socketClient);
+      }
+    });
   });
 
   io.listen(3000);

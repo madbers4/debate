@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class GameCardWidgetState extends ChangeNotifier {
   CardSide cardSide = CardSide.FRONT;
 
-  onFlip() {
+  flip() {
     if (cardSide == CardSide.FRONT) {
       cardSide = CardSide.BACK;
     } else {

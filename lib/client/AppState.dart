@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:v1/client/api/ApiClient.dart';
-import 'package:v1/common/domain/Player.dart';
+import 'package:v1/client/api/AutorizationClient.dart';
+import 'package:v1/common/features/autorization/AutorizationToken.dart';
 
 class AppState extends ChangeNotifier {
-  ApiClient _client = ApiClient();
-  Player? player;
+  AutorizationToken? authToken;
+  AutorizationClient authClient;
 
-  AppState() {
-    _client.subscribe('/', <Player>(p) {
-      player = p;
+  AppState(this.authClient) {
+    authClient.subToken((token) {
+      authToken = token;
       notifyListeners();
-    }, 'player', Player.fromJson);
+    });
   }
 }

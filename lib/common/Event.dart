@@ -1,4 +1,4 @@
-import 'package:v1/common/domain/Id.dart';
+import 'package:v1/common/features/infrastructure/dto/Id.dart';
 
 class Event implements Id {
   String id;

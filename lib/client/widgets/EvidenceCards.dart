@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:v1/common/domain/GameCard.dart';
+import 'package:v1/common/GameCard.dart';
 import 'package:v1/client/widgets/GameCard/GameCardWidget.dart';
 
 class EvidencesCards extends StatelessWidget {

@@ -1,0 +1,4 @@
+enum SignInFailReason {
+  WrongUserOrPassword,
+  InvalidToken
+}

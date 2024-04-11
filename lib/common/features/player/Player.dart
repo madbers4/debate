@@ -1,4 +1,4 @@
-import 'package:v1/common/domain/DTO.dart';
+import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 
 class Player implements DTO {
   String name;
