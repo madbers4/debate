@@ -1,17 +1,22 @@
 import 'package:go_router/go_router.dart';
 import 'package:v1/client/App.dart';
 import 'package:v1/client/widgets/Menu/GamesScreen.dart';
+import 'package:v1/client/widgets/Menu/Loading/LoadingScreen.dart';
 import 'package:v1/client/widgets/Menu/MainMenuScreen.dart';
 import 'package:v1/client/widgets/Menu/Rooms/RoomsScreen.dart';
 import 'package:v1/client/widgets/Menu/SignIn/SignInScreen.dart';
 
 class AppRouter {
   final router = GoRouter(
-    initialLocation: '/sign-in',
+    initialLocation: '/loading',
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const MainMenuSceenWidget(),
+        builder: (context, state) => const MainMenuSceen(),
+      ),
+      GoRoute(
+        path: '/loading',
+        builder: (context, state) => const LoadingScreen(),
       ),
       GoRoute(
         path: '/sign-in',

@@ -6,7 +6,7 @@ import 'package:v1/client/Router.dart';
 import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/api/RoomsClient.dart';
-import 'package:v1/client/widgets/style/palette.dart';
+import 'package:v1/client/widgets/style/Palette.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -26,28 +26,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider(create: (context) => Palette()),
-        Provider<SocketClient>(create: (context) => ApiClient().socketClient),
-        Provider<RoomsClient>(
-            create: (context) =>
-                RoomsClient(Provider.of<SocketClient>(context, listen: false))),
-        Provider<AutorizationClient>(
-            create: (context) => AutorizationClient(
-                Provider.of<SocketClient>(context, listen: false))),
-        ChangeNotifierProvider(
-            create: (context) => AppState(
-                Provider.of<AutorizationClient>(context, listen: false))),
-      ],
-      child: MaterialApp.router(
+    return MaterialApp(
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
         ),
-        routerConfig: router,
-      ),
-    );
+        home: Scaffold(
+          body: MultiProvider(
+            providers: [
+              Provider(create: (context) => Palette()),
+              Provider<ApiClient>(create: (context) => ApiClient()),
+              Provider<SocketClient>(
+                  create: (context) =>
+                      Provider.of<ApiClient>(context, listen: false)
+                          .socketClient),
+              Provider<RoomsClient>(
+                  create: (context) => RoomsClient(
+                      Provider.of<SocketClient>(context, listen: false))),
+              Provider<AutorizationClient>(
+                create: (context) => AutorizationClient(
+                    Provider.of<SocketClient>(context, listen: false)),
+              ),
+              ChangeNotifierProvider(create: (context) => AppState(context)),
+            ],
+            builder: (context, child) => MaterialApp.router(
+              routerConfig: router,
+            ),
+          ),
+        ));
   }
 }

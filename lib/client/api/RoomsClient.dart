@@ -1,4 +1,6 @@
 import 'package:v1/common/features/room/CreateRoomArgs.dart';
+import 'package:v1/common/features/room/JoinRoomArgs.dart';
+import 'package:v1/common/features/room/RemoveRoomArgs.dart';
 import 'package:v1/common/features/room/Rooms.dart';
 import 'package:v1/common/features/room/RoomsEndpointApi.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
@@ -14,15 +16,24 @@ class RoomsClient {
     return socketClient.subscribe(api.roomsHandler, callback);
   }
 
-  unsubRooms(String id) {
+  unsubscribe(String id) {
     socketClient.unsubscribe(id);
   }
 
   getRooms() {
-    socketClient.send(api.getRoomsHandler, Void());
+    print('get rooms');
+    socketClient.send(api.getStateHandler, Void());
   }
 
   createRoom(CreateRoomArgs args) {
-    socketClient.send(api.createRoom, args);
+    socketClient.send(api.create, args);
+  }
+
+  joinRoom(JoinRoomArgs args) {
+    socketClient.send(api.join, args);
+  }
+
+  removeRoom(RemoveRoomArgs args) {
+    socketClient.send(api.remove, args);
   }
 }

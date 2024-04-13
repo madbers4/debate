@@ -21,7 +21,7 @@ class RoomsState extends ChangeNotifier {
 
   @override
   void dispose() {
-    this._client.unsubRooms(_roomsSubId!);
+    _client.unsubscribe(_roomsSubId);
     super.dispose();
   }
 }

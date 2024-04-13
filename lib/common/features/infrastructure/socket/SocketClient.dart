@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/infrastructure/endpoint/EndpointHandler.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketDTO.dart';
+import 'package:v1/common/utils/generateUID.dart';
 
 class SocketClient {
   dynamic io;
@@ -43,17 +44,11 @@ class SocketClient {
 }
 
 class Subscriber<T extends DTO> {
-  String id = Subscriber._generateID();
+  String id = generateUID();
   EndpointHandler<T> endpointHandler;
   SubscribeCallback<T> callback;
 
   Subscriber(this.endpointHandler, this.callback);
-
-  static String _generateID() {
-    var r = Random();
-    return String.fromCharCodes(
-        List.generate(999, (index) => r.nextInt(33) + 89));
-  }
 }
 
 typedef SubscribeCallback<T extends DTO> = void Function(T dto);

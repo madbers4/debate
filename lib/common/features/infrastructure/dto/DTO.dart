@@ -1,5 +1,5 @@
 abstract class DTO {
-  String id;
+  final String id;
 
   DTO({required this.id});
 

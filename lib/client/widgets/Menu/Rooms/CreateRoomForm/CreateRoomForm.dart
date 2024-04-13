@@ -11,7 +11,8 @@ class CreateRoomForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CreateRoomState>(
-        create: (context) => CreateRoomState(Provider.of<RoomsClient>(context)),
+        create: (context) =>
+            CreateRoomState(Provider.of<RoomsClient>(context, listen: false)),
         builder: (context, widget) {
           final state = context.watch<CreateRoomState>();
 

@@ -5,7 +5,7 @@ import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/widgets/Menu/SignIn/SignInForm/SignInForm.dart';
 import 'package:v1/client/widgets/Menu/SignIn/SignInForm/SignInState.dart';
 import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
-import 'package:v1/client/widgets/style/palette.dart';
+import 'package:v1/client/widgets/style/Palette.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({

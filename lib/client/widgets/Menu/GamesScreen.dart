@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/widgets/Menu/__temp_GameLevels.dart';
-import 'package:v1/client/widgets/style/palette.dart';
+import 'package:v1/client/widgets/style/Palette.dart';
 import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
 
 class GamesScreen extends StatelessWidget {

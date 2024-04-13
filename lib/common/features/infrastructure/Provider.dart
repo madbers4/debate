@@ -1,18 +1,18 @@
 class Provider<T> {
   final Map<Type, T> _storage = {};
 
-  void add(T object) {
-    _storage[T] = object;
+  void add<B extends T>(B object) {
+    _storage[B] = object;
   }
 
-  T get() {
-    final object = _storage[T];
+  B get<B extends T>() {
+    final object = _storage[B];
 
     if (object == null) {
       throw Exception("No instance of type $T found");
     }
 
-    return object as T;
+    return object as B;
   }
 
   List<T> getAll() {

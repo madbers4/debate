@@ -11,10 +11,10 @@ void main(List<String> arguments) {
   final io = Server();
   final socketServiceProvider = Provider<SocketService>();
 
+  socketServiceProvider.add<AutorizationService>(
+      AutorizationService(serviceProvider: socketServiceProvider));
   socketServiceProvider
-      .add(RoomsService(serviceProvider: socketServiceProvider));
-  socketServiceProvider
-      .add(AutorizationService(serviceProvider: socketServiceProvider));
+      .add<RoomsService>(RoomsService(serviceProvider: socketServiceProvider));
 
   io.on('connection', (client) {
     print('connection default namespace');

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:v1/client/api/RoomsClient.dart';
 import 'package:v1/client/widgets/Menu/Rooms/CreateRoomForm/CreateRoomForm.dart';
 import 'package:v1/client/widgets/Menu/Rooms/RoomsState.dart';
-import 'package:v1/client/widgets/style/palette.dart';
+import 'package:v1/client/widgets/style/Palette.dart';
 import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
 
 class RoomsScreen extends StatelessWidget {
@@ -16,7 +16,8 @@ class RoomsScreen extends StatelessWidget {
     // final playerProgress = context.watch<PlayerProgress>();
 
     return ChangeNotifierProvider(
-        create: (context) => RoomsState(Provider.of<RoomsClient>(context)),
+        create: (context) =>
+            RoomsState(Provider.of<RoomsClient>(context, listen: false)),
         builder: (context, child) {
           final state = context.watch<RoomsState>();
 
@@ -39,7 +40,7 @@ class RoomsScreen extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       children: [
-                        for (final room in state.rooms.list)
+                        for (final room in state.rooms.getAll())
                           ListTile(
                             enabled: true,
                             onTap: () {

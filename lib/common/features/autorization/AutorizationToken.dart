@@ -1,7 +1,8 @@
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
+import 'package:v1/common/utils/generateUID.dart';
 
 class AutorizationToken implements DTO {
-  String id = 'null';
+  String id = generateUID();
   String username;
   String hash;
 

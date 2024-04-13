@@ -1,6 +1,7 @@
+import 'package:v1/common/features/infrastructure/dto/Void.dart';
 import 'package:v1/common/features/room/CreateRoomArgs.dart';
-import 'package:v1/common/features/infrastructure/dto/DTO.dart';
-import 'package:v1/common/features/room/Room.dart';
+import 'package:v1/common/features/room/JoinRoomArgs.dart';
+import 'package:v1/common/features/room/RemoveRoomArgs.dart';
 import 'package:v1/common/features/room/Rooms.dart';
 import 'package:v1/common/features/room/RoomsEndpointApi.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
@@ -9,31 +10,29 @@ class RoomsEndpoint {
   SocketClient socketClient;
   RoomsEndpointApi api = RoomsEndpointApi();
 
-  Rooms testRooms = Rooms(id: '1', list: [
-    Room(id: '1', name: 'Wuhahaha room'),
-    Room(id: '2', name: 'Furina room'),
-    Room(id: '3', name: 'Anton room'),
-    Room(id: '4', name: 'Navia))00'),
-  ]);
+  RoomsEndpoint(this.socketClient);
 
-  RoomsEndpoint(this.socketClient) {
-    socketClient.subscribe(api.getRoomsHandler, getRooms);
-    socketClient.subscribe(api.createRoom, createRoom);
+  unsubscribe(String id) {
+    socketClient.unsubscribe(id);
   }
 
-  void getRooms(DTO _) {
-    sendRooms();
+  String subGetRooms(void Function(Void _) callback) {
+    return socketClient.subscribe(api.getStateHandler, callback);
   }
 
-  void createRoom(CreateRoomArgs args) {
-    testRooms = Rooms(
-        id: 'null',
-        list: [...testRooms.list, Room(id: 'null', name: args.name)]);
-
-    sendRooms();
+  String subCreateRoom(void Function(CreateRoomArgs args) callback) {
+    return socketClient.subscribe(api.create, callback);
   }
 
-  void sendRooms() {
-    socketClient.send(api.roomsHandler, testRooms);
+  String subJoinRoom(void Function(JoinRoomArgs args) callback) {
+    return socketClient.subscribe(api.join, callback);
+  }
+  
+  String subRemoveRoom(void Function(RemoveRoomArgs args) callback) {
+    return socketClient.subscribe(api.remove, callback);
+  }
+
+  void sendRooms(Rooms args) {
+    socketClient.send(api.roomsHandler, args);
   }
 }
