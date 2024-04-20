@@ -6,8 +6,8 @@ import 'package:v1/client/widgets/GameCard/GameCardState.dart';
 import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 
-class MainMenuSceen extends StatelessWidget {
-  const MainMenuSceen({
+class MainMenuScreen extends StatelessWidget {
+  const MainMenuScreen({
     super.key,
   });
 

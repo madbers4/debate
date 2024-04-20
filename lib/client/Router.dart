@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:v1/client/App.dart';
-import 'package:v1/client/widgets/Menu/GamesScreen.dart';
+import 'package:v1/client/widgets/Menu/Games/GamesScreen.dart';
 import 'package:v1/client/widgets/Menu/Loading/LoadingScreen.dart';
 import 'package:v1/client/widgets/Menu/MainMenuScreen.dart';
 import 'package:v1/client/widgets/Menu/Rooms/RoomsScreen.dart';
@@ -12,7 +12,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const MainMenuSceen(),
+        builder: (context, state) => const MainMenuScreen(),
       ),
       GoRoute(
         path: '/loading',
