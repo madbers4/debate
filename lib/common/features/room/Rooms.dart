@@ -37,7 +37,7 @@ class Rooms implements DTO {
     return _list;
   }
 
-  void join(String roomId, String name, Role role) {
+  void join(String roomId, String name, PlayerRole role) {
     final room = get(roomId);
 
     Defendant? defendant = room.defendant;
@@ -46,16 +46,16 @@ class Rooms implements DTO {
     Plaintiff? plaintiff = room.plaintiff;
 
     switch (role) {
-      case Role.Defendant:
+      case PlayerRole.Defendant:
         defendant = Defendant(id: generateUID(), name: name);
         break;
-      case Role.Judge:
+      case PlayerRole.Judge:
         judge = Judge(id: generateUID(), name: name);
         break;
-      case Role.Observer:
+      case PlayerRole.Observer:
         observers.add(Observer(id: generateUID(), name: name));
         break;
-      case Role.Plaintiff:
+      case PlayerRole.Plaintiff:
         plaintiff = Plaintiff(id: generateUID(), name: name);
         break;
       default:

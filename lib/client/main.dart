@@ -6,6 +6,7 @@ import 'package:v1/client/Router.dart';
 import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/api/RoomsClient.dart';
+import 'package:v1/client/features/settings/SettingsState.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 import 'package:wakelock/wakelock.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           body: MultiProvider(
             providers: [
               Provider(create: (context) => Palette()),
+              Provider(create: (context) => SettingsState(context)),
               Provider<ApiClient>(create: (context) => ApiClient()),
               Provider<SocketClient>(
                   create: (context) =>

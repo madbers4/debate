@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:v1/common/GameCard.dart';
-import 'package:v1/client/widgets/GameCard/GameCardWidget.dart';
+import 'package:v1/client/widgets/game-card/GameCardWidget.dart';
 
 class RPCards extends StatelessWidget {
   const RPCards();

@@ -1,10 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:v1/client/App.dart';
-import 'package:v1/client/widgets/Menu/Games/GamesScreen.dart';
-import 'package:v1/client/widgets/Menu/Loading/LoadingScreen.dart';
-import 'package:v1/client/widgets/Menu/MainMenuScreen.dart';
-import 'package:v1/client/widgets/Menu/Rooms/RoomsScreen.dart';
-import 'package:v1/client/widgets/Menu/SignIn/SignInScreen.dart';
+import 'package:v1/client/features/loading/LoadingScreen.dart';
+import 'package:v1/client/features/rooms/RoomsScreen.dart';
 
 class AppRouter {
   final router = GoRouter(
@@ -12,10 +8,6 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const MainMenuScreen(),
-      ),
-      GoRoute(
-        path: '/loading',
         builder: (context, state) => const LoadingScreen(),
       ),
       GoRoute(
@@ -23,16 +15,20 @@ class AppRouter {
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
-        path: '/game',
-        builder: (context, state) => App(),
+        path: '/rooms',
+        builder: (context, state) => RoomsScreen(),
       ),
       GoRoute(
         path: '/rooms',
         builder: (context, state) => RoomsScreen(),
       ),
       GoRoute(
-        path: '/games',
-        builder: (context, state) => GamesScreen(),
+        path: '/scenarious',
+        builder: (context, state) => ScenariousScreen(),
+      ),
+      GoRoute(
+        path: '/game',
+        builder: (context, state) => GameScreen(),
       ),
     ],
   );

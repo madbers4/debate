@@ -1,1 +1,1 @@
-enum Role { Observer, Plaintiff, Defendant, Judge }
+enum PlayerRole { Observer, Plaintiff, Defendant, Judge }
