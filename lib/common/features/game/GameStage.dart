@@ -8,5 +8,4 @@ enum GameStage {
   Evidences,
   Debates,
   Judgement,
-  Finish,
 }

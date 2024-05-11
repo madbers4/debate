@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
+import 'package:v1/client/features/game/widgets/card-slot/CardSlot.dart';
 
 class DebatesStageBody extends StatelessWidget {
   const DebatesStageBody({super.key});
@@ -44,6 +45,38 @@ class DebatesStageBody extends StatelessWidget {
               actId: 'I',
               event: scenario.events[3],
             )),
+        Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CardSlot(),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CardSlot()
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                child: Text('Принять'),
+                onPressed: () {},
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                child: Text('Отклонить'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

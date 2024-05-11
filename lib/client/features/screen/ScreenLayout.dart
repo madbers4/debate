@@ -7,6 +7,7 @@ class ScreenLayout extends StatelessWidget {
   final Widget? rightTopContent;
   final Widget? leftBottomContent;
   final Widget? rightBottomContent;
+  final Widget? topCenterContant;
   final AssetImage? background;
 
   const ScreenLayout({
@@ -16,6 +17,7 @@ class ScreenLayout extends StatelessWidget {
     this.rightTopContent,
     this.leftBottomContent,
     this.rightBottomContent,
+    this.topCenterContant,
     this.background,
   });
 
