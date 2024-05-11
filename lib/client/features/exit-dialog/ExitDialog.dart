@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:v1/client/features/game/widgets/description/Description.dart';
-import 'package:v1/client/features/menu/MenuLayout.dart';
+import 'package:v1/client/features/screen/ScreenLayout.dart';
 
 class ExitDialog extends StatelessWidget {
   const ExitDialog({super.key});

@@ -1,6 +1,6 @@
-import 'package:v1/common/features/games/stage-states/ActStageState.dart';
-import 'package:v1/common/features/games/stage-states/DefendantStageState.dart';
-import 'package:v1/common/features/games/stage-states/TitleStageState.dart';
+import 'package:v1/common/features/game/stage-states/ActStageState.dart';
+import 'package:v1/common/features/game/stage-states/DefendantStageState.dart';
+import 'package:v1/common/features/game/stage-states/TitleStageState.dart';
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/infrastructure/dto/Void.dart';
 

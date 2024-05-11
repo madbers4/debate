@@ -11,6 +11,7 @@ class Scenario implements DTO {
   final String id;
   final ScenarioDescription description;
   final ScenarioDefendant defendant;
+  // TODO: refactor this on act and events
   final List<ScenarioEvent> events;
   final List<ScenarioEvedence> evedences;
 

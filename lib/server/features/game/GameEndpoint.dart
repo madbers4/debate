@@ -1,5 +1,5 @@
-import 'package:v1/common/features/games/Game.dart';
-import 'package:v1/common/features/games/GameEndpointApi.dart';
+import 'package:v1/common/features/game/Game.dart';
+import 'package:v1/common/features/game/GameEndpointApi.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 
 class RoomsEndpoint {

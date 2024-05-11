@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:v1/client/features/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
-import 'package:v1/client/features/menu/MenuLayout.dart';
+import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
-import 'package:v1/common/features/games/stage-states/ActStageState.dart';
+import 'package:v1/common/features/game/stage-states/ActStageState.dart';
 import 'package:v1/common/features/scenario/ScenarioEvent.dart';
 
 enum ActId { One, Two, Three, Four }

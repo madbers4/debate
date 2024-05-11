@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
-import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
+import 'package:v1/common/features/scenario/ScenarioEvent.dart';
 
 class ActTile extends StatelessWidget {
-  final String name;
-  final List<ScenarioFact> facts;
+  final String actId;
+  final ScenarioEvent event;
 
-  const ActTile({
-    required this.name,
-    required this.facts,
-  });
+  const ActTile({required this.actId, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +18,17 @@ class ActTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(name),
+          Text(event.title),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: facts.indexed
+            children: event.facts.indexed
                 .map((e) {
                   final index = e.$1;
                   final value = e.$2;
                   final List<Widget> res = [];
 
                   if (index != 0) {
-                    res.add(SizedBox(
+                    res.add(const SizedBox(
                       width: 10,
                     ));
                   }

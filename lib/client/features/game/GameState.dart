@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:v1/common/features/games/Game.dart';
-import 'package:v1/common/features/games/GameStage.dart';
-import 'package:v1/common/features/games/GameStageStates.dart';
+import 'package:v1/common/features/game/Game.dart';
+import 'package:v1/common/features/game/GameStage.dart';
+import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/scenario/scenarios/mysteryOfTheHeavenLyre.dart';
 
 class GameState extends ChangeNotifier {

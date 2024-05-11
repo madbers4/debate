@@ -4,7 +4,7 @@ import 'package:v1/client/features/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/defendant/DefendantStageBody.dart';
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
-import 'package:v1/client/features/menu/MenuLayout.dart';
+import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 
 class DefendantStage extends StatelessWidget {

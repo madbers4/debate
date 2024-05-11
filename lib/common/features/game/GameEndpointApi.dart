@@ -1,4 +1,4 @@
-import 'package:v1/common/features/games/Game.dart';
+import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/infrastructure/endpoint/EndpointHandler.dart';
 
 class GameEndpointApi {

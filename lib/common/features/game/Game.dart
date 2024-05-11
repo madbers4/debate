@@ -1,5 +1,5 @@
-import 'package:v1/common/features/games/GameStage.dart';
-import 'package:v1/common/features/games/GameStageStates.dart';
+import 'package:v1/common/features/game/GameStage.dart';
+import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/scenario/Scenario.dart';
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 
