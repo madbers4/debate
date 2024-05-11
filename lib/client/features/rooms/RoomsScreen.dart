@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/Router.dart';
 import 'package:v1/client/features/menu/MenuLayout.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
+import 'package:v1/client/features/rooms/create-form/CreateRoomForm.dart';
 import 'package:v1/client/features/rooms/table/RoomsTable.dart';
 import 'package:v1/client/features/settings/SettingsButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
@@ -20,9 +22,29 @@ class RoomsScreen extends StatelessWidget {
           final state = context.watch<RoomsState>();
 
           return ScreenLayout(
-            bodyContent: RoomsTable(),
-            rightTopContent: SettingsButton(),
-            rightBottomContent: NextButton(),
+            bodyContent: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Игровые комнаты',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                const RoomsTable(),
+              ],
+            ),
+            rightTopContent: const SettingsButton(),
+            rightBottomContent: NextButton(
+              onPressed: () {
+                router.go('/scenarious');
+              },
+            ),
+            leftBottomContent: CreateRoomForm(),
           );
         });
   }

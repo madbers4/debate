@@ -10,11 +10,12 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ScreenLayout(
-        bodyContent: SignInForm(),
-        rightTopContent: SettingsButton(),
+    return ScreenLayout(
+      bodyContent: Container(
+        alignment: Alignment.bottomRight,
+        child: SignInForm(),
       ),
+      rightTopContent: SettingsButton(),
     );
   }
 }

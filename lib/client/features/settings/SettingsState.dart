@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:v1/common/features/settings/Settings.dart';
+import 'package:v1/client/features/settings/SettingsFields.dart';
 
 class SettingsState extends ChangeNotifier {
-  Settings settings = Settings();
+  final formKey = GlobalKey<FormState>();
+  // Settings _settings = Settings();
+  SettingsFields _fields = SettingsFields();
 
   SettingsState(BuildContext context);
 
-  save(Settings newSettings) {
-    settings = newSettings;
+  SettingsFields getFields() {
+    return _fields;
+  }
+
+  setFields(SettingsFields newFields) {
+    _fields = newFields;
     notifyListeners();
   }
 }

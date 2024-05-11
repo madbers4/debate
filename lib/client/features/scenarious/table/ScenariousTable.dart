@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:v1/client/features/scenarious/table/ScenariousTableRow.dart';
+import 'package:flutter/widgets.dart';
+import 'package:v1/client/features/scenarious/ScenariousSceenState.dart';
+import 'package:provider/provider.dart';
 
 class ScenariousTable extends StatelessWidget {
   const ScenariousTable({
@@ -8,15 +10,33 @@ class ScenariousTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    final state = context.watch<ScenarionScreenState>();
+
+    return Column(
       children: [
-        ScenariousTableRow(
-          key: const Key('1'),
-          rowId: '1',
-          isSelected: false,
-          title: 'mock',
-          onSelect: () {},
-        ),
+        Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Сценарии',
+              style: Theme.of(context).textTheme.titleLarge,
+            )),
+        const SizedBox(height: 10),
+        ListView.separated(
+            shrinkWrap: true,
+            itemCount: state.scenarios.length,
+            separatorBuilder: (_, __) => const Divider(),
+            itemBuilder: (context, int index) {
+              final scenario = state.scenarios[index];
+
+              return ListTile(
+                enabled: true,
+                onTap: () {
+                  // GoRouter.of(context).go('/play/session/${index}');
+                },
+                leading: Text(index.toString()),
+                title: Text('${scenario.title}'),
+              );
+            })
       ],
     );
   }

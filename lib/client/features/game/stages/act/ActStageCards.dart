@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/game/stages/act/ActStepCards.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 
-class ActStage extends StatelessWidget {
-  const ActStage({super.key});
+class ActStageCards extends StatelessWidget {
+  const ActStageCards({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +11,11 @@ class ActStage extends StatelessWidget {
 
     return Stack(
       children: [
-        // Title
+        // Card 1
         Container(),
-        // Description
+        // Card 2
         Container(),
-        // Cards
-        ActStageCards()
+        // Defendant Cards Stage
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/GameState.dart';
+import 'package:v1/client/features/game/stages/debates/DebatesStage.dart';
 
 import 'package:v1/client/widgets/style/Palette.dart';
 
@@ -16,8 +17,7 @@ class GameScreen extends StatelessWidget {
         builder: (context, child) {
           final state = context.watch<GameState>();
 
-          // Show step by game stage
-          return Container();
+          return DebatesStage();
         });
   }
 }

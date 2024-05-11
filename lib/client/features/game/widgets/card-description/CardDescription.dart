@@ -11,7 +11,7 @@ class CardDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDialog(
+    return Container(
       bodyContent: Stack(
         children: [
           // Card

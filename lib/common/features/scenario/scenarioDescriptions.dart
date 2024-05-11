@@ -4,21 +4,18 @@ import 'package:v1/common/features/scenario/scenarios/mysteryOfTheHeavenLyre.dar
 final spyShadowDescription = ScenarioDescription(
     id: '1',
     title: 'Шпионская тень: Разоблачение знати Фонтейна',
-    playerDescription: '',
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, bibendum sed, imperdiet id, sit amet. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.');
 
 final silverLionDescription = ScenarioDescription(
     id: '2',
     title: 'Серебрянный лев: Пропажа гербовой печати',
-    playerDescription: '',
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, bibendum sed, imperdiet id, sit amet. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.');
 
 final banditsInAHoodieDescription = ScenarioDescription(
     id: '3',
     title: 'Бандиты в балахоне: Ограбление похитителей сокровищ',
-    playerDescription: '',
     description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, bibendum sed, imperdiet id, sit amet. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.');
 

@@ -46,6 +46,7 @@ class SignInForm extends StatelessWidget {
             key: state.formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Column(
                   children: [
@@ -61,17 +62,18 @@ class SignInForm extends StatelessWidget {
                         // The validator receives the text that the user has entered.
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Пожалуйста, введите логин';
+                            return '';
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
+                          errorStyle: TextStyle(height: 0),
                           labelText: 'Логин',
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     SizedBox(
@@ -84,15 +86,17 @@ class SignInForm extends StatelessWidget {
                               password: value));
                         },
                         // The validator receives the text that the user has entered.
+
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Пожалуйста, введите пароль';
+                            return '';
                           }
 
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
+                          errorStyle: TextStyle(height: 0),
                           labelText: 'Пароль',
                         ),
                       ),

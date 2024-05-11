@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
-import 'package:v1/client/widgets/BodyLayout.dart';
-
 
 class BottomSnappingSheet extends StatelessWidget {
   final Widget child;
+  final Widget sheetContent;
 
-  const BottomSnappingSheet({
-    super.key,
-    required this.child
-  });
+  const BottomSnappingSheet(
+      {super.key, required this.child, required this.sheetContent});
 
   @override
   Widget build(BuildContext context) {
     return SnappingSheet(
-      // TODO: Add your content that is placed
-      // behind the sheet. (Can be left empty)
       grabbingHeight: 75,
-    
-      // TODO: Add your grabbing widget here,
       grabbing: Container(
         color: Colors.transparent,
         child: Center(
@@ -40,18 +33,18 @@ class BottomSnappingSheet extends StatelessWidget {
         SnappingPosition.factor(
           positionFactor: 0.63,
           grabbingContentOffset: GrabbingContentOffset.top,
-          ),
+        ),
         SnappingPosition.factor(
           positionFactor: 0.8,
           grabbingContentOffset: GrabbingContentOffset.top,
-          ),
+        ),
       ],
       sheetBelow: SnappingSheetContent(
         draggable: false,
         sizeBehavior: SheetSizeStatic(size: 300, expandOnOverflow: false),
-        child: child,
+        child: sheetContent,
       ),
-      child: const BodyLayout(),
+      child: child,
     );
   }
 }

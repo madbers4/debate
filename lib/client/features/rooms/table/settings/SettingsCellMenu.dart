@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/rooms/table/cells/settings/SettingsCellMenuState.dart';
+import 'package:v1/client/features/rooms/table/settings/SettingsCellMenuState.dart';
 
 class SettingsCellMenu extends StatelessWidget {
   final bool isShowed;

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
+import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
 
-class EventCard extends StatelessWidget {
+class ActTile extends StatelessWidget {
   final String name;
-  final Widget leftCard;
-  final Widget middleCard;
-  final Widget rightCard;
+  final List<ScenarioFact> facts;
 
-  const EventCard({
+  const ActTile({
     required this.name,
-    required this.leftCard,
-    required this.middleCard,
-    required this.rightCard,
+    required this.facts,
   });
 
   @override
@@ -26,7 +24,22 @@ class EventCard extends StatelessWidget {
           Text(name),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [leftCard, middleCard, rightCard],
+            children: facts.indexed
+                .map((e) {
+                  final index = e.$1;
+                  final value = e.$2;
+                  final List<Widget> res = [];
+
+                  if (index != 0) {
+                    res.add(SizedBox(
+                      width: 10,
+                    ));
+                  }
+                  res.add(FactCard(fact: value));
+                  return res;
+                })
+                .expand((e) => e)
+                .toList(),
           )
         ],
       ),

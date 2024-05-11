@@ -15,7 +15,7 @@ class EvidencesStageCards extends StatelessWidget {
         Container(),
         // Card 2
         Container(),
-        // Defender Cards Stage
+        // Defendant Cards Stage
       ],
     );
   }

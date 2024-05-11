@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
-import 'package:v1/client/widgets/RPCards.dart';
 
 class LeftSnappingSheet extends StatelessWidget {
   final Widget child;
+  final Widget sheetContent;
   
   const LeftSnappingSheet({
     super.key,
     required this.child,
+    required this.sheetContent,
   });
 
   @override
@@ -29,8 +30,7 @@ class LeftSnappingSheet extends StatelessWidget {
       sheetLeft: SnappingSheetContent(
         draggable: false,
         sizeBehavior: SheetSizeStatic(size: 180.0, expandOnOverflow: false),
-        // TODO: Add your sheet content here
-        child: const RPCards(),
+        child: sheetContent,
       ),
       snappingPositions: const [
         SnappingPosition.factor(

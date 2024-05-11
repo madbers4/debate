@@ -1,7 +1,6 @@
 enum GameStage {
   Title,
-  IntroDefendant,
-  DefendantRole,
+  Defendant,
   Act1,
   Act2,
   Act3,

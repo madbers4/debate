@@ -6,8 +6,11 @@ import 'package:v1/client/widgets/game-card/GameCardState.dart';
 
 class GameCardWidget extends StatelessWidget {
   final GameCard card;
+  final bool? isCardCardFlipped;
+  final bool? isDisabled;
 
-  const GameCardWidget({super.key, required this.card});
+  const GameCardWidget(
+      {super.key, required this.card, this.isCardCardFlipped, this.isDisabled});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +18,16 @@ class GameCardWidget extends StatelessWidget {
         create: (context) => GameCardWidgetState(),
         builder: (context, rre) {
           final state = context.watch<GameCardWidgetState>();
+
+          CardSide cardSide = state.cardSide;
+
+          if (isCardCardFlipped == true) {
+            cardSide = CardSide.BACK;
+          }
+
+          if (isCardCardFlipped == false) {
+            cardSide = CardSide.FRONT;
+          }
 
           final front = Card(
             child: Container(
@@ -55,13 +68,14 @@ class GameCardWidget extends StatelessWidget {
           );
 
           return Draggable(
-            feedback: state.cardSide == CardSide.FRONT ? front : back,
+            feedback: cardSide == CardSide.FRONT ? front : back,
             childWhenDragging: const SizedBox(height: 267, width: 179),
             child: FlipCard(
                 onFlip: state.flip,
+                flipOnTouch: isDisabled != true && isCardCardFlipped == null,
                 fill: Fill.fillBack,
                 direction: FlipDirection.HORIZONTAL,
-                side: state.cardSide,
+                side: cardSide,
                 front: front,
                 back: back),
           );

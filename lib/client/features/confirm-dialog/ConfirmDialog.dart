@@ -6,11 +6,12 @@ class ConfirmDialog extends StatelessWidget {
   VoidCallback onClose;
   VoidCallback onConfirm;
 
-  ConfirmDialog({required this.isShowed, required this.onClose, required this.onConfirm});
+  ConfirmDialog(
+      {required this.isShowed, required this.onClose, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
-    return CustomDialog(
+    return Container(
       bodyContent: Stack(
         children: [
           // Title

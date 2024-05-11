@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HeadCell extends StatelessWidget {
-  String title;
-
-  HeadCell({super.key, required this.title});
+class DebatesStageBody extends StatelessWidget {
+  const DebatesStageBody({super.key});
 
   @override
   Widget build(BuildContext context) {

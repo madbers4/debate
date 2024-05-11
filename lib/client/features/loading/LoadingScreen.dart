@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/loading/LoadingScreenState.dart';
+import 'package:v1/client/features/menu/MenuLayout.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
-import 'package:v1/client/widgets/style/ResponsiveScreen.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({
@@ -18,22 +18,7 @@ class LoadingScreen extends StatelessWidget {
         builder: (context, child) {
           final state = context.watch<LoadingScreenState>();
 
-          return Scaffold(
-              backgroundColor: palette.backgroundSettings,
-              body: ResponsiveScreen(
-                squarishMainArea: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Loading...'),
-                      ],
-                    ),
-                  ],
-                ),
-                rectangularMenuArea: Container(),
-              ));
+          return ScreenLayout(bodyContent: Text('loading...'));
         });
   }
 }

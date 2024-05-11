@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/Router.dart';
 import 'package:v1/client/features/menu/MenuLayout.dart';
 import 'package:v1/client/features/rooms/table/RoomsTable.dart';
 import 'package:v1/client/features/scenarious/ScenariousSceenState.dart';
+import 'package:v1/client/features/scenarious/table/ScenariousTable.dart';
 import 'package:v1/client/features/settings/SettingsButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 
-class GamesScreen extends StatelessWidget {
-  const GamesScreen({super.key});
+class ScenariousScreen extends StatelessWidget {
+  const ScenariousScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +22,36 @@ class GamesScreen extends StatelessWidget {
         builder: (context, child) {
           final state = context.watch<ScenarionScreenState>();
           return ScreenLayout(
-              bodyContent: Stack(
+              bodyContent: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // With one row
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Комната',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      )),
                   RoomsTable(),
-                  // ScenariousTable
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                      child: SingleChildScrollView(child: ScenariousTable()))
                 ],
               ),
               rightTopContent: SettingsButton(),
-              leftBottomContent: BackButton(),
+              leftBottomContent: BackButton(
+                onPressed: () {
+                  router.go('/rooms');
+                },
+              ),
               // TODO: OR Waiting button
-              rightBottomContent: NextButton());
+              rightBottomContent: NextButton(
+                onPressed: () {
+                  // router.go('/');
+                },
+              ));
         });
   }
 }

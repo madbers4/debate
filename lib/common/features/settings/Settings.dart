@@ -6,5 +6,5 @@ class Settings {
   Settings(
       {this.username,
       this.apiHost = 'http://localhost:3000',
-      this.timeoutMs = 300000}) {}
+      this.timeoutMs = 300000});
 }

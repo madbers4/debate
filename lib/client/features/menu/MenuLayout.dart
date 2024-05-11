@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ScreenLayout extends StatelessWidget {
   final Widget bodyContent;
@@ -20,40 +21,40 @@ class ScreenLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: background != null
-                  ? DecorationImage(image: background!)
-                  : null,
-            ),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            image:
+                background != null ? DecorationImage(image: background!) : null,
           ),
-          Positioned(
-              top: 20,
-              left: 20,
-              child: leftTopContent != null ? leftTopContent! : Container()
-              // Icon(Icons.menu, color: Colors.white), // Пример элемента в углу
-              ),
-          Positioned(
-              top: 20,
-              right: 20,
-              child: rightTopContent != null ? rightTopContent! : Container()),
-          Positioned(
-            bottom: 20,
+        ),
+        Positioned(
+            top: 20,
             left: 20,
-            child: leftBottomContent != null ? leftBottomContent! : Container(),
-          ),
-          Positioned(
-            bottom: 20,
+            child: leftTopContent != null ? leftTopContent! : Container()
+            // Icon(Icons.menu, color: Colors.white), // Пример элемента в углу
+            ),
+        Positioned(
+            top: 20,
             right: 20,
-            child:
-                rightBottomContent != null ? rightBottomContent! : Container(),
-          ),
-          Center(child: bodyContent),
-        ],
-      ),
+            child: rightTopContent != null ? rightTopContent! : Container()),
+        Positioned(
+          bottom: 20,
+          left: 20,
+          child: leftBottomContent != null ? leftBottomContent! : Container(),
+        ),
+        Positioned(
+          bottom: 20,
+          right: 20,
+          child: rightBottomContent != null ? rightBottomContent! : Container(),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: bodyContent,
+        ),
+      ],
     );
   }
 }

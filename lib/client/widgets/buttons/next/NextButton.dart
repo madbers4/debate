@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({super.key});
+  final VoidCallback onPressed;
+
+  const NextButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return IconButton(
+        onPressed: onPressed, icon: const Icon(Icons.arrow_forward));
   }
 }
