@@ -20,14 +20,30 @@ class DebatesStageBody extends StatelessWidget {
             top: 0,
             left: 0,
             child: ActTile(
-              ac\
-              \
-              
-              : 'I',
+              actId: 'I',
+              event: scenario.events[0],
             )),
-        Positioned(top: 0, right: 0, child: Container()),
-        Positioned(bottom: 0, left: 0, child: Container()),
-        Positioned(bottom: 0, right: 0, child: Container()),
+        Positioned(
+            top: 0,
+            right: 0,
+            child: ActTile(
+              actId: 'I',
+              event: scenario.events[1],
+            )),
+        Positioned(
+            bottom: 0,
+            left: 0,
+            child: ActTile(
+              actId: 'I',
+              event: scenario.events[2],
+            )),
+        Positioned(
+            bottom: 0,
+            right: 0,
+            child: ActTile(
+              actId: 'I',
+              event: scenario.events[3],
+            )),
       ],
     );
   }

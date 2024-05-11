@@ -4,7 +4,7 @@ import 'package:snapping_sheet/snapping_sheet.dart';
 class LeftSnappingSheet extends StatelessWidget {
   final Widget child;
   final Widget sheetContent;
-  
+
   const LeftSnappingSheet({
     super.key,
     required this.child,
@@ -17,12 +17,13 @@ class LeftSnappingSheet extends StatelessWidget {
       grabbingWidth: 75,
       grabbing: Container(
         color: Colors.transparent,
+        height: 250,
         child: Center(
           child: Container(
             width: 5,
             height: 200,
             decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 15, 13, 13),
                 borderRadius: BorderRadius.all(Radius.circular(12))),
           ),
         ),

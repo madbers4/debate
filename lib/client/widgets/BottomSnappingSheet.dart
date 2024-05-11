@@ -19,7 +19,7 @@ class BottomSnappingSheet extends StatelessWidget {
             width: 200,
             height: 5,
             decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 4, 3, 3),
                 borderRadius: BorderRadius.all(Radius.circular(12))),
           ),
         ),
