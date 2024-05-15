@@ -19,8 +19,6 @@ class RoomsScreen extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (context) => RoomsState(context),
         builder: (context, child) {
-          final state = context.watch<RoomsState>();
-
           return ScreenLayout(
             bodyContent: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +39,7 @@ class RoomsScreen extends StatelessWidget {
             rightTopContent: const SettingsButton(),
             rightBottomContent: NextButton(
               onPressed: () {
-                router.go('/scenarious');
+                router.go('/scenarious/right');
               },
             ),
             leftBottomContent: CreateRoomForm(),

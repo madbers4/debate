@@ -5,6 +5,7 @@ import 'package:v1/common/features/room/RemoveRoomArgs.dart';
 import 'package:v1/common/features/room/Rooms.dart';
 import 'package:v1/common/features/room/RoomsEndpointApi.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
+import 'package:v1/common/features/room/RoomsFailArgs.dart';
 
 class RoomsEndpoint {
   SocketClient socketClient;
@@ -27,12 +28,20 @@ class RoomsEndpoint {
   String subJoinRoom(void Function(JoinRoomArgs args) callback) {
     return socketClient.subscribe(api.join, callback);
   }
-  
+
   String subRemoveRoom(void Function(RemoveRoomArgs args) callback) {
     return socketClient.subscribe(api.remove, callback);
   }
 
+  String subExitRooms(void Function(Void _) callback) {
+    return socketClient.subscribe(api.exit, callback);
+  }
+
   void sendRooms(Rooms args) {
     socketClient.send(api.roomsHandler, args);
+  }
+
+  void sendError(RoomsFailArgs args) {
+    socketClient.send(api.errorHandler, args);
   }
 }

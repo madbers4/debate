@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/GameState.dart';
-import 'package:v1/client/features/game/stages/debates/DebatesStage.dart';
 import 'package:v1/client/features/game/stages/judgement/JudgementStage.dart';
 
 import 'package:v1/client/widgets/style/Palette.dart';

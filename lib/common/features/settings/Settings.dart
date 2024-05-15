@@ -1,10 +1,12 @@
 class Settings {
-  String? username;
-  String? apiHost;
-  int timeoutMs;
+  String username;
+  String apiHost;
+  int timeousSec;
+  String? authToken;
 
   Settings(
-      {this.username,
-      this.apiHost = 'http://localhost:3000',
-      this.timeoutMs = 300000});
+      {required this.username,
+      required this.apiHost,
+      required this.timeousSec,
+      this.authToken});
 }

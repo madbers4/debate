@@ -11,9 +11,13 @@ class SettingsButton extends StatelessWidget {
       tooltip: 'Settings',
       onPressed: () => showDialog<String>(
           context: context,
-          builder: (BuildContext context) => Dialog(
-                child:
-                    Container(width: 400, height: 400, child: SettingsDialog()),
+          builder: (BuildContext _) => Dialog(
+                child: SizedBox(
+                    width: 400,
+                    height: 400,
+                    child: SettingsDialog(
+                      globalContext: context,
+                    )),
               )),
     );
   }

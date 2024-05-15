@@ -1,18 +1,14 @@
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
-import 'package:v1/common/features/player/Role.dart';
 
 class CreateRoomArgs implements DTO {
   String id = 'null';
   String name;
-  PlayerRole role;
 
-  CreateRoomArgs({required this.name, required this.role});
+  CreateRoomArgs({required this.name});
 
   CreateRoomArgs.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'] as String,
-        name = json['name'] as String,
-        role =
-            PlayerRole.values.firstWhere((e) => e.toString() == json['role']);
+        name = json['name'];
 
-  Map toJson() => {'id': id, 'name': name, 'role': role.toString()};
+  Map toJson() => {'id': id, 'name': name};
 }

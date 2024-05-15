@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/infrastructure/endpoint/EndpointHandler.dart';
@@ -7,16 +6,20 @@ import 'package:v1/common/features/infrastructure/socket/SocketDTO.dart';
 import 'package:v1/common/utils/generateUID.dart';
 
 class SocketClient {
+  final id = generateUID();
   dynamic io;
   // TODO: type this from dynamic to Subscriber
-  final Map<String, dynamic> _subscribers = {};
+  Map<String, dynamic> _subscribers = {};
 
   SocketClient({required this.io}) {
+    print('CREATE SOCKET CLIENT');
+    // print('UID', id);
     io.on('data', _onData);
   }
 
   void send<T extends DTO>(EndpointHandler<T> endpointHandler, T dto) {
     final bus = SocketBus(dto.toJson(), endpointHandler.path);
+    print(jsonEncode(bus.toJson()));
     io.emit('data', jsonEncode(bus.toJson()));
   }
 
@@ -29,6 +32,10 @@ class SocketClient {
 
   unsubscribe(String id) {
     _subscribers.remove(id);
+  }
+
+  unsubscribeAll() {
+    _subscribers = {};
   }
 
   _onData(dynamic data) {

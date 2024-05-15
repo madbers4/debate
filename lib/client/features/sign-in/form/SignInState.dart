@@ -19,12 +19,12 @@ class SignInFormState extends ChangeNotifier {
   }
 
   signIn() {
-    // _client.signIn(
-    //     SignInArgs(username: _fields.username, password: _fields.password));
+    _client.signIn(
+        SignInArgs(username: _fields.username, password: _fields.password));
   }
 
   void observerSignIn() {
-    // _client.observerSignIn();
+    _client.observerSignIn();
   }
 
   void setFields(SignInFormFields fields) {

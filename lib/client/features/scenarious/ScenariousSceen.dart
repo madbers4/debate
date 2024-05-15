@@ -43,7 +43,7 @@ class ScenariousScreen extends StatelessWidget {
               rightTopContent: SettingsButton(),
               leftBottomContent: BackButton(
                 onPressed: () {
-                  router.go('/rooms');
+                  router.go('/rooms/left');
                 },
               ),
               // TODO: OR Waiting button

@@ -93,7 +93,7 @@ class AutorizationService extends SocketService {
   void _signIn(SignInArgs args, SocketClient client) {
     final endpoint = endpointByClient[client]!;
 
-    if (args.password == '123456') {
+    if (args.username == 'test' && args.password == '123456') {
       final token = AutorizationToken(
           username: args.username,
           hash: JWTUtils.generateAccessToken(userId: args.username));

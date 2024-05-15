@@ -11,9 +11,9 @@ import 'package:go_router/go_router.dart';
 
 class LoadingScreenState extends ChangeNotifier {
   LoadingScreenState(BuildContext context) {
-            Timer(Duration(seconds: 1), () {
-    context.go('/sign-in');
-            });
+    //         Timer(Duration(seconds: 1), () {
+    // context.go('/sign-in');
+    //         });
 
     // final authClient = Provider.of<AutorizationClient>(context, listen: false);
     // final appState = Provider.of<AppState>(context, listen: false);

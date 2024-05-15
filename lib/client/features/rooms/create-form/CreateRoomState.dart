@@ -16,8 +16,9 @@ class CreateRoomState extends ChangeNotifier {
   }
 
   create() {
-    _client.createRoom(CreateRoomArgs(name: name, role: role));
-    formKey.currentState!.reset();
+    _client.createRoom(CreateRoomArgs(name: name));
+    name = '';
+    notifyListeners();
   }
 
   changeName(String value) {

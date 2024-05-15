@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/rooms/create-form/CreateRoomState.dart';
+import 'package:v1/client/main.dart';
 
 class CreateRoomForm extends StatelessWidget {
-  const CreateRoomForm({super.key});
+  CreateRoomForm({super.key});
+
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +14,7 @@ class CreateRoomForm extends StatelessWidget {
         create: (context) => CreateRoomState(context),
         builder: (context, widget) {
           final state = context.watch<CreateRoomState>();
+          _nameController.text = state.name;
 
           return Form(
             key: state.formKey,
@@ -22,7 +26,7 @@ class CreateRoomForm extends StatelessWidget {
                     SizedBox(
                       width: 200,
                       child: TextFormField(
-                        initialValue: state.name,
+                        controller: _nameController,
                         onChanged: (value) {
                           state.changeName(value);
                         },
@@ -40,27 +44,6 @@ class CreateRoomForm extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // const SizedBox(
-                    //   width: 20,
-                    // ),
-                    // SizedBox(
-                    //   width: 200,
-                    //   child: DropdownButtonFormField<String>(
-                    //     value: state.role.toString(),
-                    //     items: List.from(PlayerRole.values
-                    //         .map<DropdownMenuItem<String>>(
-                    //             (e) => DropdownMenuItem<String>(
-                    //                   value: e.toString(),
-                    //                   child: Text(e.toString().split('.')[1]),
-                    //                 ))),
-                    //     onChanged: (String? value) {
-                    //       state.changeRole(PlayerRole.values.firstWhere(
-                    //           (element) => element.toString() == value));
-                    //     },
-                    //     decoration: const InputDecoration(
-                    //         border: OutlineInputBorder(), labelText: 'Роль'),
-                    //   ),
-                    // ),
                   ],
                 ),
                 Padding(
@@ -71,10 +54,10 @@ class CreateRoomForm extends StatelessWidget {
                       if (state.formKey.currentState!.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        ScaffoldMessenger.of(scaffoldKey.currentState!.context)
+                            .showSnackBar(
                           SnackBar(
-                              content: Text(
-                                  'Create room: ${state.name}, role: ${state.role}')),
+                              content: Text('Created room: ${state.name}')),
                         );
 
                         state.create();

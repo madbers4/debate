@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class ScreenLayout extends StatelessWidget {
   final Widget bodyContent;
@@ -24,13 +25,26 @@ class ScreenLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.expand,
+      fit: StackFit.passthrough,
       children: [
         Container(
-          decoration: BoxDecoration(
-            image:
-                background != null ? DecorationImage(image: background!) : null,
-          ),
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              // color: Color.fromARGB(0, 0, 0, 0)
+              // backgroundBlendMode: BlendMode.plus,
+              color: Colors.white
+              // image: DecorationImage(
+              //     image: Svg('assets/images/background.svg'),
+              //     repeat: ImageRepeat.repeat,
+              //     fit: BoxFit.none)
+              // image: background != null
+              //     ? const DecorationImage(
+              //         image: Svg('assets/images/background.svg'),
+              //         repeat: ImageRepeat.repeat,
+              //         fit: BoxFit.none)
+              //     : null,
+              ),
         ),
         Positioned(
             top: 20,

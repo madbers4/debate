@@ -1,8 +1,11 @@
-import 'package:v1/common/features/settings/Settings.dart';
 
-class SettingsFields extends Settings {
+class SettingsFields {
+  String username;
+  String apiHost;
+  int timeousSec;
+
   SettingsFields(
-      {super.username,
-      super.apiHost = 'http://localhost:3000',
-      super.timeoutMs = 300000});
+      {required this.username,
+      required this.apiHost,
+      required this.timeousSec});
 }

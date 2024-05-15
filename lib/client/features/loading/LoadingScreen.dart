@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/loading/LoadingScreenState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
+import 'package:v1/client/features/settings/SettingsButton.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 
 class LoadingScreen extends StatelessWidget {
@@ -18,7 +19,15 @@ class LoadingScreen extends StatelessWidget {
         builder: (context, child) {
           final state = context.watch<LoadingScreenState>();
 
-          return ScreenLayout(bodyContent: Text('loading...'));
+          return ScreenLayout(
+            bodyContent: Center(
+              child: Text(
+                'LOADING...',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            rightTopContent: const SettingsButton(),
+          );
         });
   }
 }

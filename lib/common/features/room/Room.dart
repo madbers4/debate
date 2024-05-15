@@ -43,6 +43,7 @@ class Room implements DTO {
         'plaintiff': plaintiff?.toJson(),
         'judge': plaintiff?.toJson(),
         'defendant': defendant?.toJson(),
+        'observers': observers.map((e) => e.toJson()).toList()
         // TODO: add observers
       };
 }
