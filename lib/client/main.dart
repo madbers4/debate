@@ -9,6 +9,7 @@ import 'package:v1/client/Router.dart';
 import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/api/RoomsClient.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/settings/SettingsState.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 import 'package:wakelock/wakelock.dart';
@@ -90,6 +91,14 @@ class MyApp extends StatelessWidget {
 
                     return appState!;
                   }),
+              ChangeNotifierProxyProvider<RoomsClient, RoomsState>(
+                  create: (context) => RoomsState(),
+                  update: (context, roomsClient, roomsState) {
+                    if (roomsClient != null) {
+                      roomsState!.setClients(context);
+                    }
+                    return roomsState!;
+                  }),
             ],
             builder: (context, child) {
               // HARDCODE
@@ -100,6 +109,7 @@ class MyApp extends StatelessWidget {
               final aClient =
                   Provider.of<AutorizationClient>(context, listen: false);
               final _appState = Provider.of<AppState>(context, listen: false);
+              final _roomsState = Provider.of<AppState>(context, listen: false);
 
               return MaterialApp.router(
                 // theme: ,

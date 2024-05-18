@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/exit-dialog/ExitButton.dart';
+import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
@@ -58,7 +59,20 @@ class ActStage extends StatelessWidget {
       ),
       leftTopContent: ExitButton(),
       rightBottomContent: NextButton(
-        onPressed: () => {},
+        onPressed: () {
+          if (actId == ActId.One) {
+            gameRouter.go('/act/2/right');
+          }
+          if (actId == ActId.Two) {
+            gameRouter.go('/act/3/right');
+          }
+          if (actId == ActId.Three) {
+            gameRouter.go('/act/4/right');
+          }
+          if (actId == ActId.Four) {
+            gameRouter.go('/evidences/right');
+          }
+        },
       ),
       rightTopContent: Text(
         scenario.description.title,

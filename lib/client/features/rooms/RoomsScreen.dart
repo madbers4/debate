@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/Router.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
-import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/rooms/create-form/CreateRoomForm.dart';
 import 'package:v1/client/features/rooms/table/RoomsTable.dart';
 import 'package:v1/client/features/settings/SettingsButton.dart';
@@ -16,35 +15,31 @@ class RoomsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
 
-    return ChangeNotifierProvider(
-        create: (context) => RoomsState(context),
-        builder: (context, child) {
-          return ScreenLayout(
-            bodyContent: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Игровые комнаты',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                const RoomsTable(),
-              ],
-            ),
-            rightTopContent: const SettingsButton(),
-            rightBottomContent: NextButton(
-              onPressed: () {
-                router.go('/scenarious/right');
-              },
-            ),
-            leftBottomContent: CreateRoomForm(),
-          );
-        });
+    return ScreenLayout(
+      bodyContent: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Игровые комнаты',
+                style: Theme.of(context).textTheme.titleLarge,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          const RoomsTable(),
+        ],
+      ),
+      rightTopContent: const SettingsButton(),
+      rightBottomContent: NextButton(
+        onPressed: () {
+          router.go('/scenarious/right');
+        },
+      ),
+      leftBottomContent: CreateRoomForm(),
+    );
   }
 }
 

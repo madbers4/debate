@@ -6,42 +6,6 @@ import 'package:v1/client/features/rooms/RoomsScreen.dart';
 import 'package:v1/client/features/scenarious/ScenariousSceen.dart';
 import 'package:v1/client/features/sign-in/SignInScreen.dart';
 
-class AppRouter {
-  final router = GoRouter(
-    initialLocation: '/',
-    routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const LoadingScreen(),
-      ),
-      GoRoute(
-        path: '/sign-in/:direction',
-        pageBuilder: (context, state) =>
-            createSliderBuilder(context, state, const SignInScreen()),
-      ),
-      GoRoute(
-        path: '/rooms/:direction',
-        pageBuilder: (context, state) =>
-            createSliderBuilder(context, state, const RoomsScreen()),
-      ),
-      GoRoute(
-        path: '/scenarious/:direction',
-        pageBuilder: (context, state) =>
-            createSliderBuilder(context, state, const ScenariousScreen()),
-      ),
-      GoRoute(
-        path: '/game/:direction/:stage',
-        pageBuilder: (context, state) {
-          final stage = state.pathParameters['stage']!;
-          
-          return createSliderBuilder(context, state, const GameScreen());
-        },
-      ),
-    ],
-  );
-}
-
-final router = AppRouter().router;
 
 Function createSliderBuilder =
     (BuildContext context, GoRouterState state, Widget w) {
@@ -95,3 +59,39 @@ Function createSliderBuilder =
     transitionDuration: const Duration(milliseconds: 300),
   );
 };
+
+
+class AppRouter {
+  final router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const LoadingScreen(),
+      ),
+      GoRoute(
+        path: '/sign-in/:direction',
+        pageBuilder: (context, state) =>
+            createSliderBuilder(context, state, const SignInScreen()),
+      ),
+      GoRoute(
+        path: '/rooms/:direction',
+        pageBuilder: (context, state) =>
+            createSliderBuilder(context, state, const RoomsScreen()),
+      ),
+      GoRoute(
+        path: '/scenarious/:direction',
+        pageBuilder: (context, state) =>
+            createSliderBuilder(context, state, const ScenariousScreen()),
+      ),
+      GoRoute(
+        path: '/game/:direction',
+        pageBuilder: (context, state) {
+          return createSliderBuilder(context, state, const GameScreen());
+        },
+      ),
+    ],
+  );
+}
+
+final router = AppRouter().router;

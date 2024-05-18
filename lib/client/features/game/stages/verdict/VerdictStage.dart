@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 
@@ -12,7 +13,7 @@ class VerdictStage extends StatelessWidget {
     return Stack(
       children: [
         // Выйти
-        Container(),
+        Center(child: Text('Конец')),
       ],
     );
   }

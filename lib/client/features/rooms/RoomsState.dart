@@ -10,24 +10,26 @@ import 'package:v1/common/features/room/RoomsFailArgs.dart';
 class RoomsState extends ChangeNotifier {
   Rooms rooms = Rooms(id: 'null', list: []);
 
-  late RoomsClient _client;
-  late Palette _pallete;
+  RoomsClient? _client;
+  Palette? _pallete;
 
-  late String _roomsSubId;
-  late String _errorSubId;
+  String? _roomsSubId;
+  String? _errorSubId;
 
-  RoomsState(BuildContext context) {
+  RoomsState();
+
+  setClients(BuildContext context) {
     _client = Provider.of<RoomsClient>(context, listen: false);
     _pallete = Provider.of<Palette>(context, listen: false);
-    _roomsSubId = _client.subRooms(_updateRooms);
-    _errorSubId = _client.subError(_onError);
+    _roomsSubId = _client!.subRooms(_updateRooms);
+    _errorSubId = _client!.subError(_onError);
     // subError
-    _client.getRooms();
+    _client!.getRooms();
   }
 
   @override
   void dispose() {
-    _client.unsubscribe(_roomsSubId);
+    _client!.unsubscribe(_roomsSubId!);
     super.dispose();
   }
 
@@ -41,7 +43,7 @@ class RoomsState extends ChangeNotifier {
     ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(
       SnackBar(
         content: Text('Ошибка: ${e.message}'),
-        backgroundColor: _pallete.backgroundError,
+        backgroundColor: _pallete!.backgroundError,
       ),
     );
   }

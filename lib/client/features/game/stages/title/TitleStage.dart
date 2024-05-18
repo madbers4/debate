@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/exit-dialog/ExitButton.dart';
+import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/title/TitleStageBody.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
@@ -25,7 +26,9 @@ class TitleStage extends StatelessWidget {
       ),
       leftTopContent: ExitButton(),
       rightBottomContent: NextButton(
-        onPressed: () => {},
+        onPressed: () {
+          gameRouter.go('/defendant/right');
+        },
       ),
     );
   }

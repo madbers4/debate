@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/client/features/game/GameState.dart';
-import 'package:v1/client/features/game/stages/judgement/JudgementStage.dart';
 
 import 'package:v1/client/widgets/style/Palette.dart';
 
@@ -17,7 +17,9 @@ class GameScreen extends StatelessWidget {
         builder: (context, child) {
           final state = context.watch<GameState>();
 
-          return JudgementStage();
+          return MaterialApp.router(
+            routerConfig: gameRouter,
+          );
         });
   }
 }

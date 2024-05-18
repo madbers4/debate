@@ -49,7 +49,7 @@ class ScenariousScreen extends StatelessWidget {
               // TODO: OR Waiting button
               rightBottomContent: NextButton(
                 onPressed: () {
-                  // router.go('/');
+                  router.go('/game/right');
                 },
               ));
         });

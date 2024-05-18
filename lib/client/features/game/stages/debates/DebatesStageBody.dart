@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
@@ -65,7 +66,9 @@ class DebatesStageBody extends StatelessWidget {
               ),
               TextButton(
                 child: Text('Принять'),
-                onPressed: () {},
+                onPressed: () {
+                  gameRouter.go('/judgement/right');
+                },
               ),
               const SizedBox(
                 height: 10,
