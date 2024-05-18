@@ -1,16 +1,16 @@
 import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
 import 'package:v1/common/features/scenario/fact/ScenarioFalsyFact.dart';
 
-class ScenarioFactFabric {
+class ScenarioFactFactory {
   final Map<String, dynamic> _json;
 
-  ScenarioFactFabric({required Map<String, dynamic> json}) : _json = json;
+  ScenarioFactFactory({required Map<String, dynamic> json}) : _json = json;
 
   ScenarioFact build() {
     if (_json['falsyDescription']) {
       return ScenarioFalsyFact.fromJson(_json);
     }
 
-      return ScenarioFact.fromJson(_json);
+    return ScenarioFact.fromJson(_json);
   }
 }

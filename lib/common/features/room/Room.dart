@@ -22,7 +22,7 @@ class Room implements DTO {
       this.judge,
       this.observers = const []});
 
-  Room.fromJson(Map<String, dynamic> json)
+  Room.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         name = json['name'],
         plaintiff = json['plaintiff'] != null

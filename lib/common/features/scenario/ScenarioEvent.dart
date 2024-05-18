@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
-import 'package:v1/common/features/scenario/fact/ScenarioFactFabric.dart';
+import 'package:v1/common/features/scenario/fact/ScenarioFactFactory.dart';
 
 class ScenarioEvent implements DTO {
   final String id;
@@ -21,7 +21,7 @@ class ScenarioEvent implements DTO {
         title = json['title'],
         description = json['description'],
         facts = List.from(json['facts'].map<ScenarioFact>(
-            (json) => ScenarioFactFabric(json: json).build()));
+            (json) => ScenarioFactFactory(json: json).build()));
 
   Map toJson() => {
         'id': id,

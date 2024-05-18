@@ -60,6 +60,8 @@ class RoomsService extends SocketService {
     subs.add(endpoint.subExitRooms((_) {
       _exitRooms(client, true);
     }));
+
+    endpoint.sendRooms(rooms);
   }
 
   @override
@@ -152,6 +154,10 @@ class RoomsService extends SocketService {
     playerByClient[client] = player;
 
     _sendRoomsToClients();
+
+    final endpoint = endpointByClient[client]!;
+    endpoint.sendSelectedRole(player);
+    endpoint.sendSelectedRoom(rooms.get(args.roomId)!);
   }
 
   void _exitRooms(SocketClient client, bool needEmit) {
@@ -170,6 +176,10 @@ class RoomsService extends SocketService {
 
       if (needEmit == true) {
         _sendRoomsToClients();
+
+        final endpoint = endpointByClient[client]!;
+        endpoint.sendSelectedRoleRemove();
+        endpoint.sendSelectedRoomRemove();
       }
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/Router.dart';
+import 'package:v1/client/features/rooms/table/SelectedRoomTable.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/features/rooms/create-form/CreateRoomForm.dart';
 import 'package:v1/client/features/rooms/table/RoomsTable.dart';
@@ -20,6 +21,7 @@ class RoomsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SelectedRoomTable(),
           Container(
               alignment: Alignment.centerLeft,
               child: Text(

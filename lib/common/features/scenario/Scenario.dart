@@ -5,7 +5,7 @@ import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/scenario/ScenarioEvent.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendant.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioEvedenceFabric.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioEvedenceFactory.dart';
 
 class Scenario implements DTO {
   final String id;
@@ -30,7 +30,7 @@ class Scenario implements DTO {
         events = List.from(json['events']
             .map<ScenarioEvent>((json) => ScenarioEvent.fromJson(json))),
         evedences = List.from(json['evedences'].map<ScenarioEvedence>(
-            (json) => ScenarioEvedenceFabric(json: json).build()));
+            (json) => ScenarioEvedenceFactory(json: json).build()));
 
   Map toJson() => {
         'id': id,

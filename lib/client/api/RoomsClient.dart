@@ -1,7 +1,9 @@
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
+import 'package:v1/common/features/player/Player.dart';
 import 'package:v1/common/features/room/CreateRoomArgs.dart';
 import 'package:v1/common/features/room/JoinRoomArgs.dart';
 import 'package:v1/common/features/room/RemoveRoomArgs.dart';
+import 'package:v1/common/features/room/Room.dart';
 import 'package:v1/common/features/room/Rooms.dart';
 import 'package:v1/common/features/room/RoomsEndpointApi.dart';
 import 'package:v1/common/features/infrastructure/dto/Void.dart';
@@ -19,6 +21,22 @@ class RoomsClient {
 
   String subRooms(void Function(Rooms rooms) callback) {
     return socketClient.subscribe(api.roomsHandler, callback);
+  }
+
+  String subSelectedRole(void Function(Player role) callback) {
+    return socketClient.subscribe(api.selectedRoleHandler, callback);
+  }
+
+  String subSelectedRoom(void Function(Room role) callback) {
+    return socketClient.subscribe(api.selectedRoomHandler, callback);
+  }
+
+  String subSelectedRoleRemove(void Function(Void _) callback) {
+    return socketClient.subscribe(api.selectedRoleRemoveHandler, callback);
+  }
+
+  String subSelectedRoomRemove(void Function(Void _) callback) {
+    return socketClient.subscribe(api.selectedRoleRemoveHandler, callback);
   }
 
   String subError(void Function(RoomsFailArgs rooms) callback) {
