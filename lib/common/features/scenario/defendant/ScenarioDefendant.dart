@@ -30,8 +30,8 @@ class ScenarioDefendant implements DTO {
         'id': id,
         'title': name,
         'description': description,
-        'playerDescription': bornOrigin,
-        'professionOrigin': professionOrigin,
-        'secretOrigin': secretOrigin,
+        'playerDescription': bornOrigin.toJson(),
+        'professionOrigin': professionOrigin.toJson(),
+        'secretOrigin': secretOrigin.toJson(),
       };
 }

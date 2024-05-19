@@ -9,5 +9,5 @@ class GameEndpointApi {
       path: '/game/create', accesses: [], dtoFactory: Game.fromJson);
 
   EndpointHandler<Game> update = EndpointHandler(
-      path: '/game/create', accesses: [], dtoFactory: Game.fromJson);
+      path: '/game/update', accesses: [], dtoFactory: Game.fromJson);
 }

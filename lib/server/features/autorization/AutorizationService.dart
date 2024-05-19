@@ -10,6 +10,7 @@ import 'package:v1/common/features/infrastructure/service/SocketService.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 import 'package:v1/server/features/autorization/AutorizationEndpoint.dart';
 import 'package:v1/server/features/autorization/JWTUtils.dart';
+import 'package:v1/server/features/game/GameService.dart';
 import 'package:v1/server/features/rooms/RoomsService.dart';
 
 class AutorizationService extends SocketService {
@@ -128,5 +129,12 @@ class AutorizationService extends SocketService {
       endpoint.sendFail(
           SignInFailArgs(reason: SignInFailReason.WrongUserOrPassword));
     }
+  }
+
+  void addClientToServices(SocketClient client) {
+    final roomsService = serviceProvider.get<RoomsService>();
+    roomsService.addClient(client);
+    final gameService = serviceProvider.get<GameService>();
+    gameService.addClient(client);
   }
 }

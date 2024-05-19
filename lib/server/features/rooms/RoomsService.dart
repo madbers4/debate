@@ -35,11 +35,8 @@ class RoomsService extends SocketService {
   addClient(SocketClient client) {
     if (!authService.isClientAutorized(client) &&
         !authService.isClientObserver(client)) {
-      print('return');
       return;
     }
-
-    print('add client');
 
     super.addClient(client);
 
@@ -65,8 +62,9 @@ class RoomsService extends SocketService {
       _exitRooms(client, true);
     }));
 
-    _exitRooms(client, true);
     endpoint.sendRooms(rooms);
+    endpoint.sendSelectedRoleRemove();
+    endpoint.sendSelectedRoomRemove();
   }
 
   @override

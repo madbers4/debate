@@ -12,7 +12,7 @@ class SocketClient {
   Map<String, dynamic> _subscribers = {};
 
   SocketClient({required this.io}) {
-    print('CREATE SOCKET CLIENT');
+    // print('CREATE SOCKET CLIENT');
     // print('UID', id);
     io.on('data', _onData);
   }
@@ -22,8 +22,10 @@ class SocketClient {
         ? SocketBus(
             endpointHandler.customToDTOFactory!(dto), endpointHandler.path)
         : SocketBus(dto.toJson(), endpointHandler.path);
-    print(jsonEncode(bus.toJson()));
-    io.emit('data', jsonEncode(bus.toJson()));
+
+    final encoded = utf8.encode(jsonEncode(bus.toJson()));
+    // print(jsonEncode(bus.toJson()));
+    io.emit('data', encoded);
   }
 
   String subscribe<T extends DTO>(
@@ -42,7 +44,8 @@ class SocketClient {
   }
 
   _onData(dynamic data) {
-    final bus = SocketBus.fromJson(jsonDecode(data));
+    print(jsonDecode(utf8.decode(data.cast<int>())));
+    final bus = SocketBus.fromJson(jsonDecode(utf8.decode(data.cast<int>())));
 
     for (final subscriber in _subscribers.values) {
       if (subscriber.endpointHandler.path == bus.path) {

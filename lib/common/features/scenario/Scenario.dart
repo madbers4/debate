@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:v1/common/features/scenario/ScenarioDescription.dart';
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/scenario/ScenarioEvent.dart';
@@ -36,7 +34,7 @@ class Scenario implements DTO {
         'id': id,
         'description': description.toJson(),
         'defendant': defendant.toJson(),
-        'events': jsonEncode(events.map((e) => e.toJson())),
-        'evedences': jsonEncode(evedences.map((e) => e.toJson()))
+        'events': events.map((e) => e.toJson()).toList(),
+        'evedences': evedences.map((e) => e.toJson()).toList()
       };
 }

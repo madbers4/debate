@@ -50,7 +50,7 @@ class ScenariousScreen extends StatelessWidget {
                       roomsState.selectedRoom?.defendant != null
                   ? NextButton(
                       onPressed: () {
-                        router.go('/game/right');
+                        state.createGame();
                       },
                     )
                   : TextButton(

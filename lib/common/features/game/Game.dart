@@ -26,6 +26,6 @@ class Game implements DTO {
         'id': id,
         'scenario': scenario.toJson(),
         'gameStage': gameStage.toString(),
-        'stageStates': gameStage.toString(),
+        'stageStates': stageStates.toJson(),
       };
 }

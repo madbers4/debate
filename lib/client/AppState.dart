@@ -31,7 +31,7 @@ class AppState extends ChangeNotifier {
       _apiClient = apiClient;
 
       _apiClient!.subConnectError(() {
-        ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
+        ScaffoldMessenger.of(scaffoldKey.currentSta!.context).showSnackBar(
           SnackBar(
             content: const Text('Ошибка соеденения с сервером'),
             duration: const Duration(minutes: 1),

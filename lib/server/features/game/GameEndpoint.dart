@@ -2,11 +2,11 @@ import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/game/GameEndpointApi.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 
-class RoomsEndpoint {
+class GameEndpoint {
   SocketClient socketClient;
   GameEndpointApi api = GameEndpointApi();
 
-  RoomsEndpoint(this.socketClient);
+  GameEndpoint(this.socketClient);
 
   unsubscribe(String id) {
     socketClient.unsubscribe(id);

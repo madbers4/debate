@@ -27,8 +27,8 @@ class SignInForm extends StatelessWidget {
                 ),
               );
             }, (_) {
-              ScaffoldMessenger.of(scaffoldKey.currentContext!)
-                  .clearSnackBars();
+              // ScaffoldMessenger.of(scaffoldKey.currentContext!)
+              //     .clearSnackBars();
               // ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(
               //   SnackBar(
               //     content: Text('Успешно'),

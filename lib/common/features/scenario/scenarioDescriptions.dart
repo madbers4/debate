@@ -1,5 +1,5 @@
 import 'package:v1/common/features/scenario/ScenarioDescription.dart';
-import 'package:v1/common/features/scenario/scenarios/mysteryOfTheHeavenLyre.dart';
+import 'package:v1/common/features/scenario/scenarios/mysteryOfTheHeavenLyre/mysteryOfTheHeavenLyre.dart';
 
 final spyShadowDescription = ScenarioDescription(
     id: '1',

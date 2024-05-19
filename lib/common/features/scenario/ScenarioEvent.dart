@@ -27,6 +27,6 @@ class ScenarioEvent implements DTO {
         'id': id,
         'title': title,
         'description': description,
-        'facts': jsonEncode(facts.map((e) => e.toJson()))
+        'facts': facts.map((e) => e.toJson()).toList()
       };
 }

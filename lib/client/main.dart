@@ -8,6 +8,7 @@ import 'package:v1/client/AppState.dart';
 import 'package:v1/client/Router.dart';
 import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
+import 'package:v1/client/api/GameClient.dart';
 import 'package:v1/client/api/RoomsClient.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/settings/SettingsState.dart';
@@ -65,6 +66,15 @@ class MyApp extends StatelessWidget {
 
                     return roomsClient!;
                   }),
+              ChangeNotifierProxyProvider<ApiClient, GameClient>(
+                  create: (context) => GameClient(),
+                  update: (context, apiClient, gameClient) {
+                    if (apiClient.socketClient != null) {
+                      gameClient!.setClient(apiClient.socketClient!);
+                    }
+
+                    return gameClient!;
+                  }),
               ChangeNotifierProxyProvider<ApiClient, AutorizationClient>(
                   create: (context) => AutorizationClient(),
                   update: (context, apiClient, authClient) {
@@ -108,6 +118,8 @@ class MyApp extends StatelessWidget {
               final rClient = Provider.of<RoomsClient>(context, listen: false);
               final aClient =
                   Provider.of<AutorizationClient>(context, listen: false);
+              final gameClient =
+                  Provider.of<GameClient>(context, listen: false);
               final _appState = Provider.of<AppState>(context, listen: false);
               final _roomsState =
                   Provider.of<RoomsState>(context, listen: false);

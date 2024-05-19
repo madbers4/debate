@@ -41,8 +41,8 @@ class GameStageStates implements DTO {
         'title': title.toJson(),
         'defendant': defendant.toJson(),
         'act1': act1.toJson(),
-        'act2': act1.toJson(),
-        'act3': act1.toJson(),
-        'act4': act1.toJson(),
+        'act2': act2.toJson(),
+        'act3': act3.toJson(),
+        'act4': act4.toJson(),
       };
 }

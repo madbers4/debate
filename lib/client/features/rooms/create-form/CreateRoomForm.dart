@@ -14,7 +14,9 @@ class CreateRoomForm extends StatelessWidget {
         create: (context) => CreateRoomState(context),
         builder: (context, widget) {
           final state = context.watch<CreateRoomState>();
-          _nameController.text = state.name;
+          if (_nameController.text != state.name) {
+            _nameController.text = state.name;
+          }
 
           return Form(
             key: state.formKey,

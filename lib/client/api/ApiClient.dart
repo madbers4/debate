@@ -28,6 +28,7 @@ class ApiClient extends ChangeNotifier {
     _socket = IO.io(apiHost, {
       'transports': ['websocket', 'polling'],
       'autoConnect': false,
+      
     });
 
     print(_socket!.query);
