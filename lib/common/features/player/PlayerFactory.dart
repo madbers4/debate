@@ -12,16 +12,16 @@ class PlayerFactory {
       return Plaintiff.fromJson(json['data']);
     }
 
-    if (json['defendant']) {
-      return Plaintiff.fromJson(json['data']);
+    if (json['type'] == 'defendant') {
+      return Defendant.fromJson(json['data']);
     }
 
-    if (json['judge']) {
-      return Plaintiff.fromJson(json['data']);
+    if (json['type'] == 'judge') {
+      return Judge.fromJson(json['data']);
     }
 
-    if (json['observer']) {
-      return Plaintiff.fromJson(json['data']);
+    if (json['type'] == 'observer') {
+      return Observer.fromJson(json['data']);
     }
 
     return Player.fromJson(json['data']);

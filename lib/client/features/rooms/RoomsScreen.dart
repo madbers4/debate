@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/Router.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/rooms/table/SelectedRoomTable.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/features/rooms/create-form/CreateRoomForm.dart';
@@ -15,6 +16,7 @@ class RoomsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
+    final state = context.watch<RoomsState>();
 
     return ScreenLayout(
       bodyContent: Column(
@@ -35,11 +37,13 @@ class RoomsScreen extends StatelessWidget {
         ],
       ),
       rightTopContent: const SettingsButton(),
-      rightBottomContent: NextButton(
-        onPressed: () {
-          router.go('/scenarious/right');
-        },
-      ),
+      rightBottomContent: state.selectedRoom != null
+          ? NextButton(
+              onPressed: () {
+                router.go('/scenarious/right');
+              },
+            )
+          : Container(),
       leftBottomContent: CreateRoomForm(),
     );
   }

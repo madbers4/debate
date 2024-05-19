@@ -5,12 +5,13 @@ import 'package:v1/client/Router.dart';
 import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/features/settings/SettingsState.dart';
+import 'package:v1/client/main.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 import 'package:v1/common/features/autorization/AutorizationToken.dart';
 import 'package:v1/common/features/settings/Settings.dart';
 
 class AppState extends ChangeNotifier {
-  bool isUserAutorized = false;
+  bool? isUserAutorized;
 
   AutorizationClient? _authClient;
   ApiClient? _apiClient;
@@ -30,7 +31,7 @@ class AppState extends ChangeNotifier {
       _apiClient = apiClient;
 
       _apiClient!.subConnectError(() {
-        ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
           SnackBar(
             content: const Text('Ошибка соеденения с сервером'),
             duration: const Duration(minutes: 1),
@@ -41,22 +42,30 @@ class AppState extends ChangeNotifier {
       });
 
       _apiClient!.subConnect(() {
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Соеденение установлено'),
-            duration: const Duration(seconds: 4),
-            backgroundColor: _palette!.backgroundSuccess,
-          ),
-        );
+        if (scaffoldKey.currentState != null) {
+          ScaffoldMessenger.of(scaffoldKey.currentState!.context)
+              .clearSnackBars();
+          ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
+            SnackBar(
+              content: const Text('Соеденение установлено'),
+              duration: const Duration(seconds: 4),
+              backgroundColor: _palette!.backgroundSuccess,
+            ),
+          );
+        }
 
-        Timer(const Duration(seconds: 5), () {
-          if (isUserAutorized) {
-            router.go('/rooms/right');
-          } else {
+        final settings = _settingsState!.settings;
+
+        if (settings!.authToken != null) {
+          Timer(const Duration(seconds: 5), () {
+            _authClient!.tokenSignIn(AutorizationToken(
+                hash: settings.authToken!, username: settings.username));
+          });
+        } else {
+          Timer(const Duration(seconds: 5), () {
             router.go('/sign-in/right');
-          }
-        });
+          });
+        }
       });
     }
 
@@ -73,17 +82,13 @@ class AppState extends ChangeNotifier {
         notifyListeners();
       });
 
-      _authClient!.subSignInSuccess((token) {
-        isUserAutorized = true;
+      _authClient!.subSignInSuccess((args) {
+        isUserAutorized = args.isUserAutorized;
+
+        router.go('/rooms/right');
+
         notifyListeners();
       });
-
-      final settings = _settingsState!.settings;
-
-      if (settings!.authToken != null) {
-        _authClient!.tokenSignIn(AutorizationToken(
-            hash: settings.authToken!, username: settings.username));
-      }
     }
   }
 

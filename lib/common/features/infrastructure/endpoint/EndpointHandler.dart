@@ -6,7 +6,11 @@ class EndpointHandler<T extends DTO> {
   String path;
   List<EndpointAccess> accesses;
   DTOFactory<T> dtoFactory;
+  ToDTOFactory<T>? customToDTOFactory;
 
   EndpointHandler(
-      {required this.path, required this.accesses, required this.dtoFactory});
+      {required this.path,
+      required this.accesses,
+      required this.dtoFactory,
+      this.customToDTOFactory});
 }

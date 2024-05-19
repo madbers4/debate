@@ -19,10 +19,6 @@ class RoomsEndpoint {
     socketClient.unsubscribe(id);
   }
 
-  String subGetRooms(void Function(Void _) callback) {
-    return socketClient.subscribe(api.getStateHandler, callback);
-  }
-
   String subCreateRoom(void Function(CreateRoomArgs args) callback) {
     return socketClient.subscribe(api.create, callback);
   }

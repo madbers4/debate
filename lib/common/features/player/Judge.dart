@@ -1,6 +1,9 @@
 import 'package:v1/common/features/player/Player.dart';
 
 class Judge extends Player {
+  @override
+  String title = 'Судья';
+
   Judge({required super.id, required super.name});
 
   Judge.fromJson(Map<dynamic, dynamic> json)

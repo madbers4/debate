@@ -33,6 +33,14 @@ class RoomsService extends SocketService {
 
   @override
   addClient(SocketClient client) {
+    if (!authService.isClientAutorized(client) &&
+        !authService.isClientObserver(client)) {
+      print('return');
+      return;
+    }
+
+    print('add client');
+
     super.addClient(client);
 
     RoomsEndpoint endpoint = RoomsEndpoint(client);
@@ -46,15 +54,11 @@ class RoomsService extends SocketService {
     }));
 
     subs.add(endpoint.subRemoveRoom((args) {
-      _removeRoom(args);
+      _removeRoom(args, client);
     }));
 
     subs.add(endpoint.subJoinRoom((args) {
       _joinRoom(args, client);
-    }));
-
-    subs.add(endpoint.subGetRooms((_) {
-      _getRooms(client);
     }));
 
     subs.add(endpoint.subExitRooms((_) {
@@ -66,16 +70,20 @@ class RoomsService extends SocketService {
 
   @override
   removeClient(SocketClient client) {
-    final subs = subsIdsByClient[client]!;
-    final endpoint = endpointByClient[client]!;
+    final subs = subsIdsByClient[client];
+    final endpoint = endpointByClient[client];
+
+    if (subs == null || endpoint == null) {
+      return;
+    }
+
+    _exitRooms(client, true);
 
     for (final sub in subs) {
       endpoint.unsubscribe(sub);
     }
 
     endpointByClient.remove(client);
-
-    _exitRooms(client, true);
   }
 
   void _createRoom(CreateRoomArgs args, SocketClient client) {
@@ -101,9 +109,32 @@ class RoomsService extends SocketService {
     _sendRoomsToClients();
   }
 
-  void _removeRoom(RemoveRoomArgs args) {
+  void _removeRoom(RemoveRoomArgs args, SocketClient client) {
+    if (!authService.isClientAutorized(client)) {
+      return;
+    }
+
+    if (rooms.has(args.roomId) == false) {
+      return;
+    }
+
+    List<SocketClient> roomClients = roomIdByClient.entries
+        .where((e) => e.value == args.roomId)
+        .map((e) => e.key)
+        .toList();
+
+    for (final roomClient in roomClients) {
+      _exitRooms(roomClient, false);
+    }
+
     rooms.remove(args.roomId);
     _sendRoomsToClients();
+
+    for (final roomClient in roomClients) {
+      final endpoint = endpointByClient[roomClient]!;
+      endpoint.sendSelectedRoleRemove();
+      endpoint.sendSelectedRoomRemove();
+    }
   }
 
   void _joinRoom(JoinRoomArgs args, SocketClient client) {
@@ -116,26 +147,46 @@ class RoomsService extends SocketService {
     }
 
     Player? player;
+    final room = rooms.get(args.roomId)!;
+    final endpoint = endpointByClient[client]!;
 
     switch (args.role) {
       case PlayerRole.Observer:
         {
+          if (room.observers.length > 100) {
+            endpoint.sendError(
+                RoomsFailArgs(reason: RoomsFailReason.TooMuchObservers));
+            break;
+          }
           player = Observer();
         }
       case PlayerRole.Defendant:
       case PlayerRole.Plaintiff:
         {
           if (!authService.isClientAutorized(client)) {
+            endpoint.sendError(RoomsFailArgs(reason: RoomsFailReason.Unknown));
             break;
           }
 
           final userToken = authService.getToken(client);
 
           if (args.role == PlayerRole.Defendant) {
+            if (room.defendant != null) {
+              endpoint.sendError(RoomsFailArgs(
+                  reason: RoomsFailReason.TheDefenderAlreadyExists));
+              break;
+            }
+
             player = Defendant(name: userToken.username);
           }
 
           if (args.role == PlayerRole.Plaintiff) {
+            if (room.plaintiff != null) {
+              endpoint.sendError(RoomsFailArgs(
+                  reason: RoomsFailReason.ThePlainriffAlreadyExists));
+              break;
+            }
+
             player = Plaintiff(name: userToken.username);
           }
 
@@ -155,7 +206,6 @@ class RoomsService extends SocketService {
 
     _sendRoomsToClients();
 
-    final endpoint = endpointByClient[client]!;
     endpoint.sendSelectedRole(player);
     endpoint.sendSelectedRoom(rooms.get(args.roomId)!);
   }
@@ -182,11 +232,6 @@ class RoomsService extends SocketService {
         endpoint.sendSelectedRoomRemove();
       }
     }
-  }
-
-  void _getRooms(SocketClient client) {
-    final endpoint = endpointByClient[client]!;
-    endpoint.sendRooms(rooms);
   }
 
   void _sendRoomsToClients() {

@@ -3,7 +3,7 @@ import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/features/sign-in/form/SignInFormFields.dart';
 import 'package:v1/common/features/autorization/SignInArgs.dart';
 import 'package:v1/common/features/autorization/SignInFailArgs.dart';
-import 'package:v1/common/features/infrastructure/dto/Void.dart';
+import 'package:v1/common/features/autorization/SignInSuccessArgs.dart';
 
 class SignInFormState extends ChangeNotifier {
   AutorizationClient _client;
@@ -13,7 +13,7 @@ class SignInFormState extends ChangeNotifier {
   String? error;
 
   SignInFormState(this._client, void Function(SignInFailArgs) onError,
-      void Function(Void) onSuccess) {
+      void Function(SignInSuccessArgs) onSuccess) {
     _client.subSignInFail(onError);
     _client.subSignInSuccess(onSuccess);
   }

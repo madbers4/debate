@@ -5,9 +5,11 @@ import 'package:v1/client/api/RoomsClient.dart';
 import 'package:v1/common/features/player/Role.dart';
 import 'package:v1/common/features/room/JoinRoomArgs.dart';
 import 'package:v1/common/features/room/RemoveRoomArgs.dart';
+import 'package:v1/common/features/room/Room.dart';
 
 class SettingsCellMenuState extends ChangeNotifier {
   late PlayerRole playerRole;
+  late Room room;
 
   late RoomsClient _client;
   late AppState _appState;

@@ -15,26 +15,21 @@ class RoomsTable extends StatelessWidget {
     return DataTable(
         // columnSpacing: 60,
         columns: const [
-          DataColumn(
-            label: Text('#'),
-          ),
           DataColumn(label: Text('Тайтл')),
           DataColumn(label: Text('Обвиняемый')),
           DataColumn(label: Text('Прокурор')),
-          DataColumn(label: Text('Смотрители')),
+          DataColumn(label: Text('Наблюдатели')),
           DataColumn(label: Text('')),
         ],
         rows: state.rooms
             .getAll()
-            .indexed
             .map<DataRow>((row) => DataRow(cells: [
-                  DataCell(Text(row.$1.toString())),
-                  DataCell(Text(row.$2.name)),
-                  DataCell(Text(row.$2.defendant?.name ?? '')),
-                  DataCell(Text(row.$2.plaintiff?.name ?? '')),
-                  DataCell(Text('${row.$2.observers.length}')),
+                  DataCell(Text(row.name)),
+                  DataCell(Text(row.defendant?.name ?? '')),
+                  DataCell(Text(row.plaintiff?.name ?? '')),
+                  DataCell(Text('${row.observers.length}')),
                   DataCell(RowSettingsMenuButton(
-                    roomId: row.$2.id,
+                    roomId: row.id,
                   )),
                 ]))
             .toList());

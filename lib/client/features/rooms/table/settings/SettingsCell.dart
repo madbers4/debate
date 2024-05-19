@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/AppState.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/rooms/table/settings/SettingsCellMenuState.dart';
 
 class RowSettingsMenuButton extends StatelessWidget {
@@ -13,6 +15,9 @@ class RowSettingsMenuButton extends StatelessWidget {
       create: (context) => SettingsCellMenuState(context),
       builder: (context, child) {
         final state = context.watch<SettingsCellMenuState>();
+        final appState = context.watch<AppState>();
+        final roomsState = context.watch<RoomsState>();
+        final room = roomsState.rooms.get(roomId)!;
 
         return MenuAnchor(
           builder: (BuildContext context, MenuController controller,
@@ -29,36 +34,44 @@ class RowSettingsMenuButton extends StatelessWidget {
             },
           ),
           menuChildren: [
+            room.defendant == null && appState.isUserAutorized!
+                ? MenuItemButton(
+                    child: Text('Войти как обвиняемый'),
+                    onPressed: () {
+                      state.joinAsDefended(roomId);
+                    },
+                  )
+                : Container(),
+            room.plaintiff == null && appState.isUserAutorized!
+                ? MenuItemButton(
+                    child: Text('Войти как прокурор'),
+                    onPressed: () {
+                      state.joinAsPlaintiff(roomId);
+                    },
+                  )
+                : Container(),
             MenuItemButton(
-              child: Text('Войти как обвиняемый'),
-              onPressed: () {
-                state.joinAsDefended(roomId);
-              },
-            ),
-            MenuItemButton(
-              child: Text('Войти как прокурор'),
-              onPressed: () {
-                state.joinAsPlaintiff(roomId);
-              },
-            ),
-            MenuItemButton(
-              child: Text('Войти как смотритель'),
+              child: Text('Войти как наблюдатель'),
               onPressed: () {
                 state.joinAsGuest(roomId);
               },
             ),
-            MenuItemButton(
-              child: Text('Выйти'),
-              onPressed: () {
-                state.exitFromRooms();
-              },
-            ),
-            MenuItemButton(
-              child: Text('Удалить'),
-              onPressed: () {
-                state.removeRoom(roomId);
-              },
-            ),
+            roomsState.selectedRoom?.id == room.id
+                ? MenuItemButton(
+                    child: Text('Выйти'),
+                    onPressed: () {
+                      state.exitFromRooms();
+                    },
+                  )
+                : Container(),
+            appState.isUserAutorized!
+                ? MenuItemButton(
+                    child: Text('Удалить'),
+                    onPressed: () {
+                      state.removeRoom(roomId);
+                    },
+                  )
+                : Container(),
           ],
         );
       },

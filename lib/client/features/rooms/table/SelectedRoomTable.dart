@@ -13,7 +13,7 @@ class SelectedRoomTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<RoomsState>();
 
-    Room? selectedRoomWithRoomsIndex =
+    Room? selectedRoom =
         state.selectedRoom != null && state.rooms.has(state.selectedRoom!.id)
             ? state.rooms.get(state.selectedRoom!.id)
             : null;
@@ -33,32 +33,30 @@ class SelectedRoomTable extends StatelessWidget {
         DataTable(
             // columnSpacing: 60,
             columns: const [
-              DataColumn(
-                label: Text('#'),
-              ),
-              DataColumn(label: Text('Тайтл')),
+              DataColumn(label: Text('Название')),
+              DataColumn(label: Text('Роль')),
               DataColumn(label: Text('Обвиняемый')),
               DataColumn(label: Text('Прокурор')),
-              DataColumn(label: Text('Смотрители')),
-              DataColumn(label: Text('')),
+              DataColumn(label: Text('Наблюдатели')),
+              DataColumn(label: Text(''))
             ],
-            rows: selectedRoomWithRoomsIndex != null
-                ? [
-                    DataRow(cells: [
-                      DataCell(Text(selectedRoomWithRoomsIndex.toString())),
-                      DataCell(Text(selectedRoomWithRoomsIndex.name)),
-                      DataCell(Text(
-                          selectedRoomWithRoomsIndex.defendant?.name ?? '')),
-                      DataCell(Text(
-                          selectedRoomWithRoomsIndex.plaintiff?.name ?? '')),
-                      DataCell(Text(
-                          '${selectedRoomWithRoomsIndex.observers.length}')),
-                      DataCell(RowSettingsMenuButton(
-                        roomId: selectedRoomWithRoomsIndex.id,
-                      )),
-                    ])
-                  ]
-                : []),
+            rows: [
+              DataRow(cells: [
+                DataCell(Text(selectedRoom != null ? selectedRoom.name : '')),
+                DataCell(Text(state.selectedRole != null
+                    ? 'Ваша роль — ${state.selectedRole!.title}'
+                    : '')),
+                DataCell(Text(selectedRoom?.defendant?.name ?? '')),
+                DataCell(Text(selectedRoom?.plaintiff?.name ?? '')),
+                DataCell(Text(
+                    '${selectedRoom?.observers != null ? selectedRoom?.observers.length : ''}')),
+                DataCell(selectedRoom != null
+                    ? RowSettingsMenuButton(
+                        roomId: selectedRoom.id,
+                      )
+                    : Text('')),
+              ])
+            ]),
       ],
     );
   }

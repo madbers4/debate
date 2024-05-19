@@ -18,7 +18,10 @@ class SocketClient {
   }
 
   void send<T extends DTO>(EndpointHandler<T> endpointHandler, T dto) {
-    final bus = SocketBus(dto.toJson(), endpointHandler.path);
+    final bus = endpointHandler.customToDTOFactory != null
+        ? SocketBus(
+            endpointHandler.customToDTOFactory!(dto), endpointHandler.path)
+        : SocketBus(dto.toJson(), endpointHandler.path);
     print(jsonEncode(bus.toJson()));
     io.emit('data', jsonEncode(bus.toJson()));
   }

@@ -24,7 +24,8 @@ class RoomsEndpointApi {
   EndpointHandler<Player> selectedRoleHandler = EndpointHandler(
       path: '/rooms/selected-role',
       accesses: [],
-      dtoFactory: PlayerFactory.fromJson);
+      dtoFactory: PlayerFactory.fromJson,
+      customToDTOFactory: PlayerFactory.toJson);
 
   EndpointHandler<Void> selectedRoleRemoveHandler = EndpointHandler(
       path: '/rooms/selected-role/remove',
@@ -33,9 +34,6 @@ class RoomsEndpointApi {
 
   EndpointHandler<RoomsFailArgs> errorHandler = EndpointHandler(
       path: '/rooms/error', accesses: [], dtoFactory: RoomsFailArgs.fromJson);
-
-  EndpointHandler<Void> getStateHandler = EndpointHandler(
-      path: '/rooms/get', accesses: [], dtoFactory: Void.fromJson);
 
   EndpointHandler<CreateRoomArgs> create = EndpointHandler(
       path: '/rooms/create', accesses: [], dtoFactory: CreateRoomArgs.fromJson);

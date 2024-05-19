@@ -2,6 +2,7 @@ import 'package:v1/common/features/autorization/AutorizationEndpointApi.dart';
 import 'package:v1/common/features/autorization/AutorizationToken.dart';
 import 'package:v1/common/features/autorization/SignInArgs.dart';
 import 'package:v1/common/features/autorization/SignInFailArgs.dart';
+import 'package:v1/common/features/autorization/SignInSuccessArgs.dart';
 import 'package:v1/common/features/infrastructure/dto/Void.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 
@@ -27,8 +28,8 @@ class AutorizationEndpoint {
     return socketClient.subscribe(api.tokenSignInHandler, callback);
   }
 
-  void sendSuccess() {
-    socketClient.send(api.singInSuccessHandler, Void());
+  void sendSuccess(SignInSuccessArgs args) {
+    socketClient.send(api.singInSuccessHandler, args);
   }
 
   void sendFail(SignInFailArgs args) {

@@ -25,6 +25,7 @@ void main(List<String> arguments) {
     }
 
     client.on('disconnect', (_) {
+      print('disconnect');
       for (final service in socketServiceProvider.getAll()) {
         service.removeClient(socketClient);
       }

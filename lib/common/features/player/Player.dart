@@ -3,6 +3,7 @@ import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 class Player implements DTO {
   String name;
   String id;
+  String title = 'Игрок';
 
   Player({required this.id, required this.name});
 

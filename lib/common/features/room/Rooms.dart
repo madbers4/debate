@@ -17,10 +17,12 @@ class Rooms implements DTO {
     }
   }
 
-  Rooms.fromJson(Map<dynamic, dynamic> json)
-      : id = json['id'] as String,
-        _list =
-            List.from(json['rooms'].map<Room>((room) => Room.fromJson(room)));
+  static Rooms fromJson(Map<dynamic, dynamic> json) {
+    return Rooms(
+        id: json['id'] as String,
+        list:
+            List.from(json['rooms'].map<Room>((room) => Room.fromJson(room))));
+  }
 
   Map toJson() => {'id': id, 'rooms': _list};
 

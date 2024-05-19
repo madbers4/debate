@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/Router.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/features/sign-in/form/SignInFormFields.dart';
 import 'package:v1/client/features/sign-in/form/SignInState.dart';
@@ -34,7 +35,7 @@ class SignInForm extends StatelessWidget {
               //     backgroundColor: palette.backgroundSuccess,
               //   ),
               // );
-              context.go('/rooms/right');
+              // router.go('/rooms/right');
             }),
         builder: (context, widget) {
           final state = Provider.of<SignInFormState>(context);

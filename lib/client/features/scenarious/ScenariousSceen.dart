@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/Router.dart';
+import 'package:v1/client/features/rooms/table/SelectedRoomTable.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
-import 'package:v1/client/features/rooms/table/RoomsTable.dart';
 import 'package:v1/client/features/scenarious/ScenariousSceenState.dart';
 import 'package:v1/client/features/scenarious/table/ScenariousTable.dart';
 import 'package:v1/client/features/settings/SettingsButton.dart';
@@ -26,13 +26,7 @@ class ScenariousScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Комната',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      )),
-                  RoomsTable(),
+                  SelectedRoomTable(),
                   SizedBox(
                     height: 10,
                   ),

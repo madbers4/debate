@@ -2,6 +2,9 @@ import 'package:v1/common/features/player/Player.dart';
 import 'package:v1/common/utils/generateUID.dart';
 
 class Observer extends Player {
+  @override
+  String title = 'Наблюдатель';
+
   Observer({super.name = 'observer'}) : super(id: generateUID());
 
   Observer.fromJson(Map<dynamic, dynamic> json)

@@ -46,7 +46,7 @@ class ApiClient extends ChangeNotifier {
     });
 
     _socket!.onConnectError((data) {
-      // print(data);
+      print(data);
 
       for (final callback in _conErrorSubscribers) {
         callback();

@@ -163,7 +163,7 @@ class SettingsDialog extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  _appState.isUserAutorized
+                  _appState.isUserAutorized != null
                       ? TextButton(
                           onPressed: () {
                             state.logout();

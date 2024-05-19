@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
 
                     return apiClient!;
                   }),
-              ProxyProvider<ApiClient, RoomsClient>(
+              ChangeNotifierProxyProvider<ApiClient, RoomsClient>(
                   create: (context) => RoomsClient(),
                   update: (context, apiClient, roomsClient) {
                     if (apiClient.socketClient != null) {
@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProxyProvider<RoomsClient, RoomsState>(
                   create: (context) => RoomsState(),
                   update: (context, roomsClient, roomsState) {
-                    if (roomsClient != null) {
+                    if (roomsClient.socketClient != null) {
                       roomsState!.setClients(context);
                     }
                     return roomsState!;
@@ -109,7 +109,8 @@ class MyApp extends StatelessWidget {
               final aClient =
                   Provider.of<AutorizationClient>(context, listen: false);
               final _appState = Provider.of<AppState>(context, listen: false);
-              final _roomsState = Provider.of<AppState>(context, listen: false);
+              final _roomsState =
+                  Provider.of<RoomsState>(context, listen: false);
 
               return MaterialApp.router(
                 // theme: ,

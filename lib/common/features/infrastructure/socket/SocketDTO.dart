@@ -1,6 +1,7 @@
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 
 typedef DTOFactory<T extends DTO> = T Function(Map<dynamic, dynamic> json);
+typedef ToDTOFactory<T extends DTO> = Map<dynamic, dynamic> Function(T dto);
 
 class SocketBus<T extends DTO> implements DTO {
   Map<dynamic, dynamic> data;

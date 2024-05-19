@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:v1/common/features/autorization/AutorizationToken.dart';
 import 'package:v1/common/features/autorization/SignInArgs.dart';
 import 'package:v1/common/features/autorization/SignInFailArgs.dart';
 import 'package:v1/common/features/autorization/SignInFailReason.dart';
+import 'package:v1/common/features/autorization/SignInSuccessArgs.dart';
 import 'package:v1/common/features/infrastructure/dto/Void.dart';
 import 'package:v1/common/features/infrastructure/service/SocketService.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 import 'package:v1/server/features/autorization/AutorizationEndpoint.dart';
 import 'package:v1/server/features/autorization/JWTUtils.dart';
+import 'package:v1/server/features/rooms/RoomsService.dart';
 
 class AutorizationService extends SocketService {
   Map<SocketClient, List<String>> subsIdsByClient = {};
@@ -77,7 +81,14 @@ class AutorizationService extends SocketService {
 
     if (JWTUtils.verifyAccessToken(accessToken: token.hash)) {
       autorizedTokensByClient[client] = token;
-      endpoint.sendSuccess();
+
+      Timer(Duration.zero, () {
+        print('token sign in');
+        endpoint.sendSuccess(SignInSuccessArgs(isUserAutorized: true));
+
+        final roomsService = serviceProvider.get<RoomsService>();
+        roomsService.addClient(client);
+      });
     } else {
       endpoint.sendFail(SignInFailArgs(reason: SignInFailReason.InvalidToken));
     }
@@ -87,7 +98,14 @@ class AutorizationService extends SocketService {
     final endpoint = endpointByClient[client]!;
 
     observersSocketClients.add(client);
-    endpoint.sendSuccess();
+
+    Timer(Duration.zero, () {
+      print('obs sign in');
+      endpoint.sendSuccess(SignInSuccessArgs(isUserAutorized: false));
+
+      final roomsService = serviceProvider.get<RoomsService>();
+      roomsService.addClient(client);
+    });
   }
 
   void _signIn(SignInArgs args, SocketClient client) {
@@ -98,8 +116,14 @@ class AutorizationService extends SocketService {
           username: args.username,
           hash: JWTUtils.generateAccessToken(userId: args.username));
       autorizedTokensByClient[client] = token;
-      endpoint.sendSuccess();
-      endpoint.sendAuthToken(token);
+
+      Timer(Duration.zero, () {
+        endpoint.sendSuccess(SignInSuccessArgs(isUserAutorized: true));
+        endpoint.sendAuthToken(token);
+
+        final roomsService = serviceProvider.get<RoomsService>();
+        roomsService.addClient(client);
+      });
     } else {
       endpoint.sendFail(
           SignInFailArgs(reason: SignInFailReason.WrongUserOrPassword));
