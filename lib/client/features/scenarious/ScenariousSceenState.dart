@@ -7,5 +7,10 @@ class ScenarionScreenState extends ChangeNotifier {
   bool hasSelectAccess = true;
   final List<ScenarioDescription> scenarios = scenarioDescriptions;
 
-  ScenarionScreenState(BuildContext context) {}
+  ScenarionScreenState(BuildContext context);
+
+  select(String? id) {
+    selectedScenarioId = id;
+    notifyListeners();
+  }
 }

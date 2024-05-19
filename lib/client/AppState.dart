@@ -45,6 +45,7 @@ class AppState extends ChangeNotifier {
         if (scaffoldKey.currentState != null) {
           ScaffoldMessenger.of(scaffoldKey.currentState!.context)
               .clearSnackBars();
+
           ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
             SnackBar(
               content: const Text('Соеденение установлено'),
@@ -62,9 +63,11 @@ class AppState extends ChangeNotifier {
                 hash: settings.authToken!, username: settings.username));
           });
         } else {
-          Timer(const Duration(seconds: 5), () {
-            router.go('/sign-in/right');
-          });
+          if (isUserAutorized == null) {
+            Timer(const Duration(seconds: 5), () {
+              router.go('/sign-in/right');
+            });
+          }
         }
       });
     }

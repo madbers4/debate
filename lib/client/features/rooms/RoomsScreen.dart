@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/AppState.dart';
 import 'package:v1/client/Router.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/rooms/table/SelectedRoomTable.dart';
@@ -17,20 +18,21 @@ class RoomsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
     final state = context.watch<RoomsState>();
+    final appState = context.watch<AppState>();
 
     return ScreenLayout(
       bodyContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SelectedRoomTable(),
+          const SelectedRoomTable(),
           Container(
               alignment: Alignment.centerLeft,
               child: Text(
                 'Игровые комнаты',
                 style: Theme.of(context).textTheme.titleLarge,
               )),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           const RoomsTable(),
@@ -43,8 +45,12 @@ class RoomsScreen extends StatelessWidget {
                 router.go('/scenarious/right');
               },
             )
-          : Container(),
-      leftBottomContent: CreateRoomForm(),
+          : const TextButton(
+              onPressed: null,
+              child: Text('Выберите комнату'),
+            ),
+      leftBottomContent:
+          appState.isUserAutorized! ? CreateRoomForm() : Container(),
     );
   }
 }

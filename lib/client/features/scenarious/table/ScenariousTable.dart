@@ -27,14 +27,21 @@ class ScenariousTable extends StatelessWidget {
             separatorBuilder: (_, __) => const Divider(),
             itemBuilder: (context, int index) {
               final scenario = state.scenarios[index];
+              final isSelected = scenario.id == state.selectedScenarioId;
 
               return ListTile(
                 enabled: true,
+                selected: isSelected,
                 onTap: () {
+                  if (isSelected) {
+                    state.select(null);
+                  } else {
+                    state.select(scenario.id);
+                  }
                   // GoRouter.of(context).go('/play/session/${index}');
                 },
                 leading: Text(index.toString()),
-                title: Text('${scenario.title}'),
+                title: Text(scenario.title),
               );
             })
       ],

@@ -5,9 +5,9 @@ import 'package:v1/client/features/rooms/table/settings/SettingsCell.dart';
 import 'package:v1/common/features/room/Room.dart';
 
 class SelectedRoomTable extends StatelessWidget {
-  const SelectedRoomTable({
-    super.key,
-  });
+  final bool isSettingsDisabled;
+
+  const SelectedRoomTable({super.key, this.isSettingsDisabled = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class SelectedRoomTable extends StatelessWidget {
 
     Room? selectedRoom =
         state.selectedRoom != null && state.rooms.has(state.selectedRoom!.id)
-            ? state.rooms.get(state.selectedRoom!.id)
+            ? state.selectedRoom
             : null;
 
     return Column(
@@ -50,7 +50,7 @@ class SelectedRoomTable extends StatelessWidget {
                 DataCell(Text(selectedRoom?.plaintiff?.name ?? '')),
                 DataCell(Text(
                     '${selectedRoom?.observers != null ? selectedRoom?.observers.length : ''}')),
-                DataCell(selectedRoom != null
+                DataCell(selectedRoom != null && !isSettingsDisabled
                     ? RowSettingsMenuButton(
                         roomId: selectedRoom.id,
                       )

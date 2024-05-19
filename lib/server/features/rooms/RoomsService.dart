@@ -65,6 +65,7 @@ class RoomsService extends SocketService {
       _exitRooms(client, true);
     }));
 
+    _exitRooms(client, true);
     endpoint.sendRooms(rooms);
   }
 
@@ -204,10 +205,18 @@ class RoomsService extends SocketService {
     roomIdByClient[client] = args.roomId;
     playerByClient[client] = player;
 
-    _sendRoomsToClients();
+    List<SocketClient> roomClients = roomIdByClient.entries
+        .where((e) => e.value == args.roomId)
+        .map((e) => e.key)
+        .toList();
+
+    for (final roomClient in roomClients) {
+      final roomClientEndpoint = endpointByClient[roomClient]!;
+      roomClientEndpoint.sendSelectedRoom(rooms.get(args.roomId)!);
+    }
 
     endpoint.sendSelectedRole(player);
-    endpoint.sendSelectedRoom(rooms.get(args.roomId)!);
+    _sendRoomsToClients();
   }
 
   void _exitRooms(SocketClient client, bool needEmit) {
@@ -230,6 +239,16 @@ class RoomsService extends SocketService {
         final endpoint = endpointByClient[client]!;
         endpoint.sendSelectedRoleRemove();
         endpoint.sendSelectedRoomRemove();
+
+        List<SocketClient> roomClients = roomIdByClient.entries
+            .where((e) => e.value == roomId && e.key != client)
+            .map((e) => e.key)
+            .toList();
+
+        for (final roomClient in roomClients) {
+          final roomClientEndpoint = endpointByClient[roomClient]!;
+          roomClientEndpoint.sendSelectedRoom(rooms.get(roomId)!);
+        }
       }
     }
   }
