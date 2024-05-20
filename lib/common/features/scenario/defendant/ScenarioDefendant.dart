@@ -22,15 +22,16 @@ class ScenarioDefendant implements DTO {
       : id = json['id'],
         name = json['name'],
         description = json['description'],
-        bornOrigin = json['bornOrigin'],
-        professionOrigin = json['professionOrigin'],
-        secretOrigin = json['secretOrigin'];
+        bornOrigin = ScenarioDefendantOrigin.fromJson(json['bornOrigin']),
+        professionOrigin =
+            ScenarioDefendantOrigin.fromJson(json['professionOrigin']),
+        secretOrigin = ScenarioDefendantOrigin.fromJson(json['secretOrigin']);
 
   Map toJson() => {
         'id': id,
-        'title': name,
+        'name': name,
         'description': description,
-        'playerDescription': bornOrigin.toJson(),
+        'bornOrigin': bornOrigin.toJson(),
         'professionOrigin': professionOrigin.toJson(),
         'secretOrigin': secretOrigin.toJson(),
       };

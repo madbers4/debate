@@ -8,8 +8,7 @@ class DefendantStageState implements DTO {
 
   static fromJson(Map<dynamic, dynamic> json) {
     return DefendantStageState(
-        id: json['id'] as String,
-        isCardsShowed: json['isDescriptionShowed'] as bool);
+        id: json['id'] as String, isCardsShowed: json['isCardsShowed'] as bool);
   }
 
   Map toJson() => {

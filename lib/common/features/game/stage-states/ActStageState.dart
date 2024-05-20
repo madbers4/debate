@@ -17,7 +17,7 @@ class ActStageState implements DTO {
   static fromJson(Map<dynamic, dynamic> json) {
     return ActStageState(
         id: json['id'] as String,
-        isCardsShowed: json['isDescriptionShowed'] as bool,
+        isCardsShowed: json['isCardsShowed'] as bool,
         isFirstCardShowed: json['isFirstCardShowed'] as bool,
         isSecondCardShowed: json['isSecondCardShowed'] as bool,
         isThirdCardShowed: json['isThirdCardShowed'] as bool);

@@ -84,11 +84,8 @@ class AutorizationService extends SocketService {
       autorizedTokensByClient[client] = token;
 
       Timer(Duration.zero, () {
-        print('token sign in');
         endpoint.sendSuccess(SignInSuccessArgs(isUserAutorized: true));
-
-        final roomsService = serviceProvider.get<RoomsService>();
-        roomsService.addClient(client);
+        addClientToServices(client);
       });
     } else {
       endpoint.sendFail(SignInFailArgs(reason: SignInFailReason.InvalidToken));
@@ -101,11 +98,8 @@ class AutorizationService extends SocketService {
     observersSocketClients.add(client);
 
     Timer(Duration.zero, () {
-      print('obs sign in');
       endpoint.sendSuccess(SignInSuccessArgs(isUserAutorized: false));
-
-      final roomsService = serviceProvider.get<RoomsService>();
-      roomsService.addClient(client);
+      addClientToServices(client);
     });
   }
 
@@ -122,8 +116,7 @@ class AutorizationService extends SocketService {
         endpoint.sendSuccess(SignInSuccessArgs(isUserAutorized: true));
         endpoint.sendAuthToken(token);
 
-        final roomsService = serviceProvider.get<RoomsService>();
-        roomsService.addClient(client);
+        addClientToServices(client);
       });
     } else {
       endpoint.sendFail(

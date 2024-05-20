@@ -7,7 +7,7 @@ import 'package:v1/common/features/infrastructure/dto/Void.dart';
 class GameStageStates implements DTO {
   @override
   String id = '1';
-  final TitleStageState title;
+  TitleStageState title;
   DefendantStageState defendant;
   ActStageState act1;
   ActStageState act2;
@@ -29,11 +29,11 @@ class GameStageStates implements DTO {
   GameStageStates.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'] as String,
         title = TitleStageState.fromJson(json['title']),
-        defendant = TitleStageState.fromJson(json['defendant']),
-        act1 = TitleStageState.fromJson(json['act1']),
-        act2 = TitleStageState.fromJson(json['act2']),
-        act3 = TitleStageState.fromJson(json['act3']),
-        act4 = TitleStageState.fromJson(json['act4']);
+        defendant = DefendantStageState.fromJson(json['defendant']),
+        act1 = ActStageState.fromJson(json['act1']),
+        act2 = ActStageState.fromJson(json['act2']),
+        act3 = ActStageState.fromJson(json['act3']),
+        act4 = ActStageState.fromJson(json['act4']);
 
   @override
   Map toJson() => {

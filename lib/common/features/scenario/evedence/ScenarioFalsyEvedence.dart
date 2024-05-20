@@ -1,15 +1,15 @@
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
 
-class ScenarioTruthyEvedence extends ScenarioEvedence {
+class ScenarioFalsyEvedence extends ScenarioEvedence {
   final String falsyFactId;
 
-  ScenarioTruthyEvedence(
+  ScenarioFalsyEvedence(
       {required super.id,
       required super.title,
       required super.description,
       required this.falsyFactId});
 
-  ScenarioTruthyEvedence.fromJson(Map<String, dynamic> json)
+  ScenarioFalsyEvedence.fromJson(Map<String, dynamic> json)
       : falsyFactId = json['falsyFactId'] as String,
         super(
             id: json['id'] as String,
@@ -20,5 +20,6 @@ class ScenarioTruthyEvedence extends ScenarioEvedence {
         'id': id,
         'title': title,
         'description': description,
+        'falsyFactId': falsyFactId,
       };
 }
