@@ -14,7 +14,7 @@ class GameClient extends ChangeNotifier {
     notifyListeners();
   }
 
-  String subGame(void Function(Game rooms) callback) {
+  String subGame(void Function(Game game) callback) {
     return socketClient!.subscribe(api.game, callback);
   }
 

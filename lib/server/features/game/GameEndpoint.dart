@@ -16,7 +16,11 @@ class GameEndpoint {
     return socketClient.subscribe(api.create, callback);
   }
 
-  void sendState(Game args) {
+  String subUpdateGame(void Function(Game args) callback) {
+    return socketClient.subscribe(api.update, callback);
+  }
+
+  void sendGame(Game args) {
     socketClient.send(api.game, args);
   }
 }

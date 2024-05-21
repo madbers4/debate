@@ -10,6 +10,7 @@ import 'package:v1/client/api/ApiClient.dart';
 import 'package:v1/client/api/AutorizationClient.dart';
 import 'package:v1/client/api/GameClient.dart';
 import 'package:v1/client/api/RoomsClient.dart';
+import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/settings/SettingsState.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
@@ -109,6 +110,14 @@ class MyApp extends StatelessWidget {
                     }
                     return roomsState!;
                   }),
+              ChangeNotifierProxyProvider<GameClient, GameState>(
+                  create: (context) => GameState(),
+                  update: (context, gameClient, gameState) {
+                    if (gameClient.socketClient != null) {
+                      gameState!.setClients(context);
+                    }
+                    return gameState!;
+                  }),
             ],
             builder: (context, child) {
               // HARDCODE
@@ -123,6 +132,7 @@ class MyApp extends StatelessWidget {
               final _appState = Provider.of<AppState>(context, listen: false);
               final _roomsState =
                   Provider.of<RoomsState>(context, listen: false);
+              final _gameState = Provider.of<GameState>(context, listen: false);
 
               return MaterialApp.router(
                 // theme: ,

@@ -11,15 +11,10 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
+    final state = context.watch<GameState>();
 
-    return ChangeNotifierProvider(
-        create: (context) => GameState(context),
-        builder: (context, child) {
-          final state = context.watch<GameState>();
-
-          return MaterialApp.router(
-            routerConfig: gameRouter,
-          );
-        });
+    return MaterialApp.router(
+      routerConfig: gameRouter,
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/judgement/JudgementStageBody.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 
 class JudgementStage extends StatelessWidget {
   const JudgementStage({super.key});
@@ -12,7 +13,7 @@ class JudgementStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
     final stageState = game.stageStates.title;
     final scenario = game.scenario;
     final description = scenario.description;
@@ -23,13 +24,13 @@ class JudgementStage extends StatelessWidget {
       rightBottomContent: TextButton(
         child: Text('Признать виновным'),
         onPressed: () {
-          gameRouter.go('/verdict/right');
+          gameState.updateStage(GameStage.Verdict);
         },
       ),
       leftBottomContent: TextButton(
         child: Text('Признать невиновным'),
         onPressed: () {
-          gameRouter.go('/verdict/right');
+          gameState.updateStage(GameStage.Verdict);
         },
       ),
     );

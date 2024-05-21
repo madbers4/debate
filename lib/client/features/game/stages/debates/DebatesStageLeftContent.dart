@@ -9,7 +9,7 @@ class DebatesStageLeftContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
 
     return Container(
         height: 400,

@@ -4,6 +4,7 @@ import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
 import 'package:v1/client/features/game/widgets/card-slot/CardSlot.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 
 class DebatesStageBody extends StatelessWidget {
   const DebatesStageBody({super.key});
@@ -11,7 +12,7 @@ class DebatesStageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
     final stageState = game.stageStates.defendant;
     final scenario = game.scenario;
 
@@ -67,7 +68,7 @@ class DebatesStageBody extends StatelessWidget {
               TextButton(
                 child: Text('Принять'),
                 onPressed: () {
-                  gameRouter.go('/judgement/right');
+                  gameState.updateStage(GameStage.Judgement);
                 },
               ),
               const SizedBox(

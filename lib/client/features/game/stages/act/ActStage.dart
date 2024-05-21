@@ -6,6 +6,7 @@ import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/stage-states/ActStageState.dart';
 import 'package:v1/common/features/scenario/ScenarioEvent.dart';
 
@@ -18,7 +19,7 @@ class ActStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
     final scenario = game.scenario;
     ActStageState stageState;
     ScenarioEvent event;
@@ -61,16 +62,16 @@ class ActStage extends StatelessWidget {
       rightBottomContent: NextButton(
         onPressed: () {
           if (actId == ActId.One) {
-            gameRouter.go('/act/2/right');
+            gameState.updateStage(GameStage.Act2);
           }
           if (actId == ActId.Two) {
-            gameRouter.go('/act/3/right');
+            gameState.updateStage(GameStage.Act3);
           }
           if (actId == ActId.Three) {
-            gameRouter.go('/act/4/right');
+            gameState.updateStage(GameStage.Act4);
           }
           if (actId == ActId.Four) {
-            gameRouter.go('/evidences/right');
+            gameState.updateStage(GameStage.Evidences);
           }
         },
       ),

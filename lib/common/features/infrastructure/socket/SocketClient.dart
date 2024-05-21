@@ -45,6 +45,7 @@ class SocketClient {
 
   _onData(dynamic data) {
     final bus = SocketBus.fromJson(jsonDecode(utf8.decode(data.cast<int>())));
+    print(_subscribers.values);
 
     for (final subscriber in _subscribers.values) {
       if (subscriber.endpointHandler.path == bus.path) {

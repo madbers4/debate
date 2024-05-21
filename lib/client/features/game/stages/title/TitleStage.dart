@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/exit-dialog/ExitButton.dart';
-import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/title/TitleStageBody.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 
 class TitleStage extends StatelessWidget {
   const TitleStage({super.key});
@@ -13,7 +13,7 @@ class TitleStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
     final stageState = game.stageStates.title;
     final scenario = game.scenario;
     final description = scenario.description;
@@ -27,7 +27,7 @@ class TitleStage extends StatelessWidget {
       leftTopContent: ExitButton(),
       rightBottomContent: NextButton(
         onPressed: () {
-          gameRouter.go('/defendant/right');
+          gameState.updateStage(GameStage.Defendant);
         },
       ),
     );

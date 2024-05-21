@@ -13,8 +13,9 @@ class GameRouter {
     initialLocation: '/title',
     routes: [
       GoRoute(
-        path: '/title',
-        builder: (context, state) => const TitleStage(),
+        path: '/title/:direction',
+        pageBuilder: (context, state) =>
+            createSliderBuilder(context, state, const TitleStage()),
       ),
       GoRoute(
         path: '/defendant/:direction',

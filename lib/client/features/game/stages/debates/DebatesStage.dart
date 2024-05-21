@@ -16,7 +16,7 @@ class DebatesStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
     final stageState = game.stageStates.defendant;
     final scenario = game.scenario;
 

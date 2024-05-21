@@ -7,6 +7,7 @@ import 'package:v1/client/features/game/stages/defendant/DefendantStageBody.dart
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 
 class DefendantStage extends StatelessWidget {
   const DefendantStage({super.key});
@@ -14,7 +15,7 @@ class DefendantStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final game = gameState.game;
+    final game = gameState.game!;
     final stageState = game.stageStates.defendant;
     final scenario = game.scenario;
     final defendant = scenario.defendant;
@@ -30,7 +31,7 @@ class DefendantStage extends StatelessWidget {
       leftTopContent: ExitButton(),
       rightBottomContent: NextButton(
         onPressed: () {
-          gameRouter.go('/act/1/right');
+          gameState.updateStage(GameStage.Act1);
         },
       ),
       rightTopContent: SideTitle(

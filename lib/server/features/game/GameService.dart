@@ -5,12 +5,16 @@ import 'package:v1/common/features/infrastructure/service/SocketService.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 import 'package:v1/server/features/autorization/AutorizationService.dart';
 import 'package:v1/server/features/game/GameEndpoint.dart';
+import 'package:v1/server/features/rooms/RoomsService.dart';
 
 class GameService extends SocketService {
   Map<SocketClient, List<String>> subsIdsByClient = {};
   Map<SocketClient, GameEndpoint> endpointByClient = {};
   Map<SocketClient, AutorizationToken> autorizedTokensByClient = {};
   late AutorizationService authService;
+  // Map<SocketClient, Player> gameByClient = {};
+  // Map<SocketClient, String> gameByRoom = {};
+  Map<String, Game> gameById = {};
 
   GameService({required super.serviceProvider}) {
     authService = serviceProvider.get<AutorizationService>();
@@ -32,7 +36,11 @@ class GameService extends SocketService {
     subsIdsByClient[client] = subs;
 
     subs.add(endpoint.subCreateGame((args) {
-      _createGame(args, client);
+      _updateGame(args, client);
+    }));
+
+    subs.add(endpoint.subUpdateGame((args) {
+      _updateGame(args, client);
     }));
   }
 
@@ -53,7 +61,27 @@ class GameService extends SocketService {
     endpointByClient.remove(client);
   }
 
-  void _createGame(Game game, SocketClient client) {
-    print(game.toJson());
+  void _updateGame(Game game, SocketClient client) {
+    gameById[game.id] = game;
+
+    final roomsService = serviceProvider.get<RoomsService>();
+    final roomId = roomsService.roomIdByClient[client]!;
+    final room = roomsService.rooms.get(roomId)!;
+    final plaintiff = room.plaintiff!;
+    final defendant = room.defendant!;
+    final observers = room.observers;
+
+    List<SocketClient> playersClients = roomsService.playerByClient.entries
+        .where((e) =>
+            e.value == plaintiff ||
+            e.value == defendant ||
+            observers.any((element) => element == e.value))
+        .map((e) => e.key)
+        .toList();
+
+    for (final playerClient in playersClients) {
+      final endpoint = endpointByClient[playerClient]!;
+      endpoint.sendGame(game);
+    }
   }
 }
