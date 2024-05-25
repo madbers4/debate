@@ -25,6 +25,7 @@ class ActStage extends StatelessWidget {
     ScenarioEvent event;
     String actTitle;
     String actKey;
+    GameStage previousStage;
 
     switch (actId) {
       case ActId.One:
@@ -32,45 +33,44 @@ class ActStage extends StatelessWidget {
         actKey = 'act1';
         stageState = game.stageStates.act1;
         event = game.scenario.events[0];
+        previousStage = GameStage.Defendant;
         break;
       case ActId.Two:
         actTitle = 'Акт 2';
         actKey = 'act2';
         stageState = game.stageStates.act2;
         event = game.scenario.events[1];
+        previousStage = GameStage.Act1;
         break;
       case ActId.Three:
         actTitle = 'Акт 3';
         actKey = 'act3';
         stageState = game.stageStates.act3;
         event = game.scenario.events[2];
+        previousStage = GameStage.Act2;
         break;
       case ActId.Four:
         actTitle = 'Акт 4';
         actKey = 'act4';
         stageState = game.stageStates.act4;
         event = game.scenario.events[3];
+        previousStage = GameStage.Act3;
         break;
       default:
         actTitle = 'Не верный акт';
         actKey = 'null';
         stageState = game.stageStates.act1;
         event = game.scenario.events[0];
+        previousStage = GameStage.Defendant;
     }
 
     return ScreenLayout(
       key: Key(actKey),
       bodyContent: ActStageBody(
+        actKey: actKey,
         actTitle: actTitle,
-        title: event.title,
-        description: event.description,
-        isCardsShowed: stageState.isCardsShowed,
-        firstCard: event.facts[0],
-        secondCard: event.facts[1],
-        thirdCard: event.facts[2],
-        isFirstCardShowed: stageState.isFirstCardShowed,
-        isSecondCardShowed: stageState.isSecondCardShowed,
-        isThirdCardShowed: stageState.isThirdCardShowed,
+        event: event,
+        stageState: stageState,
       ),
       leftTopContent: ExitButton(),
       rightBottomContent: !stageState.isCardsShowed ||
@@ -107,9 +107,11 @@ class ActStage extends StatelessWidget {
               },
             )
           : Container(),
-        leftBottomContent: BackButton(onPressed: () {
-            gameState.updateStage(GameStage.Defendant);
-        },),
+      leftBottomContent: BackButton(
+        onPressed: () {
+          gameState.updateStage(previousStage);
+        },
+      ),
       rightTopContent: Text(
         scenario.description.title,
         textAlign: TextAlign.center,

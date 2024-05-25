@@ -87,7 +87,7 @@ class DefendantStageBody extends StatelessWidget {
                         OriginCard(
                           title: 'Происхождение',
                           origin: bornOrigin,
-                          isCardCardFlipped: stageState.isFirstCardShowed,
+                          isCardCardFlipped: !stageState.isFirstCardShowed,
                           onFlip: () {
                             gameState.updateGameState(
                                 GameStageStates.fromExisting(
@@ -108,7 +108,7 @@ class DefendantStageBody extends StatelessWidget {
                         ),
                         OriginCard(
                           title: 'Профессия',
-                          isCardCardFlipped: stageState.isSecondCardShowed,
+                          isCardCardFlipped: !stageState.isSecondCardShowed,
                           origin: professionOrigin,
                           onFlip: () {
                             gameState.updateGameState(
@@ -131,7 +131,7 @@ class DefendantStageBody extends StatelessWidget {
                         OriginCard(
                           title: 'Секрет',
                           origin: secretOrigin,
-                          isCardCardFlipped: stageState.isThirdCardShowed,
+                          isCardCardFlipped: !stageState.isThirdCardShowed,
                           onFlip: () {
                             gameState.updateGameState(
                                 GameStageStates.fromExisting(

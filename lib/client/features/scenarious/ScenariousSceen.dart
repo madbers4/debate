@@ -25,42 +25,47 @@ class ScenariousScreen extends StatelessWidget {
           final roomsState = context.watch<RoomsState>();
           final state = context.watch<ScenarionScreenState>();
           return ScreenLayout(
-              bodyContent: const Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SelectedRoomTable(
-                    isSettingsDisabled: true,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Expanded(
-                      child: SingleChildScrollView(child: ScenariousTable()))
-                ],
-              ),
-              rightTopContent: SettingsButton(),
-              leftBottomContent: BackButton(
-                onPressed: () {
-                  router.go('/rooms/left');
-                },
-              ),
-              rightBottomContent: roomsState.selectedRole is Plaintiff &&
-                      state.selectedScenarioId != null &&
-                      roomsState.selectedRoom?.defendant != null
-                  ? NextButton(
-                      onPressed: () {
-                        state.createGame();
-                      },
-                    )
-                  : TextButton(
-                      onPressed: null,
-                      child: Text(roomsState.selectedRole is Plaintiff
-                          ? roomsState.selectedRoom?.defendant != null
-                              ? 'Выберете сценарий'
-                              : 'Ожидание обвиняемого'
-                          : 'Ожидание прокурора'),
-                    ));
+            bodyContent: const Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SelectedRoomTable(
+                  isSettingsDisabled: true,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Expanded(child: SingleChildScrollView(child: ScenariousTable()))
+              ],
+            ),
+            rightTopContent: SettingsButton(),
+            leftBottomContent: BackButton(
+              onPressed: () {
+                router.go('/rooms/left');
+              },
+            ),
+            rightBottomContent: NextButton(
+              onPressed: () {
+                state.createGame();
+              },
+            ),
+            // TODO: REPLACE THIS
+            // rightBottomContent: roomsState.selectedRole is Plaintiff &&
+            //         state.selectedScenarioId != null &&
+            //         roomsState.selectedRoom?.defendant != null
+            //     ? NextButton(
+            //         onPressed: () {
+            //           state.createGame();
+            //         },
+            //       )
+            //     : TextButton(
+            //         onPressed: null,
+            //         child: Text(roomsState.selectedRole is Plaintiff
+            //             ? roomsState.selectedRoom?.defendant != null
+            //                 ? 'Выберете сценарий'
+            //                 : 'Ожидание обвиняемого'
+            //             : 'Ожидание прокурора')),
+          );
         });
   }
 }

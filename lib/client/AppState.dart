@@ -38,7 +38,9 @@ class AppState extends ChangeNotifier {
             backgroundColor: _palette!.backgroundError,
           ),
         );
-        router.go('/');
+
+        // TODO: REPLACE THIS
+        // router.go('/');
       });
 
       _apiClient!.subConnect(() {

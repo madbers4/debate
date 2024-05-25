@@ -36,7 +36,9 @@ class GameCardWidget extends StatelessWidget {
             state.controller.toggleCard();
           }
 
-          CardSide cardSide = state.controller.state?.isFront ?? true ? CardSide.FRONT : CardSide.BACK;
+          CardSide cardSide = state.controller.state?.isFront ?? true
+              ? CardSide.FRONT
+              : CardSide.BACK;
 
           if (isCardCardFlipped == true) {
             cardSide = CardSide.BACK;
@@ -45,7 +47,6 @@ class GameCardWidget extends StatelessWidget {
           if (isCardCardFlipped == false) {
             cardSide = CardSide.FRONT;
           }
-
 
           // if (state.controller.state?.isFront == isCardCardFlipped) {
           //   state.controller.toggleCard();
@@ -90,7 +91,7 @@ class GameCardWidget extends StatelessWidget {
           );
 
           return Draggable(
-            feedback: (state.controller.state?.isFront ?? true) ? front : back,
+            feedback: cardSide == CardSide.FRONT ? front : back,
             childWhenDragging: const SizedBox(height: 267, width: 179),
             child: GestureDetector(
               onTap: () {
@@ -109,7 +110,7 @@ class GameCardWidget extends StatelessWidget {
                   onFlip: () {
                     // state.controller.state.
                   },
-                  side: CardSide.FRONT :,
+                  side: cardSide,
                   flipOnTouch: false,
                   fill: Fill.fillBack,
                   direction: FlipDirection.HORIZONTAL,

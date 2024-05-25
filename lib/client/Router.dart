@@ -6,10 +6,13 @@ import 'package:v1/client/features/rooms/RoomsScreen.dart';
 import 'package:v1/client/features/scenarious/ScenariousSceen.dart';
 import 'package:v1/client/features/sign-in/SignInScreen.dart';
 
-
 Function createSliderBuilder =
     (BuildContext context, GoRouterState state, Widget w) {
-  final direction = state.pathParameters['direction']!;
+  var direction = state.pathParameters['direction']!;
+
+  if (direction == 'no') {
+    direction = 'right';
+  }
 
   Offset offsetBeginNewPage;
   Offset offsetEndOldPage;
@@ -56,10 +59,10 @@ Function createSliderBuilder =
         ],
       );
     },
-    transitionDuration: const Duration(milliseconds: 300),
+    transitionDuration: Duration(
+        milliseconds: state.pathParameters['direction']! == 'no' ? 0 : 300),
   );
 };
-
 
 class AppRouter {
   final router = GoRouter(

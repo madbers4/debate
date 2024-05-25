@@ -10,7 +10,7 @@ import 'package:v1/client/features/game/stages/verdict/VerdictStage.dart';
 
 class GameRouter {
   final router = GoRouter(
-    initialLocation: '/title',
+    initialLocation: '/title/no',
     routes: [
       GoRoute(
         path: '/title/:direction',
@@ -23,30 +23,28 @@ class GameRouter {
             createSliderBuilder(context, state, const DefendantStage()),
       ),
       GoRoute(
-          path: '/act/:act/:direction',
+          path: '/act/1/:direction',
           pageBuilder: (context, state) {
-            final act = state.pathParameters['act']!;
-            ActId? actId;
-
-            switch (act) {
-              case '1':
-                actId = ActId.One;
-                break;
-              case '2':
-                actId = ActId.Two;
-                break;
-              case '3':
-                actId = ActId.Three;
-                break;
-              case '4':
-                actId = ActId.Four;
-                break;
-              default:
-                break;
-            }
-
             return createSliderBuilder(
-                context, state, ActStage(actId: actId ?? ActId.One));
+                context, state, const ActStage(actId: ActId.One));
+          }),
+      GoRoute(
+          path: '/act/2/:direction',
+          pageBuilder: (context, state) {
+            return createSliderBuilder(
+                context, state, const ActStage(actId: ActId.Two));
+          }),
+      GoRoute(
+          path: '/act/3/:direction',
+          pageBuilder: (context, state) {
+            return createSliderBuilder(
+                context, state, const ActStage(actId: ActId.Three));
+          }),
+      GoRoute(
+          path: '/act/4/:direction',
+          pageBuilder: (context, state) {
+            return createSliderBuilder(
+                context, state, const ActStage(actId: ActId.Four));
           }),
       GoRoute(
         path: '/evidences/:direction',

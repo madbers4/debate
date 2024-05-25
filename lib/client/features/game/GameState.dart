@@ -52,7 +52,7 @@ class GameState extends ChangeNotifier {
   }
 
   _updateRoute() {
-    if (previousGame?.gameStage == game?.gameStage) {
+    if (previousGame == null) {
       router.go('/game/right');
       return;
     }
@@ -73,7 +73,7 @@ class GameState extends ChangeNotifier {
         }
         break;
       case GameStage.Act1:
-        if (previousGame?.gameStage == GameStage.Act2) {  
+        if (previousGame?.gameStage == GameStage.Act2) {
           gameRouter.go('/act/1/left');
         } else {
           gameRouter.go('/act/1/right');

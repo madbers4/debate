@@ -25,8 +25,13 @@ class EvidencesStage extends StatelessWidget {
       ),
       leftTopContent: ExitButton(),
       rightBottomContent: NextButton(
-        onPressed: ()  {
+        onPressed: () {
           gameState.updateStage(GameStage.Debates);
+        },
+      ),
+      leftBottomContent: BackButton(
+        onPressed: () {
+          gameState.updateStage(GameStage.Act4);
         },
       ),
       rightTopContent: SideTitle(
