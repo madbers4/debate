@@ -8,9 +8,14 @@ class GameCardWidget extends StatelessWidget {
   final GameCard card;
   final bool? isCardCardFlipped;
   final bool? isDisabled;
+  final VoidCallback? onFlip;
 
   const GameCardWidget(
-      {super.key, required this.card, this.isCardCardFlipped, this.isDisabled});
+      {super.key,
+      required this.card,
+      this.isCardCardFlipped,
+      this.isDisabled,
+      this.onFlip});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,19 @@ class GameCardWidget extends StatelessWidget {
         builder: (context, rre) {
           final state = context.watch<GameCardWidgetState>();
 
-          CardSide cardSide = state.cardSide;
+          if (isCardCardFlipped != null &&
+              state.controller.state?.isFront == isCardCardFlipped) {
+            state.controller.toggleCard();
+          }
+
+          if (isCardCardFlipped != null &&
+              isCardCardFlipped != null &&
+              state.controller.state != null &&
+              !state.controller.state!.isFront == !isCardCardFlipped!) {
+            state.controller.toggleCard();
+          }
+
+          CardSide cardSide = state.controller.state?.isFront ?? true ? CardSide.FRONT : CardSide.BACK;
 
           if (isCardCardFlipped == true) {
             cardSide = CardSide.BACK;
@@ -28,6 +45,11 @@ class GameCardWidget extends StatelessWidget {
           if (isCardCardFlipped == false) {
             cardSide = CardSide.FRONT;
           }
+
+
+          // if (state.controller.state?.isFront == isCardCardFlipped) {
+          //   state.controller.toggleCard();
+          // }
 
           final front = Card(
             child: Container(
@@ -68,16 +90,33 @@ class GameCardWidget extends StatelessWidget {
           );
 
           return Draggable(
-            feedback: cardSide == CardSide.FRONT ? front : back,
+            feedback: (state.controller.state?.isFront ?? true) ? front : back,
             childWhenDragging: const SizedBox(height: 267, width: 179),
-            child: FlipCard(
-                onFlip: state.flip,
-                flipOnTouch: isDisabled != true && isCardCardFlipped == null,
-                fill: Fill.fillBack,
-                direction: FlipDirection.HORIZONTAL,
-                side: cardSide,
-                front: front,
-                back: back),
+            child: GestureDetector(
+              onTap: () {
+                if (isDisabled == true) {
+                  return;
+                }
+                if (onFlip != null) {
+                  onFlip!();
+                }
+
+                if (isCardCardFlipped == null) {
+                  state.controller.toggleCard();
+                }
+              },
+              child: FlipCard(
+                  onFlip: () {
+                    // state.controller.state.
+                  },
+                  side: CardSide.FRONT :,
+                  flipOnTouch: false,
+                  fill: Fill.fillBack,
+                  direction: FlipDirection.HORIZONTAL,
+                  controller: state.controller,
+                  front: front,
+                  back: back),
+            ),
           );
         });
   }

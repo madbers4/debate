@@ -6,6 +6,7 @@ import 'package:v1/client/features/game/widgets/title/Title.dart';
 import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
 
 class ActStageBody extends StatelessWidget {
+  final String actTitle;
   final String title;
   final String description;
   final bool isCardsShowed;
@@ -18,6 +19,7 @@ class ActStageBody extends StatelessWidget {
 
   const ActStageBody({
     super.key,
+    required this.actTitle,
     required this.title,
     required this.description,
     required this.isCardsShowed,
@@ -48,7 +50,7 @@ class ActStageBody extends StatelessWidget {
               child: Column(
                 children: [
                   GameTitle(
-                    child: 'Акт 1',
+                    child: actTitle,
                   ),
                   SizedBox(
                     height: 10,

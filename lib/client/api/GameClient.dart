@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/game/GameEndpointApi.dart';
+import 'package:v1/common/features/infrastructure/dto/Void.dart';
 import 'package:v1/common/features/infrastructure/socket/SocketClient.dart';
 
 class GameClient extends ChangeNotifier {
@@ -28,5 +29,9 @@ class GameClient extends ChangeNotifier {
 
   updateGame(Game args) {
     socketClient!.send(api.update, args);
+  }
+
+  exit() {
+    socketClient!.send(api.update, Void());
   }
 }

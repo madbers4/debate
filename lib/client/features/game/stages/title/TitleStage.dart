@@ -6,6 +6,8 @@ import 'package:v1/client/features/game/stages/title/TitleStageBody.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/GameStage.dart';
+import 'package:v1/common/features/game/GameStageStates.dart';
+import 'package:v1/common/features/game/stage-states/TitleStageState.dart';
 
 class TitleStage extends StatelessWidget {
   const TitleStage({super.key});
@@ -27,7 +29,13 @@ class TitleStage extends StatelessWidget {
       leftTopContent: ExitButton(),
       rightBottomContent: NextButton(
         onPressed: () {
-          gameState.updateStage(GameStage.Defendant);
+          if (stageState.isDescriptionShowed == false) {
+            gameState.updateGameState(GameStageStates.fromExisting(
+                game.stageStates,
+                TitleStageState(id: stageState.id, isDescriptionShowed: true)));
+          } else {
+            gameState.updateStage(GameStage.Defendant);
+          }
         },
       ),
     );

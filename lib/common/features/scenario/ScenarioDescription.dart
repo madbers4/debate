@@ -19,6 +19,6 @@ class ScenarioDescription implements DTO {
   Map toJson() => {
         'id': id,
         'title': title,
-        'description': title,
+        'description': description,
       };
 }

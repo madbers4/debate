@@ -1,5 +1,6 @@
 import 'package:v1/common/features/game/stage-states/ActStageState.dart';
 import 'package:v1/common/features/game/stage-states/DefendantStageState.dart';
+import 'package:v1/common/features/game/stage-states/GameStageState.dart';
 import 'package:v1/common/features/game/stage-states/TitleStageState.dart';
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 import 'package:v1/common/features/infrastructure/dto/Void.dart';
@@ -45,4 +46,16 @@ class GameStageStates implements DTO {
         'act3': act3.toJson(),
         'act4': act4.toJson(),
       };
+
+  static GameStageStates fromExisting(
+      GameStageStates states, GameStageState state, [String? stateName]) {
+    return GameStageStates(
+      title: state is TitleStageState ? state : states.title,
+      act1: state is ActStageState && stateName == 'act1' ? state : states.act1,
+      act2: state is ActStageState && stateName == 'act2' ? state : states.act2,
+      act3: state is ActStageState && stateName == 'act3' ? state : states.act3,
+      act4: state is ActStageState && stateName == 'act4' ? state : states.act4,
+      defendant: state is DefendantStageState ? state : states.defendant,
+    );
+  }
 }

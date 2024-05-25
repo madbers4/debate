@@ -84,4 +84,7 @@ class GameService extends SocketService {
       endpoint.sendGame(game);
     }
   }
+
+  void _exit(Game game, SocketClient client) {
+  }
 }

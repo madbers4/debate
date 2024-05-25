@@ -1,12 +1,11 @@
-import 'package:v1/common/features/infrastructure/dto/DTO.dart';
+import 'package:v1/common/features/game/stage-states/GameStageState.dart';
 
-class ActStageState implements DTO {
-  final String id;
+class ActStageState extends GameStageState {
   final bool isCardsShowed;
   final List<String> showedEvidencesIds;
 
   const ActStageState(
-      {this.id = '1',
+      {super.id = '1',
       this.isCardsShowed = false,
       this.showedEvidencesIds = const []});
 

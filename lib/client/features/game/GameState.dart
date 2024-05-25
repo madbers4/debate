@@ -5,6 +5,7 @@ import 'package:v1/client/features/game/GameRouter.dart';
 import 'package:v1/common/features/game/Game.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/common/features/game/GameStage.dart';
+import 'package:v1/common/features/game/GameStageStates.dart';
 
 class GameState extends ChangeNotifier {
   Game? game;
@@ -26,11 +27,19 @@ class GameState extends ChangeNotifier {
     super.dispose();
   }
 
+  updateGameState(GameStageStates updatedState) {
+    _client!.updateGame(Game(
+        id: game!.id,
+        gameStage: game!.gameStage,
+        scenario: game!.scenario,
+        stageStates: updatedState));
+  }
+
   updateStage(GameStage stage) {
     _client!.updateGame(Game(
         id: game!.id,
-        scenario: game!.scenario,
         gameStage: stage,
+        scenario: game!.scenario,
         stageStates: game!.stageStates));
   }
 
@@ -43,7 +52,10 @@ class GameState extends ChangeNotifier {
   }
 
   _updateRoute() {
-    router.go('/game/right');
+    if (previousGame?.gameStage == game?.gameStage) {
+      router.go('/game/right');
+      return;
+    }
 
     switch (game!.gameStage) {
       case GameStage.Title:
@@ -61,7 +73,7 @@ class GameState extends ChangeNotifier {
         }
         break;
       case GameStage.Act1:
-        if (previousGame?.gameStage == GameStage.Act2) {
+        if (previousGame?.gameStage == GameStage.Act2) {  
           gameRouter.go('/act/1/left');
         } else {
           gameRouter.go('/act/1/right');

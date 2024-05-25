@@ -1,10 +1,9 @@
-import 'package:v1/common/features/infrastructure/dto/DTO.dart';
+import 'package:v1/common/features/game/stage-states/GameStageState.dart';
 
-class TitleStageState implements DTO {
-  final String id;
+class TitleStageState extends GameStageState {
   final bool isDescriptionShowed;
 
-  const TitleStageState({this.id = '1', this.isDescriptionShowed = true});
+  const TitleStageState({super.id = '1', this.isDescriptionShowed = false});
 
   static fromJson(Map<dynamic, dynamic> json) {
     return TitleStageState(
