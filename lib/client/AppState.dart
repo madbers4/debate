@@ -17,6 +17,9 @@ class AppState extends ChangeNotifier {
   ApiClient? _apiClient;
   SettingsState? _settingsState;
   Palette? _palette;
+  // TODO: REPLACE THIS
+  final int loadingTime = 5;
+  // static const int loadingTime = 1;
 
   setClients(
       BuildContext context,
@@ -40,7 +43,7 @@ class AppState extends ChangeNotifier {
         );
 
         // TODO: REPLACE THIS
-        // router.go('/');
+        router.go('/');
       });
 
       _apiClient!.subConnect(() {
@@ -51,7 +54,7 @@ class AppState extends ChangeNotifier {
           ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
             SnackBar(
               content: const Text('Соеденение установлено'),
-              duration: const Duration(seconds: 4),
+              duration: const Duration(seconds: loadingTime - 1),
               backgroundColor: _palette!.backgroundSuccess,
             ),
           );
@@ -60,13 +63,13 @@ class AppState extends ChangeNotifier {
         final settings = _settingsState!.settings;
 
         if (settings!.authToken != null) {
-          Timer(const Duration(seconds: 5), () {
+          Timer(const Duration(seconds: loadingTime), () {
             _authClient!.tokenSignIn(AutorizationToken(
                 hash: settings.authToken!, username: settings.username));
           });
         } else {
           if (isUserAutorized == null) {
-            Timer(const Duration(seconds: 5), () {
+            Timer(const Duration(seconds: loadingTime), () {
               router.go('/sign-in/right');
             });
           }

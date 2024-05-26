@@ -1,20 +1,20 @@
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 
-class ScenarioFact implements DTO {
+class ScenarioEvent implements DTO {
   final String id;
   final String title;
   final String cardType;
   final String description;
   final String? fullDescription;
 
-  ScenarioFact(
+  ScenarioEvent(
       {required this.id,
       required this.title,
       required this.cardType,
       required this.description,
       this.fullDescription});
 
-  ScenarioFact.fromJson(Map<String, dynamic> json)
+  ScenarioEvent.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
         cardType = json['cardType'],

@@ -68,12 +68,14 @@ class GameService extends SocketService {
     final roomId = roomsService.roomIdByClient[client]!;
     final room = roomsService.rooms.get(roomId)!;
     final plaintiff = room.plaintiff!;
+    // TODO: REPLACE THIS
     final defendant = room.defendant!;
     final observers = room.observers;
 
     List<SocketClient> playersClients = roomsService.playerByClient.entries
         .where((e) =>
             e.value == plaintiff ||
+            // TODO: REPLACE THIS
             e.value == defendant ||
             observers.any((element) => element == e.value))
         .map((e) => e.key)
@@ -85,6 +87,5 @@ class GameService extends SocketService {
     }
   }
 
-  void _exit(Game game, SocketClient client) {
-  }
+  void _exit(Game game, SocketClient client) {}
 }

@@ -57,6 +57,9 @@ class GameState extends ChangeNotifier {
       return;
     }
 
+    // TODO: REPLACE THIS
+    // return;
+
     switch (game!.gameStage) {
       case GameStage.Title:
         if (previousGame?.gameStage == GameStage.Defendant) {

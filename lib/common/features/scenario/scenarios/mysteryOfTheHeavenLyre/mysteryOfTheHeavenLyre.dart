@@ -1,115 +1,116 @@
 import 'package:v1/common/features/scenario/Scenario.dart';
 import 'package:v1/common/features/scenario/ScenarioDescription.dart';
-import 'package:v1/common/features/scenario/ScenarioEvent.dart';
+import 'package:v1/common/features/scenario/ScenarioAct.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendant.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendantOrigin.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
-import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
+import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
+import 'package:v1/common/utils/generateUID.dart';
 
 final Scenario mysteryOfTheHeavenlyLyre = Scenario(
-    id: '1',
+    id: generateUID(),
     description: ScenarioDescription(
-      id: '4',
+      id: generateUID(),
       title: 'Тайна Небесной Лиры',
       description:
           'События разворачиваются в Мондштадте, где пропадает Небесная Лира Барбатоса, символ и страж магической силы города. Внезапно обвинения в адрес Путешественника, героя и спасителя Мондштадта, оглашаются в ходе торжественного судебного заседания.',
     ),
-    events: [
-      ScenarioEvent(
-          id: '1',
+    acts: [
+      ScenarioAct(
+          id: generateUID(),
           title: 'Присутсвие путешественника на месте преступления',
           description:
               'Во время расследования преступления, были обнаружены доказательства',
-          facts: [
-            ScenarioFact(
-                id: '1',
+          events: [
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Следы у храма',
                 cardType: 'Улика',
                 description:
                     'Прокурор представляет доказательства следов боевых навыков Ветра на месте преступления.'),
-            ScenarioFact(
-                id: '2',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Показания свидетеля',
                 cardType: 'Событие',
                 description:
                     'Свидетель утверждает, что видел Путешественника возле храма в момент кражи.'),
-            ScenarioFact(
-                id: '3',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Отсутствие алиби',
                 cardType: 'Факт',
                 description:
                     'Обвинение указывает на отсутствие у Путешественника алиби.'),
           ]),
-      ScenarioEvent(
-          id: '2',
+      ScenarioAct(
+          id: generateUID(),
           title: 'Поиски истины',
           description:
               'Путешественник получает слово для представления своих улик и версии событий.',
-          facts: [
-            ScenarioFact(
-                id: '4',
+          events: [
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Загадочный амулет',
                 cardType: 'Факт',
                 description:
                     'Путешественник предъявляет амулет с символикой древней секты, найденный недалеко от храма, указывая на их возможное участие в краже.'),
-            ScenarioFact(
-                id: '5',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Запечатанный пакет',
                 cardType: 'Факт',
                 description:
                     'Путешественник описывает находку запечатанного пакета у члена совета города и раскрывает, что это было сделано для отвлечения внимания.'),
-            ScenarioFact(
-                id: '6',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Тайная встреча',
                 cardType: 'Собитие',
                 description:
                     'Путешественник делится информацией о тайной встрече влиятельных лиц Мондштадта, предполагая их сговор.'),
           ]),
-      ScenarioEvent(
-          id: '3',
+      ScenarioAct(
+          id: generateUID(),
           title: 'Опрос свидетелей',
           description:
               'Путешественник получает слово для представления своих улик и версии событий.',
-          facts: [
-            ScenarioFact(
-                id: '7',
+          events: [
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Священник Бэн',
                 cardType: 'Свидетель',
                 description:
                     'Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum.'),
-            ScenarioFact(
-                id: '8',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Рыцари ордена Фавониус',
                 cardType: 'Свидетели',
                 description:
                     'Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum.'),
-            ScenarioFact(
-                id: '9',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Тайный свидетель',
                 cardType: 'Свидетели',
                 description:
                     'Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum.'),
           ]),
-      ScenarioEvent(
-          id: '4',
+      ScenarioAct(
+          id: generateUID(),
           title: 'Завершение',
           description:
               'Путешественник получает слово для представления своих улик и версии событий.',
-          facts: [
-            ScenarioFact(
-                id: '10',
+          events: [
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Окрававленный нож',
                 cardType: 'Факт',
                 description:
                     'Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum.'),
-            ScenarioFact(
-                id: '11',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Перевернутый шкаф',
                 cardType: 'Улика',
                 description:
                     'Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum.'),
-            ScenarioFact(
-                id: '12',
+            ScenarioEvent(
+                id: generateUID(),
                 title: 'Бутылка рома',
                 cardType: 'Улика',
                 description:
@@ -118,39 +119,39 @@ final Scenario mysteryOfTheHeavenlyLyre = Scenario(
     ],
     evedences: [
       ScenarioEvedence(
-          id: '1',
-          title: 'Мега дизадорант',
+          id: generateUID(),
+          title: 'Свидетельства Барбары',
           description:
               '"Подтасованные доказательства", включая фальсифицированные следы и искажённые показания свидетелей.'),
       ScenarioEvedence(
-          id: '2',
+          id: generateUID(),
           title: 'Лира Барбатоса',
           description:
               '"Подтасованные доказательства", включая фальсифицированные следы и искажённые показания свидетелей.'),
       ScenarioEvedence(
-          id: '3',
+          id: generateUID(),
           title: 'Окрававленный нож',
           description:
               '"Подтасованные доказательства", включая фальсифицированные следы и искажённые показания свидетелей.'),
     ],
     defendant: ScenarioDefendant(
-        id: '',
+        id: generateUID(),
         name: '',
         description:
             'Путешественник стоит перед собранием ведущих лидеров и горожан Мондштадта, чтобы доказать свою невиновность.',
         bornOrigin: ScenarioDefendantOrigin(
-          id: '1',
+          id: generateUID(),
           title: 'Мондштадт',
           description: '',
           additionalTitle: 'Из семьи искателей приключений',
         ),
         professionOrigin: ScenarioDefendantOrigin(
-          id: '2',
+          id: generateUID(),
           title: 'Ученик алхимика',
           description: '',
         ),
         secretOrigin: ScenarioDefendantOrigin(
-          id: '3',
+          id: generateUID(),
           title: 'Скрывает, что из семьи лоуренсов',
           description: '',
         )));

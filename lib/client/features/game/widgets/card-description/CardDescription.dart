@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:v1/client/widgets/dialog/Dialog.dart';
 
 class CardDescription extends StatelessWidget {
   final bool isShowed;

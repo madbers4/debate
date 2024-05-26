@@ -8,7 +8,7 @@ import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/ActStageState.dart';
-import 'package:v1/common/features/scenario/ScenarioEvent.dart';
+import 'package:v1/common/features/scenario/ScenarioAct.dart';
 
 enum ActId { One, Two, Three, Four }
 
@@ -22,7 +22,7 @@ class ActStage extends StatelessWidget {
     final game = gameState.game!;
     final scenario = game.scenario;
     ActStageState stageState;
-    ScenarioEvent event;
+    ScenarioAct event;
     String actTitle;
     String actKey;
     GameStage previousStage;
@@ -32,35 +32,35 @@ class ActStage extends StatelessWidget {
         actTitle = 'Акт 1';
         actKey = 'act1';
         stageState = game.stageStates.act1;
-        event = game.scenario.events[0];
+        event = game.scenario.acts[0];
         previousStage = GameStage.Defendant;
         break;
       case ActId.Two:
         actTitle = 'Акт 2';
         actKey = 'act2';
         stageState = game.stageStates.act2;
-        event = game.scenario.events[1];
+        event = game.scenario.acts[1];
         previousStage = GameStage.Act1;
         break;
       case ActId.Three:
         actTitle = 'Акт 3';
         actKey = 'act3';
         stageState = game.stageStates.act3;
-        event = game.scenario.events[2];
+        event = game.scenario.acts[2];
         previousStage = GameStage.Act2;
         break;
       case ActId.Four:
         actTitle = 'Акт 4';
         actKey = 'act4';
         stageState = game.stageStates.act4;
-        event = game.scenario.events[3];
+        event = game.scenario.acts[3];
         previousStage = GameStage.Act3;
         break;
       default:
         actTitle = 'Не верный акт';
         actKey = 'null';
         stageState = game.stageStates.act1;
-        event = game.scenario.events[0];
+        event = game.scenario.acts[0];
         previousStage = GameStage.Defendant;
     }
 

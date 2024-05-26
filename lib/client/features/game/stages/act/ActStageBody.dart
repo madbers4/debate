@@ -9,13 +9,13 @@ import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/ActStageState.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
-import 'package:v1/common/features/scenario/ScenarioEvent.dart';
+import 'package:v1/common/features/scenario/ScenarioAct.dart';
 
 class ActStageBody extends StatelessWidget {
   final String actKey;
   final String actTitle;
   final ActStageState stageState;
-  final ScenarioEvent event;
+  final ScenarioAct event;
   // final String title;
   // final String description;
   // final bool isCardsShowed;
@@ -112,7 +112,7 @@ class ActStageBody extends StatelessWidget {
                         Column(
                           children: [
                             FactCard(
-                              fact: event.facts[0],
+                              fact: event.events[0],
                               isCardCardFlipped:
                                   roomsState.selectedRole is Plaintiff
                                       ? false
@@ -155,7 +155,7 @@ class ActStageBody extends StatelessWidget {
                         Column(
                           children: [
                             FactCard(
-                              fact: event.facts[1],
+                              fact: event.events[1],
                               isCardCardFlipped:
                                   roomsState.selectedRole is Plaintiff
                                       ? false
@@ -199,7 +199,7 @@ class ActStageBody extends StatelessWidget {
                         Column(
                           children: [
                             FactCard(
-                              fact: event.facts[2],
+                              fact: event.events[2],
                               isCardCardFlipped:
                                   roomsState.selectedRole is Plaintiff
                                       ? false

@@ -8,6 +8,8 @@ class GameCardWidget extends StatelessWidget {
   final GameCard card;
   final bool? isCardCardFlipped;
   final bool? isDisabled;
+  final bool? isHightlighted;
+  final bool? isHidden;
   final VoidCallback? onFlip;
 
   const GameCardWidget(
@@ -15,6 +17,8 @@ class GameCardWidget extends StatelessWidget {
       required this.card,
       this.isCardCardFlipped,
       this.isDisabled,
+      this.isHightlighted,
+      this.isHidden,
       this.onFlip});
 
   @override
@@ -52,45 +56,52 @@ class GameCardWidget extends StatelessWidget {
           //   state.controller.toggleCard();
           // }
 
-          final front = Card(
-            child: Container(
-              height: MediaQuery.of(context).size.width * 0.087 * 1.8,
-              width: MediaQuery.of(context).size.width * 0.057 * 1.8,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage(card.frontBackgroundPath != null
-                        ? card.frontBackgroundPath!
-                        : 'assets/images/game-card-cap.jpg'),
-                    fit: BoxFit.fill,
-                  )),
-              child: Column(
-                children: <Widget>[
-                  Text(card.title),
-                  Text(card.description),
-                ],
-              ),
-            ),
-          );
-
-          final back = Card(
-            child: Container(
-              // 89 x 57
-              height: 267,
-              width: 171,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: AssetImage(card.frontBackgroundPath != null
-                      ? card.frontBackgroundPath!
-                      : 'assets/images/game-card.jpg'),
-                  fit: BoxFit.fill,
+          final front = Visibility(
+            visible: isHidden == true ? false : true,
+            child: Card(
+              child: Container(
+                height: MediaQuery.of(context).size.width * 0.087 * 1.8,
+                width: MediaQuery.of(context).size.width * 0.057 * 1.8,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: AssetImage(card.frontBackgroundPath != null
+                          ? card.frontBackgroundPath!
+                          : 'assets/images/game-card-cap.jpg'),
+                      fit: BoxFit.fill,
+                    )),
+                child: Column(
+                  children: <Widget>[
+                    Text(card.title),
+                    Text(card.description),
+                  ],
                 ),
               ),
             ),
           );
 
-          return Draggable(
+          final back = Visibility(
+            visible: isHidden == true ? false : true,
+            child: Card(
+              child: Container(
+                // 89 x 57
+                height: 267,
+                width: 171,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: AssetImage(card.frontBackgroundPath != null
+                        ? card.frontBackgroundPath!
+                        : 'assets/images/game-card.jpg'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          return Draggable<GameCard>(
+            data: card,
             feedback: cardSide == CardSide.FRONT ? front : back,
             childWhenDragging: const SizedBox(height: 267, width: 179),
             child: GestureDetector(

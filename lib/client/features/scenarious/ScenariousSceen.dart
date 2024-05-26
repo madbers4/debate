@@ -44,27 +44,27 @@ class ScenariousScreen extends StatelessWidget {
                 router.go('/rooms/left');
               },
             ),
-            rightBottomContent: NextButton(
-              onPressed: () {
-                state.createGame();
-              },
-            ),
+            // rightBottomContent: NextButton(
+            //   onPressed: () {
+            //     state.createGame();
+            //   },
+            // ),
             // TODO: REPLACE THIS
-            // rightBottomContent: roomsState.selectedRole is Plaintiff &&
-            //         state.selectedScenarioId != null &&
-            //         roomsState.selectedRoom?.defendant != null
-            //     ? NextButton(
-            //         onPressed: () {
-            //           state.createGame();
-            //         },
-            //       )
-            //     : TextButton(
-            //         onPressed: null,
-            //         child: Text(roomsState.selectedRole is Plaintiff
-            //             ? roomsState.selectedRoom?.defendant != null
-            //                 ? 'Выберете сценарий'
-            //                 : 'Ожидание обвиняемого'
-            //             : 'Ожидание прокурора')),
+            rightBottomContent: roomsState.selectedRole is Plaintiff &&
+                    state.selectedScenarioId != null &&
+                    roomsState.selectedRoom?.defendant != null
+                ? NextButton(
+                    onPressed: () {
+                      state.createGame();
+                    },
+                  )
+                : TextButton(
+                    onPressed: null,
+                    child: Text(roomsState.selectedRole is Plaintiff
+                        ? roomsState.selectedRoom?.defendant != null
+                            ? 'Выберете сценарий'
+                            : 'Ожидание обвиняемого'
+                        : 'Ожидание прокурора')),
           );
         });
   }

@@ -8,7 +8,7 @@ class ExitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Transform.scale(scaleX: -1, child: const Icon(Icons.exit_to_app)),
-      tooltip: 'Settings',
+      tooltip: 'Выйти',
       onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => Dialog(

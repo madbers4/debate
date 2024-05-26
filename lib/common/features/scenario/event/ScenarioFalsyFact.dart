@@ -1,6 +1,6 @@
-import 'package:v1/common/features/scenario/fact/ScenarioFact.dart';
+import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
 
-class ScenarioFalsyFact extends ScenarioFact {
+class ScenarioFalsyFact extends ScenarioEvent {
   final String falsyDescription;
 
   ScenarioFalsyFact(
