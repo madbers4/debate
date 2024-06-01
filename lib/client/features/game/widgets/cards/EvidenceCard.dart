@@ -7,15 +7,17 @@ class EvidenceCard extends StatelessWidget {
   final ScenarioEvedence evedence;
   final VoidCallback? onFlip;
   final bool? isCardCardFlipped;
+  final bool? isDisabled;
 
   const EvidenceCard(
-      {super.key, required this.evedence, this.isCardCardFlipped, this.onFlip});
+      {super.key, required this.evedence, this.isCardCardFlipped, this.onFlip, this.isDisabled});
 
   @override
   Widget build(BuildContext context) {
     return GameCardWidget(
         isCardCardFlipped: isCardCardFlipped,
         onFlip: onFlip,
+        isDisabled: isDisabled,
         card: GameCard(
           id: evedence.id,
           title: evedence.title,

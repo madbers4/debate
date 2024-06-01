@@ -5,10 +5,14 @@ import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
 import 'package:v1/client/features/game/widgets/card-slot/CardSlot.dart';
 import 'package:v1/client/features/game/widgets/cards/EvidenceCard.dart';
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/common/GameCard.dart';
-import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
+import 'package:v1/common/features/player/Defendant.dart';
+import 'package:v1/common/features/player/Plaintiff.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
+import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 
 class DebatesStageBody extends StatelessWidget {
   const DebatesStageBody({super.key});
@@ -16,12 +20,21 @@ class DebatesStageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
+    final roomsState = context.watch<RoomsState>();
     final game = gameState.game!;
     final stageState = game.stageStates.debates;
     final scenario = game.scenario;
 
     final List<String> hiddenActIds =
         stageState.selectedEventId != null ? [stageState.selectedEventId!] : [];
+
+    final selectedEvent = scenario.eventById[stageState.selectedEventId];
+    final selectedEvidence =
+        scenario.evidenceById[stageState.selectedEvidenceId];
+
+    final isCardMatched = selectedEvent is ScenarioFalsyEvent &&
+        selectedEvidence is ScenarioTruthyEvedence &&
+        selectedEvidence.falsyEventId == selectedEvent.id;
 
     return Stack(
       fit: StackFit.expand,
@@ -67,64 +80,163 @@ class DebatesStageBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CardSlot(
-                    child: stageState.selectedEventId != null
-                        ? FactCard(
-                            fact:
-                                scenario.eventById[stageState.selectedEventId]!)
-                        : null,
-                    onAccept: (DragTargetDetails<GameCard> card) {
-                      if (scenario.eventById[card.data.id] == null) {
-                        return;
-                      }
+                    onAccept: roomsState.selectedRole is Defendant
+                        ? (DragTargetDetails<GameCard> card) {
+                            if (scenario.eventById[card.data.id] == null) {
+                              return;
+                            }
 
-                      gameState.updateGameState(GameStageStates.fromExisting(
-                          game.stageStates,
-                          DebatesStageState(
-                              id: stageState.id,
-                              selectedEvidenceId: stageState.selectedEvidenceId,
-                              selectedEventId: card.data.id)));
-                    },
+                            gameState.updateGameState(
+                                GameStageStates.fromExisting(
+                                    game.stageStates,
+                                    DebatesStageState(
+                                        id: stageState.id,
+                                        selectedEvidenceId:
+                                            stageState.selectedEvidenceId,
+                                        selectedEventId: card.data.id)));
+                          }
+                        : null,
+                    child: selectedEvent != null
+                        ? FactCard(
+                            fact: selectedEvent,
+                            isDisabled: roomsState.selectedRole is! Defendant)
+                        : null,
                   ),
                   const SizedBox(
                     width: 20,
                   ),
                   CardSlot(
-                    child: stageState.selectedEvidenceId != null
-                        ? EvidenceCard(
-                            evedence: scenario
-                                .evidenceById[stageState.selectedEvidenceId]!)
-                        : null,
-                    onAccept: (DragTargetDetails<GameCard> card) {
-                      if (scenario.evidenceById[card.data.id] == null) {
-                        return;
-                      }
+                    onAccept: roomsState.selectedRole is Defendant
+                        ? (DragTargetDetails<GameCard> card) {
+                            if (scenario.evidenceById[card.data.id] == null) {
+                              return;
+                            }
 
-                      gameState.updateGameState(GameStageStates.fromExisting(
-                          game.stageStates,
-                          DebatesStageState(
-                              id: stageState.id,
-                              selectedEvidenceId: card.data.id,
-                              selectedEventId: stageState.selectedEventId)));
-                    },
+                            gameState.updateGameState(
+                                GameStageStates.fromExisting(
+                                    game.stageStates,
+                                    DebatesStageState(
+                                        id: stageState.id,
+                                        selectedEvidenceId: card.data.id,
+                                        selectedEventId:
+                                            stageState.selectedEventId)));
+                          }
+                        : null,
+                    child: selectedEvidence != null
+                        ? EvidenceCard(
+                            evedence: selectedEvidence,
+                            isDisabled: roomsState.selectedRole is! Defendant,
+                          )
+                        : null,
                   ),
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              TextButton(
-                child: const Text('Принять'),
-                onPressed: () {
-                  gameState.updateStage(GameStage.Judgement);
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextButton(
-                child: const Text('Отклонить'),
-                onPressed: () {},
-              ),
+              roomsState.selectedRole is Defendant
+                  ? Column(
+                      children: [
+                        TextButton(
+                          onPressed: selectedEvent != null &&
+                                  stageState.selectedEvidenceId != null &&
+                                  stageState.inDenial != true
+                              ? () {
+                                  gameState.updateGameState(
+                                      GameStageStates.fromExisting(
+                                          game.stageStates,
+                                          DebatesStageState(
+                                              id: stageState.id,
+                                              inDenial: true,
+                                              selectedEventId:
+                                                  stageState.selectedEventId,
+                                              selectedEvidenceId:
+                                                  stageState.selectedEvidenceId,
+                                              incorrectAttempts:
+                                                  stageState.incorrectAttempts,
+                                              refusedEvents:
+                                                  stageState.refusedEvents)));
+                                }
+                              : null,
+                          child: const Text('Опровергнуть'),
+                        ),
+                      ],
+                    )
+                  : Container(),
+              roomsState.selectedRole is Plaintiff &&
+                      stageState.inDenial == true &&
+                      isCardMatched
+                  ? Column(
+                      children: [
+                        Text(
+                          'Доказательство действительно опровергает данное событие',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        selectedEvent.confirmsInnocence == true
+                            ? Text(
+                                'Опровержение подтвердит невиновность обвиняемого',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              )
+                            : Container(),
+                        TextButton(
+                          onPressed: stageState.inDenial == true
+                              ? () {
+                                  gameState.updateGameState(
+                                      GameStageStates.fromExisting(
+                                          game.stageStates,
+                                          DebatesStageState(
+                                              id: stageState.id,
+                                              inDenial: false,
+                                              selectedEventId:
+                                                  stageState.selectedEventId,
+                                              selectedEvidenceId:
+                                                  stageState.selectedEvidenceId,
+                                              incorrectAttempts:
+                                                  stageState.incorrectAttempts,
+                                              refusedEvents: [
+                                                ...stageState.refusedEvents,
+                                                selectedEvent.id
+                                              ])));
+                                }
+                              : null,
+                          child: const Text('Принять'),
+                        )
+                      ],
+                    )
+                  : Container(),
+              roomsState.selectedRole is Plaintiff &&
+                      stageState.inDenial == true &&
+                      !isCardMatched
+                  ? Column(
+                      children: [
+                        Text(
+                          'Это доказательство не может опровергнуть данное событие',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            final incorrectAttempts =
+                                stageState.incorrectAttempts + 1;
+                            gameState
+                                .updateGameState(GameStageStates.fromExisting(
+                                    game.stageStates,
+                                    DebatesStageState(
+                                      id: stageState.id,
+                                      inDenial: false,
+                                      selectedEventId:
+                                          stageState.selectedEventId,
+                                      selectedEvidenceId:
+                                          stageState.selectedEvidenceId,
+                                      incorrectAttempts: incorrectAttempts,
+                                      isDebatesOver: incorrectAttempts > 3,
+                                      refusedEvents: stageState.refusedEvents,
+                                    )));
+                          },
+                          child: const Text('Отклонить'),
+                        ),
+                      ],
+                    )
+                  : Container(),
             ],
           ),
         )

@@ -66,6 +66,7 @@ Function createSliderBuilder =
 
 class AppRouter {
   final router = GoRouter(
+    // TODO: REPLACE THIS
     initialLocation: '/',
     routes: [
       GoRoute(

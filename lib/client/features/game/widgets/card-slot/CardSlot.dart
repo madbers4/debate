@@ -19,7 +19,7 @@ class CardSlot extends StatelessWidget {
                 border: candidateItems.isEmpty
                     ? Border.all(color: Color.fromARGB(255, 228, 148, 95))
                     : Border.all(color: Color.fromARGB(255, 230, 13, 13))),
-            child: child ?? Container());
+            child: child ?? Container(),);
       },
       onAcceptWithDetails: onAccept,
     );

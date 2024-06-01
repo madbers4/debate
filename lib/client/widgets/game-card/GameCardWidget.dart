@@ -100,6 +100,17 @@ class GameCardWidget extends StatelessWidget {
             ),
           );
 
+          if (isDisabled == true) {
+            return FlipCard(
+                side: cardSide,
+                flipOnTouch: false,
+                fill: Fill.fillBack,
+                direction: FlipDirection.HORIZONTAL,
+                controller: state.controller,
+                front: front,
+                back: back);
+          }
+
           return Draggable<GameCard>(
             data: card,
             feedback: cardSide == CardSide.FRONT ? front : back,
@@ -118,9 +129,6 @@ class GameCardWidget extends StatelessWidget {
                 }
               },
               child: FlipCard(
-                  onFlip: () {
-                    // state.controller.state.
-                  },
                   side: cardSide,
                   flipOnTouch: false,
                   fill: Fill.fillBack,

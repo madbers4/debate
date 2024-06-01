@@ -10,8 +10,6 @@ import 'package:v1/client/features/game/stages/verdict/VerdictStage.dart';
 
 class GameRouter {
   final router = GoRouter(
-    // TODO: REPLACE THIS
-    // initialLocation: '/debates/no',
     initialLocation: '/title/no',
     routes: [
       GoRoute(

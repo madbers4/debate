@@ -62,6 +62,10 @@ class GameService extends SocketService {
   }
 
   void _updateGame(Game game, SocketClient client) {
+    if (!authService.isClientAutorized(client)) {
+      return;
+    }
+
     gameById[game.id] = game;
 
     final roomsService = serviceProvider.get<RoomsService>();

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
+import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
 
 class ActTile extends StatelessWidget {
@@ -12,6 +15,8 @@ class ActTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final roomsState = context.watch<RoomsState>();
+
     return Card(
         child: Container(
       height: MediaQuery.of(context).size.width * 0.4 / 1.7,
@@ -37,6 +42,7 @@ class ActTile extends StatelessWidget {
                   res.add(FactCard(
                     fact: value,
                     isHidden: hiddenIds.any((element) => element == value.id),
+                    isDisabled: roomsState.selectedRole is! Defendant,
                   ));
                   return res;
                 })

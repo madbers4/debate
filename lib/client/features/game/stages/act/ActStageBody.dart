@@ -16,15 +16,6 @@ class ActStageBody extends StatelessWidget {
   final String actTitle;
   final ActStageState stageState;
   final ScenarioAct event;
-  // final String title;
-  // final String description;
-  // final bool isCardsShowed;
-  // final ScenarioFact firstCard;
-  // final ScenarioFact secondCard;
-  // final ScenarioFact thirdCard;
-  // final bool isFirstCardShowed;
-  // final bool isSecondCardShowed;
-  // final bool isThirdCardShowed;
 
   const ActStageBody(
       {super.key,
@@ -32,15 +23,6 @@ class ActStageBody extends StatelessWidget {
       required this.actTitle,
       required this.stageState,
       required this.event
-      // required this.title,
-      // required this.description,
-      // required this.isCardsShowed,
-      // required this.firstCard,
-      // required this.secondCard,
-      // required this.thirdCard,
-      // required this.isFirstCardShowed,
-      // required this.isSecondCardShowed,
-      // required this.isThirdCardShowed,
       });
 
   @override
@@ -102,7 +84,7 @@ class ActStageBody extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 80,
                     ),
                     Row(
@@ -117,7 +99,7 @@ class ActStageBody extends StatelessWidget {
                                   roomsState.selectedRole is Plaintiff
                                       ? false
                                       : !stageState.isFirstCardShowed,
-                              isDisabled: !stageState.isFirstCardShowed,
+                              isDisabled: true,
                             ),
                             SizedBox(
                               width:
@@ -160,7 +142,7 @@ class ActStageBody extends StatelessWidget {
                                   roomsState.selectedRole is Plaintiff
                                       ? false
                                       : !stageState.isSecondCardShowed,
-                              isDisabled: !stageState.isSecondCardShowed,
+                              isDisabled: true,
                             ),
                             SizedBox(
                               width:
@@ -204,7 +186,7 @@ class ActStageBody extends StatelessWidget {
                                   roomsState.selectedRole is Plaintiff
                                       ? false
                                       : !stageState.isThirdCardShowed,
-                              isDisabled: !stageState.isThirdCardShowed,
+                              isDisabled: true,
                             ),
                             SizedBox(
                               width:

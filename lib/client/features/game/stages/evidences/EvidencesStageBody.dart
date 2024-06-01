@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/widgets/cards/EvidenceCard.dart';
 import 'package:v1/client/features/game/widgets/title/Title.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/EvidencesState.dart';
+import 'package:v1/common/features/player/Defendant.dart';
+import 'package:v1/common/features/player/Plaintiff.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
 
 class EvidencesStageBody extends StatelessWidget {
@@ -16,6 +19,7 @@ class EvidencesStageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     const double titleEndPos = 100.0;
     final gameState = context.watch<GameState>();
+    final roomsState = context.watch<RoomsState>();
     final game = gameState.game!;
     final stageState = game.stageStates.evidences;
 
@@ -82,6 +86,9 @@ class EvidencesStageBody extends StatelessWidget {
                             res.add(EvidenceCard(
                               evedence: value,
                               isCardCardFlipped: !cardShowed,
+                              isDisabled:
+                                  roomsState.selectedRole is! Plaintiff &&
+                                      roomsState.selectedRole is! Defendant,
                               onFlip: () {
                                 var newShowedEvidencesIds =
                                     stageState.showedEvidencesIds;

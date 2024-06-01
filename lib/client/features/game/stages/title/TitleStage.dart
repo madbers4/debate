@@ -3,11 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:v1/client/features/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/title/TitleStageBody.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/TitleStageState.dart';
+import 'package:v1/common/features/player/Defendant.dart';
+import 'package:v1/common/features/player/Plaintiff.dart';
 
 class TitleStage extends StatelessWidget {
   const TitleStage({super.key});
@@ -15,6 +18,7 @@ class TitleStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
+    final roomsState = context.watch<RoomsState>();
     final game = gameState.game!;
     final stageState = game.stageStates.title;
     final scenario = game.scenario;
@@ -26,8 +30,9 @@ class TitleStage extends StatelessWidget {
         description: description.description,
         isDescriptionShowed: stageState.isDescriptionShowed,
       ),
-      leftTopContent: ExitButton(),
-      rightBottomContent: NextButton(
+      leftTopContent:
+          roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
+      rightBottomContent: roomsState.selectedRole is Plaintiff ? NextButton(
         onPressed: () {
           if (stageState.isDescriptionShowed == false) {
             gameState.updateGameState(GameStageStates.fromExisting(
@@ -37,7 +42,7 @@ class TitleStage extends StatelessWidget {
             gameState.updateStage(GameStage.Defendant);
           }
         },
-      ),
+      ) : Container(),
     );
   }
 }

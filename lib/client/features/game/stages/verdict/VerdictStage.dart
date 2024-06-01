@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
 
 class VerdictStage extends StatelessWidget {
@@ -9,6 +10,7 @@ class VerdictStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
+    final roomsState = context.watch<RoomsState>();
 
     return Stack(
       children: [

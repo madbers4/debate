@@ -4,8 +4,11 @@ import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/widgets/cards/OriginCard.dart';
 import 'package:v1/client/features/game/widgets/description/Description.dart';
 import 'package:v1/client/features/game/widgets/title/Title.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DefendantStageState.dart';
+import 'package:v1/common/features/player/Defendant.dart';
+import 'package:v1/common/features/player/Plaintiff.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendantOrigin.dart';
 
 class DefendantStageBody extends StatelessWidget {
@@ -29,6 +32,7 @@ class DefendantStageBody extends StatelessWidget {
     const double titleEndPos = 100.0;
 
     final gameState = context.watch<GameState>();
+    final roomsState = context.watch<RoomsState>();
     final game = gameState.game!;
     final stageState = game.stageStates.defendant;
 
@@ -88,6 +92,8 @@ class DefendantStageBody extends StatelessWidget {
                           title: 'Происхождение',
                           origin: bornOrigin,
                           isCardCardFlipped: !stageState.isFirstCardShowed,
+                          isDisabled: roomsState.selectedRole is! Plaintiff &&
+                              roomsState.selectedRole is! Defendant,
                           onFlip: () {
                             gameState.updateGameState(
                                 GameStageStates.fromExisting(
@@ -110,6 +116,8 @@ class DefendantStageBody extends StatelessWidget {
                           title: 'Профессия',
                           isCardCardFlipped: !stageState.isSecondCardShowed,
                           origin: professionOrigin,
+                          isDisabled: roomsState.selectedRole is! Plaintiff &&
+                              roomsState.selectedRole is! Defendant,
                           onFlip: () {
                             gameState.updateGameState(
                                 GameStageStates.fromExisting(
@@ -131,7 +139,11 @@ class DefendantStageBody extends StatelessWidget {
                         OriginCard(
                           title: 'Секрет',
                           origin: secretOrigin,
-                          isCardCardFlipped: !stageState.isThirdCardShowed,
+                          isDisabled: roomsState.selectedRole is! Defendant,
+                          isCardCardFlipped:
+                              roomsState.selectedRole is Defendant
+                                  ? !stageState.isThirdCardShowed
+                                  : true,
                           onFlip: () {
                             gameState.updateGameState(
                                 GameStageStates.fromExisting(

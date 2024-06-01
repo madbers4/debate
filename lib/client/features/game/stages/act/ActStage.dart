@@ -3,11 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:v1/client/features/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
+import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
+import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/ActStageState.dart';
+import 'package:v1/common/features/player/Defendant.dart';
+import 'package:v1/common/features/player/Plaintiff.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
 
 enum ActId { One, Two, Three, Four }
@@ -19,6 +23,7 @@ class ActStage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
+    final roomsState = context.watch<RoomsState>();
     final game = gameState.game!;
     final scenario = game.scenario;
     ActStageState stageState;
@@ -72,11 +77,12 @@ class ActStage extends StatelessWidget {
         event: event,
         stageState: stageState,
       ),
-      leftTopContent: ExitButton(),
-      rightBottomContent: !stageState.isCardsShowed ||
+      leftTopContent:
+          roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
+      rightBottomContent: roomsState.selectedRole is Plaintiff && (!stageState.isCardsShowed ||
               stageState.isFirstCardShowed &&
                   stageState.isSecondCardShowed &&
-                  stageState.isThirdCardShowed
+                  stageState.isThirdCardShowed)
           ? NextButton(
               onPressed: () {
                 if (!stageState.isCardsShowed) {
@@ -107,15 +113,15 @@ class ActStage extends StatelessWidget {
               },
             )
           : Container(),
-      leftBottomContent: BackButton(
-        onPressed: () {
-          gameState.updateStage(previousStage);
-        },
-      ),
-      rightTopContent: Text(
-        scenario.description.title,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.titleSmall,
+      leftBottomContent: roomsState.selectedRole is Plaintiff
+          ? BackButton(
+              onPressed: () {
+                gameState.updateStage(previousStage);
+              },
+            )
+          : Container(),
+      rightTopContent: SideTitle(
+        title: scenario.description.title,
       ),
     );
   }
