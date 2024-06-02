@@ -4,6 +4,7 @@ import 'package:v1/client/features/loading/LoadingScreenState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/features/settings/SettingsButton.dart';
 import 'package:v1/client/widgets/style/Palette.dart';
+import 'package:lottie/lottie.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({
@@ -21,10 +22,8 @@ class LoadingScreen extends StatelessWidget {
 
           return ScreenLayout(
             bodyContent: Center(
-              child: Text(
-                'LOADING...',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+              child: Lottie.network(
+                  'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
             ),
             rightTopContent: const SettingsButton(),
           );

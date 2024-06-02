@@ -19,7 +19,7 @@ class AppState extends ChangeNotifier {
   Palette? _palette;
   // TODO: REPLACE THIS
   // static const int loadingTime = 5;
-  static const int loadingTime = 1;
+  static const int loadingTime = 1000;
 
   setClients(
       BuildContext context,
@@ -50,13 +50,13 @@ class AppState extends ChangeNotifier {
           ScaffoldMessenger.of(scaffoldKey.currentState!.context)
               .clearSnackBars();
 
-          ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
-            SnackBar(
-              content: const Text('Соеденение установлено'),
-              duration: const Duration(seconds: loadingTime - 1),
-              backgroundColor: _palette!.backgroundSuccess,
-            ),
-          );
+          // ScaffoldMessenger.of(scaffoldKey.currentState!.context).showSnackBar(
+          //   SnackBar(
+          //     content: const Text('Соеденение установлено'),
+          //     duration: const Duration(seconds: loadingTime - 1),
+          //     backgroundColor: _palette!.backgroundSuccess,
+          //   ),
+          // );
         }
 
         final settings = _settingsState!.settings;
