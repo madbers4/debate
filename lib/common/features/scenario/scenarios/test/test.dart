@@ -7,6 +7,7 @@ import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
 import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
+import 'package:v1/common/features/scenario/event/ScenarioFalsyFact.dart';
 import 'package:v1/common/utils/generateUID.dart';
 
 final Scenario testScenario = Scenario(
@@ -48,9 +49,10 @@ final Scenario testScenario = Scenario(
                 title: '1 Событие 2 Акта',
                 cardType: 'Улика',
                 description: 'Описание 1 События 2 Акта'),
-            ScenarioEvent(
+            ScenarioFalsyFact(
                 id: 'Не основное',
                 title: 'Не основное',
+                falsyDescription: '',
                 cardType: 'Событие',
                 description: 'Не основное ложное событие'),
             ScenarioEvent(
