@@ -5,7 +5,6 @@ import 'package:v1/common/features/scenario/defendant/ScenarioDefendantOrigin.da
 
 class OriginCard extends StatelessWidget {
   final ScenarioDefendantOrigin origin;
-  final String title;
   final VoidCallback? onFlip;
   final bool? isCardCardFlipped;
   final bool? isDisabled;
@@ -13,7 +12,6 @@ class OriginCard extends StatelessWidget {
   const OriginCard(
       {super.key,
       required this.origin,
-      required this.title,
       this.onFlip,
       this.isCardCardFlipped,
       this.isDisabled});
@@ -26,7 +24,7 @@ class OriginCard extends StatelessWidget {
         isDisabled: isDisabled,
         card: GameCard(
           id: origin.id,
-          title: title,
+          title: origin.title,
           description: origin.description,
         ));
   }

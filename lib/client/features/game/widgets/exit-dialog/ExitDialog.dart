@@ -8,7 +8,7 @@ class ExitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenLayout(
-      bodyContent: GameDescription(child: 'Вы уверены, что хотите выйти?'),
+      bodyContent: const GameDescription(child: 'Вы уверены, что хотите выйти?'),
       leftBottomContent: TextButton(
         onPressed: () {
           // Navigator.pop(context);

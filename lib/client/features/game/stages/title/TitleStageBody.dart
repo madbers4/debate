@@ -15,7 +15,7 @@ class TitleStageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double titleStartPos = 200.0;
+    const double titleStartPos = 200;
     const double titleEndPos = 100.0;
 
     return Center(
@@ -23,7 +23,7 @@ class TitleStageBody extends StatelessWidget {
         children: <Widget>[
           // Анимированное позиционирование для заголовка
           AnimatedPositioned(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 700),
             curve: Curves.easeInOut,
             top: isDescriptionShowed ? titleEndPos : titleStartPos,
             left: 0,
@@ -36,7 +36,7 @@ class TitleStageBody extends StatelessWidget {
           ),
           // Анимированное позиционирование для описания
           AnimatedPositioned(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 1000),
             curve: Curves.easeInOut,
             top: isDescriptionShowed
                 ? titleEndPos + 60

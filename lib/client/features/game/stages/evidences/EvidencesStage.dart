@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/exit-dialog/ExitButton.dart';
+import 'package:v1/client/features/game/widgets/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/evidences/EvidencesStageBody.dart';
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';

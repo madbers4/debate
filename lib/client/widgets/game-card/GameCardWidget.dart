@@ -1,5 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/common/GameCard.dart';
 import 'package:v1/client/widgets/game-card/GameCardState.dart';
@@ -52,16 +53,12 @@ class GameCardWidget extends StatelessWidget {
             cardSide = CardSide.FRONT;
           }
 
-          // if (state.controller.state?.isFront == isCardCardFlipped) {
-          //   state.controller.toggleCard();
-          // }
-
           final front = Visibility(
             visible: isHidden == true ? false : true,
             child: Card(
               child: Container(
-                height: MediaQuery.of(context).size.width * 0.087 * 1.8,
-                width: MediaQuery.of(context).size.width * 0.057 * 1.8,
+                height: 87 * 2,
+                width: 57 * 2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -72,8 +69,23 @@ class GameCardWidget extends StatelessWidget {
                     )),
                 child: Column(
                   children: <Widget>[
-                    Text(card.title),
-                    Text(card.description),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 4),
+                      child: Text(
+                        card.title,
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.all(4),
+                        child: Text(
+                          card.description,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        )),
                   ],
                 ),
               ),

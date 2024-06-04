@@ -28,7 +28,7 @@ class DefendantStageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double titleStartPos = 200.0;
+    const double titleStartPos = 100.0;
     const double titleEndPos = 100.0;
 
     final gameState = context.watch<GameState>();
@@ -82,14 +82,13 @@ class DefendantStageBody extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 80,
+                      height: 100,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OriginCard(
-                          title: 'Происхождение',
                           origin: bornOrigin,
                           isCardCardFlipped: !stageState.isFirstCardShowed,
                           isDisabled: roomsState.selectedRole is! Plaintiff &&
@@ -113,7 +112,6 @@ class DefendantStageBody extends StatelessWidget {
                           width: 10,
                         ),
                         OriginCard(
-                          title: 'Профессия',
                           isCardCardFlipped: !stageState.isSecondCardShowed,
                           origin: professionOrigin,
                           isDisabled: roomsState.selectedRole is! Plaintiff &&
@@ -137,7 +135,6 @@ class DefendantStageBody extends StatelessWidget {
                           width: 10,
                         ),
                         OriginCard(
-                          title: 'Секрет',
                           origin: secretOrigin,
                           isDisabled: roomsState.selectedRole is! Defendant,
                           isCardCardFlipped:

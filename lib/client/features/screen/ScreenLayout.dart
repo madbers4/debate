@@ -28,21 +28,21 @@ class ScreenLayout extends StatelessWidget {
       fit: StackFit.passthrough,
       children: [
         Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-              // color: Color.fromARGB(0, 0, 0, 0)
-              // backgroundBlendMode: BlendMode.plus,
-              // color: Colors.white
-              // image: DecorationImage(
-              //     image: Svg('assets/images/background.svg'),
-              //     repeat: ImageRepeat.repeat,
-              //     fit: BoxFit.none)
-              image: DecorationImage(
-                  image: AssetImage('assets/images/test-background.png'),
-                  repeat: ImageRepeat.noRepeat,
-                  fit: BoxFit.fitWidth)),
-        ),
+            height: double.infinity,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                // color: Color.fromARGB(0, 0, 0, 0)
+                // backgroundBlendMode: BlendMode.plus,
+                color: Colors.white
+                // image: DecorationImage(
+                //     image: Svg('assets/images/background.svg'),
+                //     repeat: ImageRepeat.repeat,
+                //     fit: BoxFit.none)
+                // image: DecorationImage(
+                //     image: AssetImage('assets/images/test-background.png'),
+                //     repeat: ImageRepeat.noRepeat,
+                //     fit: BoxFit.fitWidth)),
+                )),
         Positioned(
             top: 20,
             left: 20,

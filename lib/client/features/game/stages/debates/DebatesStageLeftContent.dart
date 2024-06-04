@@ -23,19 +23,17 @@ class DebatesStageLeftContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             OriginCard(
-              title: 'Происхождение',
               origin: game.scenario.defendant.bornOrigin,
               isDisabled: true,
             ),
             OriginCard(
-              title: 'Профессия',
               origin: game.scenario.defendant.professionOrigin,
               isDisabled: true,
             ),
             OriginCard(
-              title: 'Секрет',
               origin: game.scenario.defendant.secretOrigin,
-              isCardCardFlipped:  roomsState.selectedRole is Defendant ? false : true,
+              isCardCardFlipped:
+                  roomsState.selectedRole is Defendant ? false : true,
               isDisabled: true,
             ),
           ],
