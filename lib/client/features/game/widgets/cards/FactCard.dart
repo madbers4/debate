@@ -25,7 +25,7 @@ class FactCard extends StatelessWidget {
         isDisabled: isDisabled,
         card: GameCard(
           id: fact.id,
-          title: fact.cardType,
+          title: fact.title,
           description: fact.description,
         ));
   }

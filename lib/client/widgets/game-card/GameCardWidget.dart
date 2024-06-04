@@ -73,7 +73,7 @@ class GameCardWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8, bottom: 4),
                       child: Text(
                         card.title,
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ),
                     Padding(
@@ -82,8 +82,8 @@ class GameCardWidget extends StatelessWidget {
                           card.description,
                           style: TextStyle(
                               fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                              color: Color.fromARGB(255, 95, 33, 33),
+                              fontWeight: FontWeight.w600),
                           textAlign: TextAlign.center,
                         )),
                   ],
