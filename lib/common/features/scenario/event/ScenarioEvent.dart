@@ -5,6 +5,7 @@ class ScenarioEvent implements DTO {
   final String title;
   final String cardType;
   final String description;
+  final bool? isHidden;
   final String? fullDescription;
 
   ScenarioEvent(
@@ -12,6 +13,7 @@ class ScenarioEvent implements DTO {
       required this.title,
       required this.cardType,
       required this.description,
+      this.isHidden,
       this.fullDescription});
 
   ScenarioEvent.fromJson(Map<String, dynamic> json)
@@ -19,7 +21,8 @@ class ScenarioEvent implements DTO {
         title = json['title'],
         cardType = json['cardType'],
         description = json['description'],
-        fullDescription = json['fullDescription'];
+        fullDescription = json['fullDescription'],
+        isHidden = json['isHidden'];
 
   Map toJson() => {
         'id': id,
@@ -27,5 +30,6 @@ class ScenarioEvent implements DTO {
         'cardType': cardType,
         'description': description,
         'fullDescription': fullDescription,
+        'isHidden': isHidden,
       };
 }

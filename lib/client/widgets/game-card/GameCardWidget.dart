@@ -64,7 +64,7 @@ class GameCardWidget extends StatelessWidget {
                     image: DecorationImage(
                       image: AssetImage(card.frontBackgroundPath != null
                           ? card.frontBackgroundPath!
-                          : 'assets/images/game-card-cap.jpg'),
+                          : 'assets/images/game-card-front.jpg'),
                       fit: BoxFit.fill,
                     )),
                 child: Column(
