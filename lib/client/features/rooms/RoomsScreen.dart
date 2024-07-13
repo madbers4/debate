@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/AppState.dart';
 import 'package:v1/client/Router.dart';
@@ -21,21 +22,36 @@ class RoomsScreen extends StatelessWidget {
     final appState = context.watch<AppState>();
 
     return ScreenLayout(
-      bodyContent: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
+      bodyContent: Stack(
         children: [
-          const SelectedRoomTable(),
-          Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Игровые комнаты',
-                style: Theme.of(context).textTheme.titleLarge,
-              )),
-          const SizedBox(
-            height: 10,
+          Positioned(
+            left: 20,
+            top: 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SelectedRoomTable(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Игровые комнаты',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                const RoomsTable(),
+              ],
+            ),
           ),
-          const RoomsTable(),
+          Positioned(
+              left: 20,
+              bottom: 0,
+              child: appState.isUserAutorized! ? CreateRoomForm() : Container())
         ],
       ),
       rightTopContent: const SettingsButton(),
@@ -49,8 +65,6 @@ class RoomsScreen extends StatelessWidget {
               onPressed: null,
               child: Text('Выберите комнату'),
             ),
-      leftBottomContent:
-          appState.isUserAutorized! ? CreateRoomForm() : Container(),
     );
   }
 }

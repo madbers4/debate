@@ -15,7 +15,8 @@ class FactCard extends StatelessWidget {
       required this.fact,
       this.isCardCardFlipped,
       this.isDisabled,
-      this.onFlip, this.isHidden});
+      this.onFlip,
+      this.isHidden});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,9 @@ class FactCard extends StatelessWidget {
         isHidden: isHidden,
         isDisabled: isDisabled,
         card: GameCard(
-          id: fact.id,
-          title: fact.title,
-          description: fact.description,
-        ));
+            id: fact.id,
+            title: fact.title,
+            description: fact.description,
+            backBackgroundPath: 'assets/images/story-game-card.jpg'));
   }
 }

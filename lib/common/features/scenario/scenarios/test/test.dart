@@ -14,6 +14,7 @@ final Scenario testScenario = Scenario(
     id: generateUID(),
     description: ScenarioDescription(
       id: generateUID(),
+      background: 'test-blue-background.png',
       title: 'Тестовый Сценарий',
       description: 'Основное описание тестового сценария',
     ),
@@ -123,6 +124,7 @@ final Scenario testScenario = Scenario(
     defendant: ScenarioDefendant(
         id: generateUID(),
         name: '',
+        background: 'test-blue-background.png',
         description: 'Описание обвиняемого',
         bornOrigin: ScenarioDefendantOrigin(
           id: generateUID(),

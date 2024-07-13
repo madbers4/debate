@@ -18,7 +18,7 @@ class AppState extends ChangeNotifier {
   SettingsState? _settingsState;
   Palette? _palette;
   // TODO: REPLACE THIS
-  static const int loadingTime = 5;
+  static const int loadingTime = 3;
   // static const int loadingTime = 5;
 
   setClients(

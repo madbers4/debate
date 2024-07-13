@@ -20,6 +20,7 @@ class RowSettingsMenuButton extends StatelessWidget {
         final room = roomsState.rooms.get(roomId)!;
 
         return MenuAnchor(
+          style: MenuStyle(),
           builder: (BuildContext context, MenuController controller,
                   Widget? child) =>
               IconButton(
@@ -50,12 +51,12 @@ class RowSettingsMenuButton extends StatelessWidget {
                     },
                   )
                 : Container(),
-            MenuItemButton(
-              child: Text('Войти как наблюдатель'),
-              onPressed: () {
-                state.joinAsGuest(roomId);
-              },
-            ),
+            // MenuItemButton(
+            //   child: Text('Войти как наблюдатель'),
+            //   onPressed: () {
+            //     state.joinAsGuest(roomId);
+            //   },
+            // ),
             roomsState.selectedRoom?.id == room.id
                 ? MenuItemButton(
                     child: Text('Выйти'),

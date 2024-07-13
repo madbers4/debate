@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v1/client/colors.dart';
 
 class GameDescription extends StatelessWidget {
   final String child;
@@ -10,7 +11,10 @@ class GameDescription extends StatelessWidget {
     return Text(
       child,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.titleMedium,
+      style: Theme.of(context)
+          .textTheme
+          .titleMedium!
+          .copyWith(fontFamily: 'Genshin', color: whiteColor, fontSize: 20),
     );
   }
 }

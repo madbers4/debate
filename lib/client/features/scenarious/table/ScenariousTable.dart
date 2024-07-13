@@ -23,7 +23,7 @@ class ScenariousTable extends StatelessWidget {
               'Сценарии',
               style: Theme.of(context).textTheme.titleLarge,
             )),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         ListView.separated(
             shrinkWrap: true,
             itemCount: state.scenarious_.length,
@@ -45,8 +45,8 @@ class ScenariousTable extends StatelessWidget {
                         // GoRouter.of(context).go('/play/session/${index}');
                       }
                     : null,
-                leading: Text(index.toString()),
-                title: Text(scenario.description.title),
+                // leading: Text(index.toString()),
+                title: Text('${index}    ${scenario.description.title}'),
               );
             })
       ],

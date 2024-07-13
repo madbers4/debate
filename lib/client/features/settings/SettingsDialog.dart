@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:v1/client/AppState.dart';
-import 'package:v1/client/features/screen/ScreenLayout.dart';
+import 'package:v1/client/features/dialog/DialogLayout.dart';
 import 'package:v1/client/features/settings/SettingsFields.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/settings/SettingsFormState.dart';
-import 'package:v1/client/features/settings/SettingsState.dart';
 
 class SettingsDialog extends StatelessWidget {
   final BuildContext globalContext;
@@ -15,7 +14,6 @@ class SettingsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _settingsState = globalContext.watch<SettingsState>();
     final _appState = globalContext.watch<AppState>();
 
     return ChangeNotifierProvider<SettingsFormState>(
@@ -26,7 +24,7 @@ class SettingsDialog extends StatelessWidget {
 
           return Form(
             key: state.formKey,
-            child: ScreenLayout(
+            child: DialogLayout(
               bodyContent: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

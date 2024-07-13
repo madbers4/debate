@@ -6,6 +6,7 @@ import 'package:v1/client/features/game/stages/defendant/DefendantStageBody.dart
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
+import 'package:v1/client/widgets/buttons/back/BackButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
@@ -26,6 +27,7 @@ class DefendantStage extends StatelessWidget {
     final defendant = scenario.defendant;
 
     return ScreenLayout(
+      background: scenario.defendant.background,
       bodyContent: DefendantStageBody(
         description: defendant.description,
         isCardsShowed: stageState.isCardsShowed,
@@ -36,9 +38,16 @@ class DefendantStage extends StatelessWidget {
       leftTopContent:
           roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
       leftBottomContent: roomsState.selectedRole is Plaintiff
-          ? BackButton(
+          ? BackButton2(
               onPressed: () {
-                gameState.updateStage(GameStage.Title);
+                if (stageState.isCardsShowed) {
+                  gameState.updateGameState(GameStageStates.fromExisting(
+                      game.stageStates,
+                      DefendantStageState(
+                          id: stageState.id, isCardsShowed: false)));
+                } else {
+                  gameState.updateStage(GameStage.Title);
+                }
               },
             )
           : Container(),

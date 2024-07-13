@@ -22,16 +22,21 @@ class ActStageBody extends StatelessWidget {
       required this.actKey,
       required this.actTitle,
       required this.stageState,
-      required this.event
-      });
+      required this.event});
 
   @override
   Widget build(BuildContext context) {
     final roomsState = context.watch<RoomsState>();
     final gameState = context.watch<GameState>();
 
-    const double titleStartPos = 200.0;
-    const double titleEndPos = 100.0;
+    const double titleStartPos = 85;
+    const double titleEndPos = 10;
+    const double textStartPos = 250;
+    const double textEndPos = 200;
+    const double cardsStartPos = 500;
+    const double cardsEndPos = 200;
+
+    final isCardsShowed = stageState.isCardsShowed;
 
     return Center(
       child: Stack(
@@ -40,7 +45,7 @@ class ActStageBody extends StatelessWidget {
           AnimatedPositioned(
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOut,
-            top: stageState.isCardsShowed ? titleEndPos : titleStartPos,
+            top: isCardsShowed ? titleEndPos : titleStartPos,
             left: 0,
             right: 0,
             child: Center(
@@ -48,180 +53,193 @@ class ActStageBody extends StatelessWidget {
                 children: [
                   GameTitle(
                     child: actTitle,
+                    fontSize: 60,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   GameTitle(
                     child: event.title,
+                    fontSize: 40,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GameDescription(
-                    child: event.description,
-                  )
                 ],
               ),
             ),
           ),
-          // SizedBox(
-          //   height: 50,
-          // ),
-          // Карты
           AnimatedPositioned(
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOut,
-            top: stageState.isCardsShowed
-                ? titleEndPos + 60
-                : titleStartPos +
-                    500, // смещаем описание ниже, если _showDescription true
+            top: isCardsShowed ? textEndPos : textStartPos,
             left: 0,
             right: 0,
-            child: Visibility(
-              // Visibility виджет управляет видимостью описания
-              visible: stageState.isCardsShowed,
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 80,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
+            child: Center(
+                child: AnimatedOpacity(
+              opacity: isCardsShowed ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 1000),
+              child: GameDescription(
+                child: event.description,
+              ),
+            )),
+          ),
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 1000),
+            curve: Curves.easeInOut,
+            top: isCardsShowed ? cardsEndPos : cardsStartPos,
+            left: 0,
+            right: 0,
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 1000),
+              opacity: isCardsShowed ? 1.0 : 0.0,
+              child: Visibility(
+                // Visibility виджет управляет видимостью описания
+                visible: isCardsShowed,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 800,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            FactCard(
-                              fact: event.events[0],
-                              isCardCardFlipped:
-                                  roomsState.selectedRole is Plaintiff
-                                      ? false
-                                      : !stageState.isFirstCardShowed,
-                              isDisabled: true,
+                            Column(
+                              children: [
+                                FactCard(
+                                  fact: event.events[0],
+                                  isCardCardFlipped:
+                                      roomsState.selectedRole is Plaintiff
+                                          ? false
+                                          : !stageState.isFirstCardShowed,
+                                  isDisabled: true,
+                                ),
+                                SizedBox(
+                                  width: roomsState.selectedRole is Plaintiff
+                                      ? 10
+                                      : 0,
+                                ),
+                                roomsState.selectedRole is Plaintiff
+                                    ? TextButton(
+                                        onPressed: !stageState.isFirstCardShowed
+                                            ? () {
+                                                gameState.updateGameState(
+                                                    GameStageStates.fromExisting(
+                                                        gameState
+                                                            .game!.stageStates,
+                                                        ActStageState(
+                                                            id: stageState.id,
+                                                            isCardsShowed:
+                                                                stageState
+                                                                    .isCardsShowed,
+                                                            isFirstCardShowed:
+                                                                true,
+                                                            isSecondCardShowed:
+                                                                stageState
+                                                                    .isSecondCardShowed,
+                                                            isThirdCardShowed:
+                                                                stageState
+                                                                    .isThirdCardShowed),
+                                                        actKey));
+                                              }
+                                            : null,
+                                        child:
+                                            const Text('Показать обвиняемому'))
+                                    : Container()
+                              ],
                             ),
-                            SizedBox(
-                              width:
-                                  roomsState.selectedRole is Plaintiff ? 10 : 0,
+                            Column(
+                              children: [
+                                FactCard(
+                                  fact: event.events[1],
+                                  isCardCardFlipped:
+                                      roomsState.selectedRole is Plaintiff
+                                          ? false
+                                          : !stageState.isSecondCardShowed,
+                                  isDisabled: true,
+                                ),
+                                SizedBox(
+                                  width: roomsState.selectedRole is Plaintiff
+                                      ? 10
+                                      : 0,
+                                ),
+                                roomsState.selectedRole is Plaintiff
+                                    ? TextButton(
+                                        onPressed: !stageState
+                                                .isSecondCardShowed
+                                            ? () {
+                                                gameState.updateGameState(
+                                                    GameStageStates.fromExisting(
+                                                        gameState
+                                                            .game!.stageStates,
+                                                        ActStageState(
+                                                            id: stageState.id,
+                                                            isCardsShowed:
+                                                                stageState
+                                                                    .isCardsShowed,
+                                                            isFirstCardShowed:
+                                                                stageState
+                                                                    .isFirstCardShowed,
+                                                            isSecondCardShowed:
+                                                                true,
+                                                            isThirdCardShowed:
+                                                                stageState
+                                                                    .isThirdCardShowed),
+                                                        actKey));
+                                              }
+                                            : null,
+                                        child:
+                                            const Text('Показать обвиняемому'))
+                                    : Container()
+                              ],
                             ),
-                            roomsState.selectedRole is Plaintiff
-                                ? TextButton(
-                                    onPressed: !stageState.isFirstCardShowed
-                                        ? () {
-                                            gameState.updateGameState(
-                                                GameStageStates.fromExisting(
-                                                    gameState.game!.stageStates,
-                                                    ActStageState(
-                                                        id: stageState.id,
-                                                        isCardsShowed:
-                                                            stageState
-                                                                .isCardsShowed,
-                                                        isFirstCardShowed: true,
-                                                        isSecondCardShowed:
-                                                            stageState
-                                                                .isSecondCardShowed,
-                                                        isThirdCardShowed:
-                                                            stageState
-                                                                .isThirdCardShowed),
-                                                    actKey));
-                                          }
-                                        : null,
-                                    child: const Text('Показать обвиняемому'))
-                                : Container()
+                            Column(
+                              children: [
+                                FactCard(
+                                  fact: event.events[2],
+                                  isDisabled: true,
+                                  isCardCardFlipped:
+                                      roomsState.selectedRole is Plaintiff
+                                          ? false
+                                          : !stageState.isThirdCardShowed,
+                                ),
+                                SizedBox(
+                                  width: roomsState.selectedRole is Plaintiff
+                                      ? 10
+                                      : 0,
+                                ),
+                                roomsState.selectedRole is Plaintiff
+                                    ? TextButton(
+                                        onPressed: !stageState.isThirdCardShowed
+                                            ? () {
+                                                gameState.updateGameState(
+                                                    GameStageStates.fromExisting(
+                                                        gameState
+                                                            .game!.stageStates,
+                                                        ActStageState(
+                                                            id: stageState.id,
+                                                            isCardsShowed:
+                                                                stageState
+                                                                    .isCardsShowed,
+                                                            isFirstCardShowed:
+                                                                stageState
+                                                                    .isFirstCardShowed,
+                                                            isSecondCardShowed:
+                                                                stageState
+                                                                    .isSecondCardShowed,
+                                                            isThirdCardShowed:
+                                                                true),
+                                                        actKey));
+                                              }
+                                            : null,
+                                        child:
+                                            const Text('Показать обвиняемому'))
+                                    : Container()
+                              ],
+                            ),
                           ],
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            FactCard(
-                              fact: event.events[1],
-                              isCardCardFlipped:
-                                  roomsState.selectedRole is Plaintiff
-                                      ? false
-                                      : !stageState.isSecondCardShowed,
-                              isDisabled: true,
-                            ),
-                            SizedBox(
-                              width:
-                                  roomsState.selectedRole is Plaintiff ? 10 : 0,
-                            ),
-                            roomsState.selectedRole is Plaintiff
-                                ? TextButton(
-                                    onPressed: !stageState.isSecondCardShowed
-                                        ? () {
-                                            gameState.updateGameState(
-                                                GameStageStates.fromExisting(
-                                                    gameState.game!.stageStates,
-                                                    ActStageState(
-                                                        id: stageState.id,
-                                                        isCardsShowed:
-                                                            stageState
-                                                                .isCardsShowed,
-                                                        isFirstCardShowed:
-                                                            stageState
-                                                                .isFirstCardShowed,
-                                                        isSecondCardShowed:
-                                                            true,
-                                                        isThirdCardShowed:
-                                                            stageState
-                                                                .isThirdCardShowed),
-                                                    actKey));
-                                          }
-                                        : null,
-                                    child: const Text('Показать обвиняемому'))
-                                : Container()
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            FactCard(
-                              fact: event.events[2],
-                              isCardCardFlipped:
-                                  roomsState.selectedRole is Plaintiff
-                                      ? false
-                                      : !stageState.isThirdCardShowed,
-                              isDisabled: true,
-                            ),
-                            SizedBox(
-                              width:
-                                  roomsState.selectedRole is Plaintiff ? 10 : 0,
-                            ),
-                            roomsState.selectedRole is Plaintiff
-                                ? TextButton(
-                                    onPressed: !stageState.isThirdCardShowed
-                                        ? () {
-                                            gameState.updateGameState(
-                                                GameStageStates.fromExisting(
-                                                    gameState.game!.stageStates,
-                                                    ActStageState(
-                                                        id: stageState.id,
-                                                        isCardsShowed:
-                                                            stageState
-                                                                .isCardsShowed,
-                                                        isFirstCardShowed:
-                                                            stageState
-                                                                .isFirstCardShowed,
-                                                        isSecondCardShowed:
-                                                            stageState
-                                                                .isSecondCardShowed,
-                                                        isThirdCardShowed:
-                                                            true),
-                                                    actKey));
-                                          }
-                                        : null,
-                                    child: const Text('Показать обвиняемому'))
-                                : Container()
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

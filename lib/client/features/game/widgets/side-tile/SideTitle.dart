@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v1/client/colors.dart';
 
 class SideTitle extends StatelessWidget {
   final String title;
@@ -10,7 +11,10 @@ class SideTitle extends StatelessWidget {
     return Text(
       title,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.titleSmall,
+      style: Theme.of(context)
+          .textTheme
+          .titleSmall!
+          .copyWith(fontFamily: 'Genshin', color: goldColor),
     );
   }
 }

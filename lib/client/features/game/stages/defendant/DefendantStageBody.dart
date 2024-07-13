@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/widgets/cards/OriginCard.dart';
@@ -28,8 +29,11 @@ class DefendantStageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double titleStartPos = 100.0;
-    const double titleEndPos = 100.0;
+    const double titleStartPos = 100;
+    const double titleEndPos = 100;
+    const double textPos = 200;
+    const double cardStartPos = 200;
+    const double cardEndPos = 500;
 
     final gameState = context.watch<GameState>();
     final roomsState = context.watch<RoomsState>();
@@ -46,119 +50,119 @@ class DefendantStageBody extends StatelessWidget {
             top: isCardsShowed ? titleEndPos : titleStartPos,
             left: 0,
             right: 0,
-            child: Center(
-              child: Column(
-                children: [
-                  const GameTitle(
-                    child: 'Обвиняемый',
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GameDescription(
-                    child: description,
-                  )
-                ],
-              ),
-            ),
+            child: const Center(
+                child: GameTitle(
+              child: 'Обвиняемый',
+            )),
           ),
-          // SizedBox(
-          //   height: 50,
-          // ),
-          // Карты
           AnimatedPositioned(
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOut,
-            top: isCardsShowed
-                ? titleEndPos + 60
-                : titleStartPos +
-                    500, // смещаем описание ниже, если _showDescription true
+            top: isCardsShowed ? textPos : textPos,
             left: 0,
             right: 0,
-            child: Visibility(
-              // Visibility виджет управляет видимостью описания
-              visible: isCardsShowed,
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        OriginCard(
-                          origin: bornOrigin,
-                          isCardCardFlipped: !stageState.isFirstCardShowed,
-                          isDisabled: roomsState.selectedRole is! Plaintiff &&
-                              roomsState.selectedRole is! Defendant,
-                          onFlip: () {
-                            gameState.updateGameState(
-                                GameStageStates.fromExisting(
-                                    game.stageStates,
-                                    DefendantStageState(
-                                        id: stageState.id,
-                                        isCardsShowed: stageState.isCardsShowed,
-                                        isFirstCardShowed:
-                                            !stageState.isFirstCardShowed,
-                                        isSecondCardShowed:
-                                            stageState.isSecondCardShowed,
-                                        isThirdCardShowed:
-                                            stageState.isThirdCardShowed)));
-                          },
+            child: Center(
+                child: AnimatedOpacity(
+              opacity: isCardsShowed ? 0.0 : 1.0,
+              duration: Duration(milliseconds: 1000),
+              child: GameDescription(
+                child: description,
+              ),
+            )),
+          ),
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 1000),
+            curve: Curves.easeInOut,
+            top: isCardsShowed ? cardStartPos : cardEndPos,
+            left: 0,
+            right: 0,
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 1000),
+              opacity: isCardsShowed ? 1.0 : 0.0,
+              child: Visibility(
+                // Visibility виджет управляет видимостью описания
+                visible: isCardsShowed,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 800,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            OriginCard(
+                              origin: bornOrigin,
+                              isCardCardFlipped: !stageState.isFirstCardShowed,
+                              isDisabled:
+                                  roomsState.selectedRole is! Plaintiff &&
+                                      roomsState.selectedRole is! Defendant,
+                              onFlip: () {
+                                gameState.updateGameState(
+                                    GameStageStates.fromExisting(
+                                        game.stageStates,
+                                        DefendantStageState(
+                                            id: stageState.id,
+                                            isCardsShowed:
+                                                stageState.isCardsShowed,
+                                            isFirstCardShowed:
+                                                !stageState.isFirstCardShowed,
+                                            isSecondCardShowed:
+                                                stageState.isSecondCardShowed,
+                                            isThirdCardShowed:
+                                                stageState.isThirdCardShowed)));
+                              },
+                            ),
+                            OriginCard(
+                              isCardCardFlipped: !stageState.isSecondCardShowed,
+                              origin: professionOrigin,
+                              isDisabled:
+                                  roomsState.selectedRole is! Plaintiff &&
+                                      roomsState.selectedRole is! Defendant,
+                              onFlip: () {
+                                gameState.updateGameState(
+                                    GameStageStates.fromExisting(
+                                        game.stageStates,
+                                        DefendantStageState(
+                                            id: stageState.id,
+                                            isCardsShowed:
+                                                stageState.isCardsShowed,
+                                            isFirstCardShowed:
+                                                stageState.isFirstCardShowed,
+                                            isSecondCardShowed:
+                                                !stageState.isSecondCardShowed,
+                                            isThirdCardShowed:
+                                                stageState.isThirdCardShowed)));
+                              },
+                            ),
+                            OriginCard(
+                              origin: secretOrigin,
+                              isDisabled: roomsState.selectedRole is! Defendant,
+                              isCardCardFlipped:
+                                  roomsState.selectedRole is Defendant
+                                      ? !stageState.isThirdCardShowed
+                                      : true,
+                              onFlip: () {
+                                gameState.updateGameState(
+                                    GameStageStates.fromExisting(
+                                        game.stageStates,
+                                        DefendantStageState(
+                                            id: stageState.id,
+                                            isCardsShowed:
+                                                stageState.isCardsShowed,
+                                            isFirstCardShowed:
+                                                stageState.isFirstCardShowed,
+                                            isSecondCardShowed:
+                                                stageState.isSecondCardShowed,
+                                            isThirdCardShowed: !stageState
+                                                .isThirdCardShowed)));
+                              },
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        OriginCard(
-                          isCardCardFlipped: !stageState.isSecondCardShowed,
-                          origin: professionOrigin,
-                          isDisabled: roomsState.selectedRole is! Plaintiff &&
-                              roomsState.selectedRole is! Defendant,
-                          onFlip: () {
-                            gameState.updateGameState(
-                                GameStageStates.fromExisting(
-                                    game.stageStates,
-                                    DefendantStageState(
-                                        id: stageState.id,
-                                        isCardsShowed: stageState.isCardsShowed,
-                                        isFirstCardShowed:
-                                            stageState.isFirstCardShowed,
-                                        isSecondCardShowed:
-                                            !stageState.isSecondCardShowed,
-                                        isThirdCardShowed:
-                                            stageState.isThirdCardShowed)));
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        OriginCard(
-                          origin: secretOrigin,
-                          isDisabled: roomsState.selectedRole is! Defendant,
-                          isCardCardFlipped:
-                              roomsState.selectedRole is Defendant
-                                  ? !stageState.isThirdCardShowed
-                                  : true,
-                          onFlip: () {
-                            gameState.updateGameState(
-                                GameStageStates.fromExisting(
-                                    game.stageStates,
-                                    DefendantStageState(
-                                        id: stageState.id,
-                                        isCardsShowed: stageState.isCardsShowed,
-                                        isFirstCardShowed:
-                                            stageState.isFirstCardShowed,
-                                        isSecondCardShowed:
-                                            stageState.isSecondCardShowed,
-                                        isThirdCardShowed:
-                                            !stageState.isThirdCardShowed)));
-                          },
-                        ),
-                      ],
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

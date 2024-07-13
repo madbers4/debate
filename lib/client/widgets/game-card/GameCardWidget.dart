@@ -27,6 +27,9 @@ class GameCardWidget extends StatelessWidget {
     return ChangeNotifierProvider<GameCardWidgetState>(
         create: (context) => GameCardWidgetState(),
         builder: (context, rre) {
+          const double cardWidth = 171;
+          const double cardHeight = 267;
+
           final state = context.watch<GameCardWidgetState>();
 
           if (isCardCardFlipped != null &&
@@ -57,8 +60,8 @@ class GameCardWidget extends StatelessWidget {
             visible: isHidden == true ? false : true,
             child: Card(
               child: Container(
-                height: 87 * 2,
-                width: 57 * 2,
+                height: cardHeight,
+                width: cardWidth,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -70,19 +73,21 @@ class GameCardWidget extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 4),
+                      padding: const EdgeInsets.only(
+                          top: 8, left: 4, right: 4, bottom: 4),
                       child: Text(
                         card.title,
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.all(4),
+                        padding: EdgeInsets.all(8),
                         child: Text(
                           card.description,
                           style: TextStyle(
                               fontSize: 12,
-                              color: Color.fromARGB(255, 95, 33, 33),
+                              color: Color.fromARGB(255, 32, 93, 129),
                               fontWeight: FontWeight.w600),
                           textAlign: TextAlign.center,
                         )),
@@ -97,13 +102,13 @@ class GameCardWidget extends StatelessWidget {
             child: Card(
               child: Container(
                 // 89 x 57
-                height: 267,
-                width: 171,
+                height: cardHeight,
+                width: cardWidth,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage(card.frontBackgroundPath != null
-                        ? card.frontBackgroundPath!
+                    image: AssetImage(card.backBackgroundPath != null
+                        ? card.backBackgroundPath!
                         : 'assets/images/game-card.jpg'),
                     fit: BoxFit.fill,
                   ),
@@ -126,7 +131,8 @@ class GameCardWidget extends StatelessWidget {
           return Draggable<GameCard>(
             data: card,
             feedback: cardSide == CardSide.FRONT ? front : back,
-            childWhenDragging: const SizedBox(height: 267, width: 179),
+            childWhenDragging:
+                const SizedBox(height: cardHeight, width: cardWidth),
             child: GestureDetector(
               onTap: () {
                 if (isDisabled == true) {

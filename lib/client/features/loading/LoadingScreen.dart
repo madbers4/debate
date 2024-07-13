@@ -22,8 +22,9 @@ class LoadingScreen extends StatelessWidget {
 
           return ScreenLayout(
             bodyContent: Center(
-              child: Lottie.network(
-                  'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+              child: Container(),
+              // child: Lottie.network(
+              //     'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
             ),
             rightTopContent: const SettingsButton(),
           );

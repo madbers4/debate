@@ -19,8 +19,8 @@ class ActTile extends StatelessWidget {
 
     return Card(
         child: Container(
-      height: MediaQuery.of(context).size.width * 0.4 / 1.7,
-      width: MediaQuery.of(context).size.width * 0.6 / 1.7,
+      height: 300,
+      width: 500,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

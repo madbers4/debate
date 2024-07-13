@@ -25,6 +25,8 @@ class TitleStage extends StatelessWidget {
     final description = scenario.description;
 
     return ScreenLayout(
+      background:
+          stageState.isDescriptionShowed ? description.background : 'black',
       bodyContent: TitleStageBody(
         title: description.title,
         description: description.description,
@@ -32,17 +34,20 @@ class TitleStage extends StatelessWidget {
       ),
       leftTopContent:
           roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
-      rightBottomContent: roomsState.selectedRole is Plaintiff ? NextButton(
-        onPressed: () {
-          if (stageState.isDescriptionShowed == false) {
-            gameState.updateGameState(GameStageStates.fromExisting(
-                game.stageStates,
-                TitleStageState(id: stageState.id, isDescriptionShowed: true)));
-          } else {
-            gameState.updateStage(GameStage.Defendant);
-          }
-        },
-      ) : Container(),
+      rightBottomContent: roomsState.selectedRole is Plaintiff
+          ? NextButton(
+              onPressed: () {
+                if (stageState.isDescriptionShowed == false) {
+                  gameState.updateGameState(GameStageStates.fromExisting(
+                      game.stageStates,
+                      TitleStageState(
+                          id: stageState.id, isDescriptionShowed: true)));
+                } else {
+                  gameState.updateStage(GameStage.Defendant);
+                }
+              },
+            )
+          : Container(),
     );
   }
 }

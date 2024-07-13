@@ -6,6 +6,7 @@ import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
+import 'package:v1/client/widgets/buttons/back/BackButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
@@ -34,28 +35,28 @@ class ActStage extends StatelessWidget {
 
     switch (actId) {
       case ActId.One:
-        actTitle = 'Акт 1';
+        actTitle = 'АКТ I';
         actKey = 'act1';
         stageState = game.stageStates.act1;
         event = game.scenario.acts[0];
         previousStage = GameStage.Defendant;
         break;
       case ActId.Two:
-        actTitle = 'Акт 2';
+        actTitle = 'АКТ II';
         actKey = 'act2';
         stageState = game.stageStates.act2;
         event = game.scenario.acts[1];
         previousStage = GameStage.Act1;
         break;
       case ActId.Three:
-        actTitle = 'Акт 3';
+        actTitle = 'АКТ III';
         actKey = 'act3';
         stageState = game.stageStates.act3;
         event = game.scenario.acts[2];
         previousStage = GameStage.Act2;
         break;
       case ActId.Four:
-        actTitle = 'Акт 4';
+        actTitle = 'АКТ IV';
         actKey = 'act4';
         stageState = game.stageStates.act4;
         event = game.scenario.acts[3];
@@ -79,10 +80,11 @@ class ActStage extends StatelessWidget {
       ),
       leftTopContent:
           roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
-      rightBottomContent: roomsState.selectedRole is Plaintiff && (!stageState.isCardsShowed ||
-              stageState.isFirstCardShowed &&
-                  stageState.isSecondCardShowed &&
-                  stageState.isThirdCardShowed)
+      rightBottomContent: roomsState.selectedRole is Plaintiff &&
+              (!stageState.isCardsShowed ||
+                  stageState.isFirstCardShowed &&
+                      stageState.isSecondCardShowed &&
+                      stageState.isThirdCardShowed)
           ? NextButton(
               onPressed: () {
                 if (!stageState.isCardsShowed) {
@@ -114,9 +116,21 @@ class ActStage extends StatelessWidget {
             )
           : Container(),
       leftBottomContent: roomsState.selectedRole is Plaintiff
-          ? BackButton(
+          ? BackButton2(
               onPressed: () {
-                gameState.updateStage(previousStage);
+                if (stageState.isCardsShowed) {
+                  gameState.updateGameState(GameStageStates.fromExisting(
+                      game.stageStates,
+                      ActStageState(
+                          id: stageState.id,
+                          isCardsShowed: false,
+                          isFirstCardShowed: stageState.isFirstCardShowed,
+                          isSecondCardShowed: stageState.isSecondCardShowed,
+                          isThirdCardShowed: stageState.isThirdCardShowed),
+                      actKey));
+                } else {
+                  gameState.updateStage(previousStage);
+                }
               },
             )
           : Container(),

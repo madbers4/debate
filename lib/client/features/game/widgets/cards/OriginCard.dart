@@ -23,9 +23,9 @@ class OriginCard extends StatelessWidget {
         isCardCardFlipped: isCardCardFlipped,
         isDisabled: isDisabled,
         card: GameCard(
-          id: origin.id,
-          title: origin.title,
-          description: origin.description,
-        ));
+            id: origin.id,
+            title: origin.title,
+            description: origin.description,
+            backBackgroundPath: 'assets/images/rp-game-card.jpg'));
   }
 }

@@ -12,14 +12,15 @@ class CardSlot extends StatelessWidget {
     return DragTarget<GameCard>(
       builder: (context, candidateItems, rejectedItems) {
         return Container(
-            height: MediaQuery.of(context).size.width * 0.087 * 1.8,
-            width: MediaQuery.of(context).size.width * 0.057 * 1.8,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: candidateItems.isEmpty
-                    ? Border.all(color: Color.fromARGB(255, 228, 148, 95))
-                    : Border.all(color: Color.fromARGB(255, 230, 13, 13))),
-            child: child ?? Container(),);
+          height: 87 * 2.5,
+          width: 57 * 2.5,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: candidateItems.isEmpty
+                  ? Border.all(color: Color.fromARGB(255, 228, 148, 95))
+                  : Border.all(color: Color.fromARGB(255, 230, 13, 13))),
+          child: child ?? Container(),
+        );
       },
       onAcceptWithDetails: onAccept,
     );

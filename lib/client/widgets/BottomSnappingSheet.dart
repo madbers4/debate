@@ -14,6 +14,7 @@ class BottomSnappingSheet extends StatelessWidget {
       grabbingHeight: 75,
       grabbing: Container(
         color: Colors.transparent,
+        alignment: Alignment.bottomCenter,
         child: Center(
           child: Container(
             width: 200,
@@ -29,19 +30,18 @@ class BottomSnappingSheet extends StatelessWidget {
           positionFactor: 0.0,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
-        SnappingPosition.factor(positionFactor: 0.4),
         SnappingPosition.factor(
-          positionFactor: 0.63,
+          positionFactor: 0.25,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
         SnappingPosition.factor(
-          positionFactor: 0.8,
+          positionFactor: 0.4,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
       ],
       sheetBelow: SnappingSheetContent(
         draggable: false,
-        sizeBehavior: SheetSizeStatic(size: 300, expandOnOverflow: false),
+        sizeBehavior: SheetSizeStatic(size: 250, expandOnOverflow: false),
         child: sheetContent,
       ),
       child: child,

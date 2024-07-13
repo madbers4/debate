@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/rooms/table/settings/SettingsCell.dart';
@@ -30,33 +31,37 @@ class SelectedRoomTable extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        DataTable(
-            // columnSpacing: 60,
-            columns: const [
-              DataColumn(label: Text('Название')),
-              DataColumn(label: Text('Роль')),
-              DataColumn(label: Text('Обвиняемый')),
-              DataColumn(label: Text('Прокурор')),
-              DataColumn(label: Text('Наблюдатели')),
-              DataColumn(label: Text(''))
-            ],
-            rows: [
-              DataRow(cells: [
-                DataCell(Text(selectedRoom != null ? selectedRoom.name : '')),
-                DataCell(Text(state.selectedRole != null
-                    ? 'Ваша роль — ${state.selectedRole!.title}'
-                    : '')),
-                DataCell(Text(selectedRoom?.defendant?.name ?? '')),
-                DataCell(Text(selectedRoom?.plaintiff?.name ?? '')),
-                DataCell(Text(
-                    '${selectedRoom?.observers != null ? selectedRoom?.observers.length : ''}')),
-                DataCell(selectedRoom != null && !isSettingsDisabled
-                    ? RowSettingsMenuButton(
-                        roomId: selectedRoom.id,
-                      )
-                    : Text('')),
-              ])
-            ]),
+        SizedBox(
+          width: 900,
+          child: DataTable(
+
+              columnSpacing: 60,
+              columns: const [
+                DataColumn(label: Text('Название')),
+                DataColumn(label: Text('Роль')),
+                DataColumn(label: Text('Обвиняемый')),
+                DataColumn(label: Text('Прокурор')),
+                // DataColumn(label: Text('Наблюдатели')),
+                DataColumn(label: Text(''))
+              ],
+              rows: [
+                DataRow(cells: [
+                  DataCell(Text(selectedRoom != null ? selectedRoom.name : '')),
+                  DataCell(Text(state.selectedRole != null
+                      ? 'Ваша роль — ${state.selectedRole!.title}'
+                      : '')),
+                  DataCell(Text(selectedRoom?.defendant?.name ?? '')),
+                  DataCell(Text(selectedRoom?.plaintiff?.name ?? '')),
+                  // DataCell(Text(
+                  //     '${selectedRoom?.observers != null ? selectedRoom?.observers.length : ''}')),
+                  DataCell(selectedRoom != null && !isSettingsDisabled
+                      ? RowSettingsMenuButton(
+                          roomId: selectedRoom.id,
+                        )
+                      : Text('')),
+                ])
+              ]),
+        ),
       ],
     );
   }
