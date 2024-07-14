@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/colors.dart';
 import 'package:v1/client/features/game/GameState.dart';
+import 'package:v1/client/features/game/stages/act/ShowButton.dart';
 
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
 import 'package:v1/client/features/game/widgets/description/Description.dart';
@@ -114,11 +116,12 @@ class ActStageBody extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: roomsState.selectedRole is Plaintiff
-                                      ? 10
+                                      ? 20
                                       : 0,
                                 ),
                                 roomsState.selectedRole is Plaintiff
-                                    ? TextButton(
+                                    ? ShowButton(
+                                        isShowed: stageState.isFirstCardShowed,
                                         onPressed: !stageState.isFirstCardShowed
                                             ? () {
                                                 gameState.updateGameState(
@@ -141,8 +144,7 @@ class ActStageBody extends StatelessWidget {
                                                         actKey));
                                               }
                                             : null,
-                                        child:
-                                            const Text('Показать обвиняемому'))
+                                      )
                                     : Container()
                               ],
                             ),
@@ -158,11 +160,12 @@ class ActStageBody extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: roomsState.selectedRole is Plaintiff
-                                      ? 10
+                                      ? 20
                                       : 0,
                                 ),
                                 roomsState.selectedRole is Plaintiff
-                                    ? TextButton(
+                                    ? ShowButton(
+                                        isShowed: stageState.isSecondCardShowed,
                                         onPressed: !stageState
                                                 .isSecondCardShowed
                                             ? () {
@@ -186,8 +189,7 @@ class ActStageBody extends StatelessWidget {
                                                         actKey));
                                               }
                                             : null,
-                                        child:
-                                            const Text('Показать обвиняемому'))
+                                      )
                                     : Container()
                               ],
                             ),
@@ -203,11 +205,12 @@ class ActStageBody extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: roomsState.selectedRole is Plaintiff
-                                      ? 10
+                                      ? 20
                                       : 0,
                                 ),
                                 roomsState.selectedRole is Plaintiff
-                                    ? TextButton(
+                                    ? ShowButton(
+                                        isShowed: stageState.isThirdCardShowed,
                                         onPressed: !stageState.isThirdCardShowed
                                             ? () {
                                                 gameState.updateGameState(
@@ -230,8 +233,7 @@ class ActStageBody extends StatelessWidget {
                                                         actKey));
                                               }
                                             : null,
-                                        child:
-                                            const Text('Показать обвиняемому'))
+                                      )
                                     : Container()
                               ],
                             ),

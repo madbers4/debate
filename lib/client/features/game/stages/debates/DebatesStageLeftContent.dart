@@ -3,6 +3,7 @@ import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/cards/OriginCard.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
+import 'package:v1/client/widgets/game-card/GameCardWidget.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 
 class DebatesStageLeftContent extends StatelessWidget {
@@ -25,16 +26,19 @@ class DebatesStageLeftContent extends StatelessWidget {
             OriginCard(
               origin: game.scenario.defendant.bornOrigin,
               isDisabled: true,
+              size: GameCardWidgetSize.S221,
             ),
             OriginCard(
               origin: game.scenario.defendant.professionOrigin,
               isDisabled: true,
+              size: GameCardWidgetSize.S221,
             ),
             OriginCard(
               origin: game.scenario.defendant.secretOrigin,
               isCardCardFlipped:
                   roomsState.selectedRole is Defendant ? false : true,
               isDisabled: true,
+              size: GameCardWidgetSize.S221,
             ),
           ],
         ));

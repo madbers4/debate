@@ -13,6 +13,7 @@ class SignInScreen extends StatelessWidget {
     return ScreenLayout(
       bodyContent: Container(
         alignment: Alignment.bottomRight,
+        padding: const EdgeInsets.all(20),
         child: const SignInForm(),
       ),
       rightTopContent: const SettingsButton(),

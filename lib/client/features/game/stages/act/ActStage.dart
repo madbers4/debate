@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/features/game/widgets/act-tile/ActTileV2.dart';
 import 'package:v1/client/features/game/widgets/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
@@ -14,8 +15,7 @@ import 'package:v1/common/features/game/stage-states/ActStageState.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
-
-enum ActId { One, Two, Three, Four }
+import 'package:v1/common/features/scenario/ScenarioActId.dart';
 
 class ActStage extends StatelessWidget {
   final ActId actId;
@@ -29,41 +29,36 @@ class ActStage extends StatelessWidget {
     final scenario = game.scenario;
     ActStageState stageState;
     ScenarioAct event;
-    String actTitle;
+    String actTitle = getActTitleByActId(actId);
     String actKey;
     GameStage previousStage;
 
     switch (actId) {
       case ActId.One:
-        actTitle = 'АКТ I';
         actKey = 'act1';
         stageState = game.stageStates.act1;
         event = game.scenario.acts[0];
         previousStage = GameStage.Defendant;
         break;
       case ActId.Two:
-        actTitle = 'АКТ II';
         actKey = 'act2';
         stageState = game.stageStates.act2;
         event = game.scenario.acts[1];
         previousStage = GameStage.Act1;
         break;
       case ActId.Three:
-        actTitle = 'АКТ III';
         actKey = 'act3';
         stageState = game.stageStates.act3;
         event = game.scenario.acts[2];
         previousStage = GameStage.Act2;
         break;
       case ActId.Four:
-        actTitle = 'АКТ IV';
         actKey = 'act4';
         stageState = game.stageStates.act4;
         event = game.scenario.acts[3];
         previousStage = GameStage.Act3;
         break;
       default:
-        actTitle = 'Не верный акт';
         actKey = 'null';
         stageState = game.stageStates.act1;
         event = game.scenario.acts[0];

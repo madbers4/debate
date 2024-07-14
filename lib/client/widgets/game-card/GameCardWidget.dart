@@ -2,8 +2,31 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/colors.dart';
 import 'package:v1/common/GameCard.dart';
 import 'package:v1/client/widgets/game-card/GameCardState.dart';
+
+enum GameCardWidgetSize { S267, S221 }
+
+const Map<GameCardWidgetSize, double> heightBySize = {
+  GameCardWidgetSize.S221: 221.61,
+  GameCardWidgetSize.S267: 267,
+};
+
+const Map<GameCardWidgetSize, double> widthBySize = {
+  GameCardWidgetSize.S221: 141.93,
+  GameCardWidgetSize.S267: 171,
+};
+
+const Map<GameCardWidgetSize, double> titleSizeBySize = {
+  GameCardWidgetSize.S221: 14,
+  GameCardWidgetSize.S267: 15,
+};
+
+const Map<GameCardWidgetSize, double> descriptionSizeBySize = {
+  GameCardWidgetSize.S221: 11,
+  GameCardWidgetSize.S267: 12,
+};
 
 class GameCardWidget extends StatelessWidget {
   final GameCard card;
@@ -12,6 +35,7 @@ class GameCardWidget extends StatelessWidget {
   final bool? isHightlighted;
   final bool? isHidden;
   final VoidCallback? onFlip;
+  final GameCardWidgetSize size;
 
   const GameCardWidget(
       {super.key,
@@ -20,15 +44,18 @@ class GameCardWidget extends StatelessWidget {
       this.isDisabled,
       this.isHightlighted,
       this.isHidden,
-      this.onFlip});
+      this.onFlip,
+      this.size = GameCardWidgetSize.S267});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<GameCardWidgetState>(
         create: (context) => GameCardWidgetState(),
         builder: (context, rre) {
-          const double cardWidth = 171;
-          const double cardHeight = 267;
+          final cardWidth = widthBySize[size];
+          final cardHeight = heightBySize[size];
+          final titleSize = titleSizeBySize[size];
+          final descriptionSize = descriptionSizeBySize[size];
 
           final state = context.watch<GameCardWidgetState>();
 
@@ -70,25 +97,34 @@ class GameCardWidget extends StatelessWidget {
                           : 'assets/images/game-card-front.jpg'),
                       fit: BoxFit.fill,
                     )),
-                child: Column(
+                child: Stack(
                   children: <Widget>[
-                    Padding(
+                    Container(
+                      alignment: Alignment.topCenter,
                       padding: const EdgeInsets.only(
-                          top: 8, left: 4, right: 4, bottom: 4),
+                          top: 12, left: 7, right: 7, bottom: 4),
                       child: Text(
                         card.title,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: blueColor,
+                            fontSize: titleSize,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Genshin'),
                       ),
                     ),
-                    Padding(
-                        padding: EdgeInsets.all(8),
+                    Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(
+                            top: 12, left: 12, right: 12, bottom: 12),
                         child: Text(
                           card.description,
                           style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromARGB(255, 32, 93, 129),
-                              fontWeight: FontWeight.w600),
+                              fontSize: descriptionSize,
+                              color: const Color.fromARGB(255, 38, 59, 71),
+                              fontFamily: 'Genshin',
+                              letterSpacing: 0.01,
+                              fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         )),
                   ],
@@ -131,8 +167,8 @@ class GameCardWidget extends StatelessWidget {
           return Draggable<GameCard>(
             data: card,
             feedback: cardSide == CardSide.FRONT ? front : back,
-            childWhenDragging:
-                const SizedBox(height: cardHeight, width: cardWidth),
+            childWhenDragging: Opacity(
+                opacity: 0.0, child: cardSide == CardSide.FRONT ? front : back),
             child: GestureDetector(
               onTap: () {
                 if (isDisabled == true) {

@@ -7,6 +7,7 @@ import 'package:v1/client/features/game/stages/evidences/EvidencesStage.dart';
 import 'package:v1/client/features/game/stages/judgement/JudgementStage.dart';
 import 'package:v1/client/features/game/stages/title/TitleStage.dart';
 import 'package:v1/client/features/game/stages/verdict/VerdictStage.dart';
+import 'package:v1/common/features/scenario/ScenarioActId.dart';
 
 class GameRouter {
   final router = GoRouter(

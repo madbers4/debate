@@ -1,4 +1,5 @@
 import 'package:v1/common/features/game/stage-states/GameStageState.dart';
+import 'package:v1/common/features/scenario/ScenarioActId.dart';
 
 class DebatesStageState extends GameStageState {
   final String id;
@@ -11,10 +12,12 @@ class DebatesStageState extends GameStageState {
   final bool? inPause;
   final num incorrectAttempts;
   final List<String> refusedEvents;
+  final ActId showedActId;
 
   const DebatesStageState(
       {this.id = '1',
       this.refusedEvents = const [],
+      this.showedActId = ActId.One,
       this.incorrectAttempts = 0,
       this.selectedEventId,
       this.selectedEvidenceId,
@@ -49,7 +52,9 @@ class DebatesStageState extends GameStageState {
             : 0,
         refusedEvents: json['refusedEvents'] != null
             ? List.from(json['refusedEvents'])
-            : []);
+            : [],
+        showedActId: ActId.values
+            .firstWhere((e) => e.toString() == json['showedActId']));
   }
 
   Map toJson() => {
@@ -63,5 +68,6 @@ class DebatesStageState extends GameStageState {
         'inPause': inPause,
         'incorrectAttempts': incorrectAttempts,
         'refusedEvents': refusedEvents,
+        'showedActId': showedActId.toString()
       };
 }

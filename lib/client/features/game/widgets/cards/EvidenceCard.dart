@@ -8,9 +8,15 @@ class EvidenceCard extends StatelessWidget {
   final VoidCallback? onFlip;
   final bool? isCardCardFlipped;
   final bool? isDisabled;
+  final GameCardWidgetSize? size;
 
   const EvidenceCard(
-      {super.key, required this.evedence, this.isCardCardFlipped, this.onFlip, this.isDisabled});
+      {super.key,
+      required this.evedence,
+      this.isCardCardFlipped,
+      this.onFlip,
+      this.isDisabled,
+      this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +24,11 @@ class EvidenceCard extends StatelessWidget {
         isCardCardFlipped: isCardCardFlipped,
         onFlip: onFlip,
         isDisabled: isDisabled,
+        size: size ?? GameCardWidgetSize.S267,
         card: GameCard(
-          id: evedence.id,
-          title: evedence.title,
-          description: evedence.description,
-          backBackgroundPath: 'assets/images/evedences-game-card.jpg'
-        ));
+            id: evedence.id,
+            title: evedence.title,
+            description: evedence.description,
+            backBackgroundPath: 'assets/images/evedences-game-card.jpg'));
   }
 }

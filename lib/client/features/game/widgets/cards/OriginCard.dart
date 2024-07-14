@@ -8,13 +8,15 @@ class OriginCard extends StatelessWidget {
   final VoidCallback? onFlip;
   final bool? isCardCardFlipped;
   final bool? isDisabled;
+  final GameCardWidgetSize? size;
 
   const OriginCard(
       {super.key,
       required this.origin,
       this.onFlip,
       this.isCardCardFlipped,
-      this.isDisabled});
+      this.isDisabled,
+      this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class OriginCard extends StatelessWidget {
         onFlip: onFlip,
         isCardCardFlipped: isCardCardFlipped,
         isDisabled: isDisabled,
+        size: size ?? GameCardWidgetSize.S267,
         card: GameCard(
             id: origin.id,
             title: origin.title,

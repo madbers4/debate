@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
+import 'package:v1/client/colors.dart';
 
 class BottomSnappingSheet extends StatelessWidget {
   final Widget child;
@@ -11,7 +12,7 @@ class BottomSnappingSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SnappingSheet(
-      grabbingHeight: 75,
+      grabbingHeight: 15,
       grabbing: Container(
         color: Colors.transparent,
         alignment: Alignment.bottomCenter,
@@ -20,28 +21,28 @@ class BottomSnappingSheet extends StatelessWidget {
             width: 200,
             height: 5,
             decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 4, 3, 3),
+                color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(12))),
           ),
         ),
       ),
       snappingPositions: const [
         SnappingPosition.factor(
-          positionFactor: 0.0,
+          positionFactor: 0.05,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
         SnappingPosition.factor(
-          positionFactor: 0.25,
+          positionFactor: 0.15,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
         SnappingPosition.factor(
-          positionFactor: 0.4,
+          positionFactor: 0.40,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
       ],
       sheetBelow: SnappingSheetContent(
         draggable: false,
-        sizeBehavior: SheetSizeStatic(size: 250, expandOnOverflow: false),
+        sizeBehavior: SheetSizeStatic(size: 300, expandOnOverflow: false),
         child: sheetContent,
       ),
       child: child,
