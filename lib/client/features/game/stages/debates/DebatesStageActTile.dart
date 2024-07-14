@@ -25,13 +25,13 @@ class DebatesStageActTile extends StatelessWidget {
     final List<String> hiddenActIds =
         stageState.selectedEventId != null ? [stageState.selectedEventId!] : [];
 
-    return Stack(
-      // fit: StackFit.expand,
+    return Container(
+        child: Stack(
       children: [
         Positioned(
           top: 0,
           left: 0,
-          width: 600,
+          width: 550,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -68,24 +68,24 @@ class DebatesStageActTile extends StatelessWidget {
           hiddenIds: hiddenActIds,
         ),
         ActTileV2(
-          actId: ActId.One,
+          actId: ActId.Two,
           event: scenario.acts[1],
           isShowed: stageState.showedActId == ActId.Two,
           hiddenIds: hiddenActIds,
         ),
         ActTileV2(
-          actId: ActId.One,
+          actId: ActId.Three,
           event: scenario.acts[2],
           isShowed: stageState.showedActId == ActId.Three,
           hiddenIds: hiddenActIds,
         ),
         ActTileV2(
-          actId: ActId.One,
+          actId: ActId.Four,
           event: scenario.acts[3],
           isShowed: stageState.showedActId == ActId.Four,
           hiddenIds: hiddenActIds,
         ),
       ],
-    );
+    ));
   }
 }

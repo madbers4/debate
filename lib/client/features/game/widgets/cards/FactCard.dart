@@ -31,6 +31,7 @@ class FactCard extends StatelessWidget {
             id: fact.id,
             title: fact.title,
             description: fact.description,
+            type: GameCardType.Event,
             backBackgroundPath: 'assets/images/story-game-card.jpg'));
   }
 }

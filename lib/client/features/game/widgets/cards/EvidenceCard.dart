@@ -29,6 +29,7 @@ class EvidenceCard extends StatelessWidget {
             id: evedence.id,
             title: evedence.title,
             description: evedence.description,
+            type: GameCardType.Evidence,
             backBackgroundPath: 'assets/images/evedences-game-card.jpg'));
   }
 }

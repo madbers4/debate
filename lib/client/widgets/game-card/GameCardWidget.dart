@@ -9,13 +9,13 @@ import 'package:v1/client/widgets/game-card/GameCardState.dart';
 enum GameCardWidgetSize { S267, S221 }
 
 const Map<GameCardWidgetSize, double> heightBySize = {
-  GameCardWidgetSize.S221: 221.61,
-  GameCardWidgetSize.S267: 267,
+  GameCardWidgetSize.S221: 212.16,
+  GameCardWidgetSize.S267: 256.32,
 };
 
 const Map<GameCardWidgetSize, double> widthBySize = {
-  GameCardWidgetSize.S221: 141.93,
-  GameCardWidgetSize.S267: 171,
+  GameCardWidgetSize.S221: 136.2528,
+  GameCardWidgetSize.S267: 164.16,
 };
 
 const Map<GameCardWidgetSize, double> titleSizeBySize = {
@@ -50,7 +50,8 @@ class GameCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<GameCardWidgetState>(
-        create: (context) => GameCardWidgetState(),
+        create: (context) => GameCardWidgetState(
+            isFront: isCardCardFlipped != null ? !isCardCardFlipped! : true),
         builder: (context, rre) {
           final cardWidth = widthBySize[size];
           final cardHeight = heightBySize[size];
@@ -71,9 +72,7 @@ class GameCardWidget extends StatelessWidget {
             state.controller.toggleCard();
           }
 
-          CardSide cardSide = state.controller.state?.isFront ?? true
-              ? CardSide.FRONT
-              : CardSide.BACK;
+          CardSide cardSide = state.isFront ? CardSide.FRONT : CardSide.BACK;
 
           if (isCardCardFlipped == true) {
             cardSide = CardSide.BACK;
@@ -179,6 +178,8 @@ class GameCardWidget extends StatelessWidget {
                 }
 
                 if (isCardCardFlipped == null) {
+                  state.flip(!state.controller.state!.isFront);
+
                   state.controller.toggleCard();
                 }
               },

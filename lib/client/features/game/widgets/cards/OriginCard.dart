@@ -29,6 +29,7 @@ class OriginCard extends StatelessWidget {
             id: origin.id,
             title: origin.title,
             description: origin.description,
+            type: GameCardType.Origin,
             backBackgroundPath: 'assets/images/rp-game-card.jpg'));
   }
 }

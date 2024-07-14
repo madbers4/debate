@@ -33,7 +33,7 @@ class ScenarionScreenState extends ChangeNotifier {
 
     _gameClient.createGame(Game(
         id: generateUID(),
-        gameStage: GameStage.Title,
+        gameStage: GameStage.Debates,
         scenario: selectedScenario,
         stageStates: GameStageStates()));
   }

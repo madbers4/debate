@@ -36,7 +36,7 @@ class BottomSnappingSheet extends StatelessWidget {
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
         SnappingPosition.factor(
-          positionFactor: 0.40,
+          positionFactor: 0.44,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
       ],

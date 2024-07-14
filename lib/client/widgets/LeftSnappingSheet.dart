@@ -40,7 +40,7 @@ class LeftSnappingSheet extends StatelessWidget {
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
         SnappingPosition.factor(
-          positionFactor: 0.175,
+          positionFactor: 0.18,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
       ],
