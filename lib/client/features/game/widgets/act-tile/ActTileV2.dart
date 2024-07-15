@@ -85,6 +85,7 @@ class ActTileV2 extends StatelessWidget {
                           hiddenIds.any((element) => element == value.id);
 
                       res.add(TransparentPointer(
+                        transparent: !isShowed,
                         child: FactCard(
                           fact: value,
                           size: GameCardWidgetSize.S267,

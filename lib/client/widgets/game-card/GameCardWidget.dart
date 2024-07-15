@@ -34,6 +34,7 @@ class GameCardWidget extends StatelessWidget {
   final bool? isDisabled;
   final bool? isHightlighted;
   final bool? isTransparent;
+  final bool? fullTransparent;
   final VoidCallback? onFlip;
   final GameCardWidgetSize size;
 
@@ -44,6 +45,7 @@ class GameCardWidget extends StatelessWidget {
       this.isDisabled,
       this.isHightlighted,
       this.isTransparent,
+      this.fullTransparent,
       this.onFlip,
       this.size = GameCardWidgetSize.S267});
 
@@ -53,6 +55,7 @@ class GameCardWidget extends StatelessWidget {
         create: (context) => GameCardWidgetState(
             isFront: isCardCardFlipped != null ? !isCardCardFlipped! : true),
         builder: (context, rre) {
+          final transparentSize = fullTransparent == true ? 0.0 : 0.5;
           final cardWidth = widthBySize[size];
           final cardHeight = heightBySize[size];
           final titleSize = titleSizeBySize[size];
@@ -84,7 +87,7 @@ class GameCardWidget extends StatelessWidget {
 
           final front = AnimatedOpacity(
             duration: const Duration(milliseconds: 500),
-            opacity: isTransparent == true ? 0.5 : 1.0,
+            opacity: isTransparent == true ? transparentSize : 1.0,
             child: Card(
               child: Container(
                 height: cardHeight,
@@ -135,7 +138,7 @@ class GameCardWidget extends StatelessWidget {
 
           final back = AnimatedOpacity(
             duration: const Duration(milliseconds: 500),
-            opacity: isTransparent == true ? 0.5 : 1.0,
+            opacity: isTransparent == true ? transparentSize : 1.0,
             child: Card(
               child: Container(
                 // 89 x 57
@@ -159,22 +162,25 @@ class GameCardWidget extends StatelessWidget {
             maxSimultaneousDrags: isDisabled == true ? 0 : null,
             feedback: cardSide == CardSide.FRONT ? front : back,
             childWhenDragging: Opacity(
-                opacity: 0.5, child: cardSide == CardSide.FRONT ? front : back),
+                opacity: transparentSize,
+                child: cardSide == CardSide.FRONT ? front : back),
             child: GestureDetector(
-              onTap: () {
-                if (isDisabled == true) {
-                  return;
-                }
-                if (onFlip != null) {
-                  onFlip!();
-                }
+              onTap: isDisabled != true
+                  ? () {
+                      if (isDisabled == true) {
+                        return;
+                      }
+                      if (onFlip != null) {
+                        onFlip!();
+                      }
 
-                if (isCardCardFlipped == null) {
-                  state.flip(!state.controller.state!.isFront);
+                      if (isCardCardFlipped == null) {
+                        state.flip(!state.controller.state!.isFront);
 
-                  state.controller.toggleCard();
-                }
-              },
+                        state.controller.toggleCard();
+                      }
+                    }
+                  : null,
               child: FlipCard(
                   side: cardSide,
                   flipOnTouch: false,

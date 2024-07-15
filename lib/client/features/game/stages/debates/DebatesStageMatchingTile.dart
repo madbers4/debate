@@ -38,7 +38,8 @@ class DebatesStageMatchingTile extends StatelessWidget {
               type: GameCardType.Event,
               onAccept: roomsState.selectedRole is Defendant
                   ? (DragTargetDetails<GameCard> card) {
-                      if (scenario.eventById[card.data.id] == null) {
+                      if (scenario.eventById[card.data.id] == null ||
+                          stageState.inDenial == true) {
                         return;
                       }
 
@@ -50,17 +51,30 @@ class DebatesStageMatchingTile extends StatelessWidget {
                           })));
                     }
                   : null,
+              onLeave: (c) {
+                if (c != null && stageState.selectedEventId == c.id) {
+                  gameState.updateGameState(GameStageStates.fromExisting(
+                      game.stageStates,
+                      DebatesStageState.fromJson({
+                        ...stageState.toJson(),
+                        'selectedEventId': null,
+                      })));
+                }
+              },
               child: selectedEvent != null
                   ? FactCard(
                       fact: selectedEvent,
-                      isDisabled: roomsState.selectedRole is! Defendant)
+                      fullTransparent: true,
+                      isDisabled: roomsState.selectedRole is! Defendant ||
+                          stageState.inDenial == true)
                   : null,
             ),
             CardSlot(
               type: GameCardType.Evidence,
               onAccept: roomsState.selectedRole is Defendant
                   ? (DragTargetDetails<GameCard> card) {
-                      if (scenario.evidenceById[card.data.id] == null) {
+                      if (scenario.evidenceById[card.data.id] == null ||
+                          stageState.inDenial == true) {
                         return;
                       }
 
@@ -72,10 +86,22 @@ class DebatesStageMatchingTile extends StatelessWidget {
                           })));
                     }
                   : null,
+              onLeave: (c) {
+                if (c != null && stageState.selectedEvidenceId == c.id) {
+                  gameState.updateGameState(GameStageStates.fromExisting(
+                      game.stageStates,
+                      DebatesStageState.fromJson({
+                        ...stageState.toJson(),
+                        'selectedEvidenceId': null,
+                      })));
+                }
+              },
               child: selectedEvidence != null
                   ? EvidenceCard(
                       evedence: selectedEvidence,
-                      isDisabled: roomsState.selectedRole is! Defendant,
+                      fullTransparent: true,
+                      isDisabled: roomsState.selectedRole is! Defendant ||
+                          stageState.inDenial == true,
                     )
                   : null,
             ),

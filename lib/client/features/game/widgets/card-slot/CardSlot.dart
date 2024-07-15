@@ -6,9 +6,11 @@ import 'package:v1/common/GameCard.dart';
 class CardSlot extends StatelessWidget {
   final Widget? child;
   final void Function(DragTargetDetails<GameCard>)? onAccept;
+  final void Function(GameCard?)? onLeave;
   final GameCardType type;
 
-  const CardSlot({super.key, this.child, required this.type, this.onAccept});
+  const CardSlot(
+      {super.key, this.child, required this.type, this.onAccept, this.onLeave});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,8 @@ class CardSlot extends StatelessWidget {
           child: child ?? Container(),
         );
       },
+      onLeave: onLeave,
+      
       onAcceptWithDetails: onAccept,
     );
   }
