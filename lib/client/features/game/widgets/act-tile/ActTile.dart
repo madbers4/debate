@@ -41,7 +41,8 @@ class ActTile extends StatelessWidget {
                   }
                   res.add(FactCard(
                     fact: value,
-                    isHidden: hiddenIds.any((element) => element == value.id),
+                    isTransparent:
+                        hiddenIds.any((element) => element == value.id),
                     isDisabled: roomsState.selectedRole is! Defendant,
                   ));
                   return res;

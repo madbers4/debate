@@ -7,6 +7,7 @@ class EvidenceCard extends StatelessWidget {
   final ScenarioEvedence evedence;
   final VoidCallback? onFlip;
   final bool? isCardCardFlipped;
+  final bool? isTransparent;
   final bool? isDisabled;
   final GameCardWidgetSize? size;
 
@@ -16,6 +17,7 @@ class EvidenceCard extends StatelessWidget {
       this.isCardCardFlipped,
       this.onFlip,
       this.isDisabled,
+      this.isTransparent,
       this.size});
 
   @override
@@ -24,6 +26,7 @@ class EvidenceCard extends StatelessWidget {
         isCardCardFlipped: isCardCardFlipped,
         onFlip: onFlip,
         isDisabled: isDisabled,
+        isTransparent: isTransparent,
         size: size ?? GameCardWidgetSize.S267,
         card: GameCard(
             id: evedence.id,

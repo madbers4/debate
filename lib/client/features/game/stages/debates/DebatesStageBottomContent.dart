@@ -12,8 +12,9 @@ class DebatesStageBottomContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = context.watch<GameState>();
-    final roomsState = context.watch<RoomsState>();
     final game = gameState.game!;
+    final stageState = game.stageStates.debates;
+    final roomsState = context.watch<RoomsState>();
 
     return Container(
         height: 180,
@@ -26,7 +27,9 @@ class DebatesStageBottomContent extends StatelessWidget {
                 .map((e) => EvidenceCard(
                       evedence: e,
                       size: GameCardWidgetSize.S267,
-                      isDisabled: roomsState.selectedRole is! Defendant,
+                      isTransparent: stageState.selectedEvidenceId == e.id,
+                      isDisabled: roomsState.selectedRole is! Defendant ||
+                          stageState.selectedEvidenceId == e.id,
                     ))
                 .toList()));
   }

@@ -8,7 +8,7 @@ class FactCard extends StatelessWidget {
   final bool? isCardCardFlipped;
   final VoidCallback? onFlip;
   final bool? isDisabled;
-  final bool? isHidden;
+  final bool? isTransparent;
   final GameCardWidgetSize? size;
 
   const FactCard(
@@ -17,14 +17,14 @@ class FactCard extends StatelessWidget {
       this.isCardCardFlipped,
       this.isDisabled,
       this.onFlip,
-      this.isHidden,
+      this.isTransparent,
       this.size});
 
   @override
   Widget build(BuildContext context) {
     return GameCardWidget(
         isCardCardFlipped: isCardCardFlipped,
-        isHidden: isHidden,
+        isTransparent: isTransparent,
         isDisabled: isDisabled,
         size: size ?? GameCardWidgetSize.S267,
         card: GameCard(

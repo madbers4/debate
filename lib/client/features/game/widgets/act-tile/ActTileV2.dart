@@ -80,14 +80,18 @@ class ActTileV2 extends StatelessWidget {
                           width: 10,
                         ));
                       }
+
+                      final isSelected =
+                          hiddenIds.any((element) => element == value.id);
+
                       res.add(TransparentPointer(
                         child: FactCard(
                           fact: value,
                           size: GameCardWidgetSize.S267,
-                          isHidden:
-                              hiddenIds.any((element) => element == value.id),
+                          isTransparent: isSelected,
                           isDisabled: roomsState.selectedRole is! Defendant ||
-                              !isShowed,
+                              !isShowed ||
+                              isSelected,
                         ),
                       ));
                       return res;

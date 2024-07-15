@@ -44,10 +44,10 @@ class DebatesStageMatchingTile extends StatelessWidget {
 
                       gameState.updateGameState(GameStageStates.fromExisting(
                           game.stageStates,
-                          DebatesStageState(
-                              id: stageState.id,
-                              selectedEvidenceId: stageState.selectedEvidenceId,
-                              selectedEventId: card.data.id)));
+                          DebatesStageState.fromJson({
+                            ...stageState.toJson(),
+                            'selectedEventId': card.data.id
+                          })));
                     }
                   : null,
               child: selectedEvent != null
@@ -66,10 +66,10 @@ class DebatesStageMatchingTile extends StatelessWidget {
 
                       gameState.updateGameState(GameStageStates.fromExisting(
                           game.stageStates,
-                          DebatesStageState(
-                              id: stageState.id,
-                              selectedEvidenceId: card.data.id,
-                              selectedEventId: stageState.selectedEventId)));
+                          DebatesStageState.fromJson({
+                            ...stageState.toJson(),
+                            'selectedEvidenceId': card.data.id,
+                          })));
                     }
                   : null,
               child: selectedEvidence != null

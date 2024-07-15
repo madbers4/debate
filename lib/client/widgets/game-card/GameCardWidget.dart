@@ -33,7 +33,7 @@ class GameCardWidget extends StatelessWidget {
   final bool? isCardCardFlipped;
   final bool? isDisabled;
   final bool? isHightlighted;
-  final bool? isHidden;
+  final bool? isTransparent;
   final VoidCallback? onFlip;
   final GameCardWidgetSize size;
 
@@ -43,7 +43,7 @@ class GameCardWidget extends StatelessWidget {
       this.isCardCardFlipped,
       this.isDisabled,
       this.isHightlighted,
-      this.isHidden,
+      this.isTransparent,
       this.onFlip,
       this.size = GameCardWidgetSize.S267});
 
@@ -82,8 +82,9 @@ class GameCardWidget extends StatelessWidget {
             cardSide = CardSide.FRONT;
           }
 
-          final front = Visibility(
-            visible: isHidden == true ? false : true,
+          final front = AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            opacity: isTransparent == true ? 0.5 : 1.0,
             child: Card(
               child: Container(
                 height: cardHeight,
@@ -132,8 +133,9 @@ class GameCardWidget extends StatelessWidget {
             ),
           );
 
-          final back = Visibility(
-            visible: isHidden == true ? false : true,
+          final back = AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            opacity: isTransparent == true ? 0.5 : 1.0,
             child: Card(
               child: Container(
                 // 89 x 57
@@ -152,22 +154,12 @@ class GameCardWidget extends StatelessWidget {
             ),
           );
 
-          if (isDisabled == true) {
-            return FlipCard(
-                side: cardSide,
-                flipOnTouch: false,
-                fill: Fill.fillBack,
-                direction: FlipDirection.HORIZONTAL,
-                controller: state.controller,
-                front: front,
-                back: back);
-          }
-
           return Draggable<GameCard>(
             data: card,
+            maxSimultaneousDrags: isDisabled == true ? 0 : null,
             feedback: cardSide == CardSide.FRONT ? front : back,
             childWhenDragging: Opacity(
-                opacity: 0.0, child: cardSide == CardSide.FRONT ? front : back),
+                opacity: 0.5, child: cardSide == CardSide.FRONT ? front : back),
             child: GestureDetector(
               onTap: () {
                 if (isDisabled == true) {
