@@ -5,27 +5,34 @@ import 'package:v1/client/colors.dart';
 class BottomSnappingSheet extends StatelessWidget {
   final Widget child;
   final Widget sheetContent;
+  final bool? isHidden;
 
   const BottomSnappingSheet(
-      {super.key, required this.child, required this.sheetContent});
+      {super.key,
+      required this.child,
+      required this.sheetContent,
+      this.isHidden});
 
   @override
   Widget build(BuildContext context) {
     return SnappingSheet(
-      grabbingHeight: 15,
-      grabbing: Container(
-        color: Colors.transparent,
-        alignment: Alignment.bottomCenter,
-        child: Center(
+      grabbingHeight: isHidden == true ? 0 : 25,
+      grabbing: AnimatedOpacity(
+          duration: const Duration(milliseconds: 1000),
+          opacity: isHidden == true ? 0.0 : 1.0,
           child: Container(
-            width: 200,
-            height: 5,
-            decoration: const BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.all(Radius.circular(12))),
-          ),
-        ),
-      ),
+            color: Colors.transparent,
+            alignment: Alignment.bottomCenter,
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 5,
+                decoration: const BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+              ),
+            ),
+          )),
       snappingPositions: const [
         SnappingPosition.factor(
           positionFactor: 0.05,
@@ -41,10 +48,13 @@ class BottomSnappingSheet extends StatelessWidget {
         ),
       ],
       sheetBelow: SnappingSheetContent(
-        draggable: false,
-        sizeBehavior: SheetSizeStatic(size: 300, expandOnOverflow: false),
-        child: sheetContent,
-      ),
+          draggable: false,
+          sizeBehavior: SheetSizeStatic(size: 300, expandOnOverflow: false),
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 1000),
+            opacity: isHidden == true ? 0.0 : 1.0,
+            child: sheetContent,
+          )),
       child: child,
     );
   }

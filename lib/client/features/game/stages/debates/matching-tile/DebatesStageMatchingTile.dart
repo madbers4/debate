@@ -64,7 +64,9 @@ class DebatesStageMatchingTile extends StatelessWidget {
               child: selectedEvent != null
                   ? FactCard(
                       fact: selectedEvent,
-                      fullTransparent: true,
+                      fullTransparent:
+                          stageState.inDenial == true ? false : true,
+                      isTransparent: stageState.inDenial,
                       isDisabled: roomsState.selectedRole is! Defendant ||
                           stageState.inDenial == true)
                   : null,
@@ -99,7 +101,9 @@ class DebatesStageMatchingTile extends StatelessWidget {
               child: selectedEvidence != null
                   ? EvidenceCard(
                       evedence: selectedEvidence,
-                      fullTransparent: true,
+                      fullTransparent:
+                          stageState.inDenial == true ? false : true,
+                      isTransparent: stageState.inDenial,
                       isDisabled: roomsState.selectedRole is! Defendant ||
                           stageState.inDenial == true,
                     )

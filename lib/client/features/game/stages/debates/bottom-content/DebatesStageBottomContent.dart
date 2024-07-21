@@ -23,14 +23,17 @@ class DebatesStageBottomContent extends StatelessWidget {
         alignment: Alignment.center,
         child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: game.scenario.evedences
-                .map((e) => EvidenceCard(
-                      evedence: e,
-                      size: GameCardWidgetSize.S267,
-                      isTransparent: stageState.selectedEvidenceId == e.id,
-                      isDisabled: roomsState.selectedRole is! Defendant ||
-                          stageState.selectedEvidenceId == e.id,
-                    ))
-                .toList()));
+            children: game.scenario.evedences.map((e) {
+              final isDisabled = roomsState.selectedRole is! Defendant ||
+                  stageState.selectedEvidenceId == e.id;
+
+              return EvidenceCard(
+                evedence: e,
+                size: GameCardWidgetSize.S267,
+                isTransparent: stageState.selectedEvidenceId == e.id,
+                isDisabled: isDisabled,
+                isCardCardFlipped: isDisabled ? false : null,
+              );
+            }).toList()));
   }
 }

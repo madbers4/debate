@@ -14,25 +14,28 @@ class CardSlot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DragTarget<GameCard>(
-      builder: (context, candidateItems, rejectedItems) {
-        return Container(
-          height: heightBySize[GameCardWidgetSize.S267]! + 5,
-          width: widthBySize[GameCardWidgetSize.S267]! + 5,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: candidateItems.isEmpty
-                  ? Border.all(color: goldColor)
-                  : Border.all(
-                      color: candidateItems[0]!.type == type
-                          ? const Color.fromARGB(255, 13, 230, 24)
-                          : const Color.fromARGB(255, 230, 13, 13))),
-          child: child ?? Container(),
-        );
-      },
-      onLeave: onLeave,
-      
-      onAcceptWithDetails: onAccept,
+    return Column(
+      children: [
+        DragTarget<GameCard>(
+          builder: (context, candidateItems, rejectedItems) {
+            return Container(
+              height: heightBySize[GameCardWidgetSize.S267]! + 5,
+              width: widthBySize[GameCardWidgetSize.S267]! + 5,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: candidateItems.isEmpty
+                      ? Border.all(color: goldColor)
+                      : Border.all(
+                          color: candidateItems[0]!.type == type
+                              ? const Color.fromARGB(255, 13, 230, 24)
+                              : const Color.fromARGB(255, 230, 13, 13))),
+              child: child ?? Container(),
+            );
+          },
+          onLeave: onLeave,
+          onAcceptWithDetails: onAccept,
+        ),
+      ],
     );
   }
 }

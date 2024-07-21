@@ -93,7 +93,6 @@ final Scenario testScenario = Scenario(
                 title: 'Основное ложное событие',
                 cardType: 'Улика',
                 description: 'Основное ложное событие',
-                falsyDescription: 'Это событие явно ложное',
                 confirmsInnocence: true),
             ScenarioEvent(
                 id: generateUID(),
@@ -114,13 +113,16 @@ final Scenario testScenario = Scenario(
           id: generateUID(),
           title: 'Улика 2',
           falsyEventId: 'Не основное',
-          description: 'Опровергающее ложное'),
+          description: 'Опровергающее ложное',
+          falsyDescription: ''),
       ScenarioTruthyEvedence(
           id: generateUID(),
           title: 'Улика 3',
           falsyEventId: 'Основное ложное событие',
-          description: 'Опровергающее основное ложное'),
+          description: 'Опровергающее основное ложное',
+          falsyDescription: ''),
     ],
+    transitionEvents: [],
     defendant: ScenarioDefendant(
         id: generateUID(),
         name: '',

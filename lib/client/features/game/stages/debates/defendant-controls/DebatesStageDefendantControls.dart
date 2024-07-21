@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:v1/client/colors.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
+import 'package:v1/client/features/game/stages/debates/defendant-controls/DabatesStageConfirmMatchingDialog.dart';
+import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
@@ -27,20 +30,22 @@ class DebatesStageDefendantControls extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          TextButton(
-            onPressed: selectedEvent != null &&
-                    stageState.selectedEvidenceId != null &&
-                    stageState.inDenial != true
-                ? () {
-                    gameState.updateGameState(GameStageStates.fromExisting(
-                        game.stageStates,
-                        DebatesStageState.fromJson({
-                          ...stageState.toJson(),
-                          'inDenial': true,
-                        })));
-                  }
-                : null,
-            child: const Text('Опровергнуть'),
+          DebatesButton(
+            isEnabled: selectedEvent != null &&
+                stageState.selectedEvidenceId != null &&
+                stageState.inDenial != true,
+            onPressed: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => const Dialog(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      surfaceTintColor: Colors.transparent,
+                      child: SizedBox(
+                          width: 400,
+                          height: 150,
+                          child: DabatesStageConfirmMatchingDialog()),
+                    )),
+            text: 'Опровергнуть',
           ),
         ],
       ),

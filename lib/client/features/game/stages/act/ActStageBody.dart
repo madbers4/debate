@@ -5,6 +5,7 @@ import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ShowButton.dart';
 
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
+import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
 import 'package:v1/client/features/game/widgets/description/Description.dart';
 import 'package:v1/client/features/game/widgets/title/Title.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
@@ -120,8 +121,11 @@ class ActStageBody extends StatelessWidget {
                                       : 0,
                                 ),
                                 roomsState.selectedRole is Plaintiff
-                                    ? ShowButton(
-                                        isShowed: stageState.isFirstCardShowed,
+                                    ? DebatesButton(
+                                        text: !stageState.isFirstCardShowed
+                                            ? 'Показать'
+                                            : 'Показано',
+                                        isEnabled: stageState.isFirstCardShowed,
                                         onPressed: !stageState.isFirstCardShowed
                                             ? () {
                                                 gameState.updateGameState(
@@ -164,8 +168,12 @@ class ActStageBody extends StatelessWidget {
                                       : 0,
                                 ),
                                 roomsState.selectedRole is Plaintiff
-                                    ? ShowButton(
-                                        isShowed: stageState.isSecondCardShowed,
+                                    ? DebatesButton(
+                                        text: !stageState.isSecondCardShowed
+                                            ? 'Показать'
+                                            : 'Показано',
+                                        isEnabled:
+                                            stageState.isSecondCardShowed,
                                         onPressed: !stageState
                                                 .isSecondCardShowed
                                             ? () {
@@ -209,8 +217,11 @@ class ActStageBody extends StatelessWidget {
                                       : 0,
                                 ),
                                 roomsState.selectedRole is Plaintiff
-                                    ? ShowButton(
-                                        isShowed: stageState.isThirdCardShowed,
+                                    ? DebatesButton(
+                                        text: !stageState.isThirdCardShowed
+                                            ? 'Показать'
+                                            : 'Показано',
+                                        isEnabled: stageState.isThirdCardShowed,
                                         onPressed: !stageState.isThirdCardShowed
                                             ? () {
                                                 gameState.updateGameState(

@@ -6,6 +6,9 @@ class DebatesStageState extends GameStageState {
   final String? selectedEventId;
   final String? selectedEvidenceId;
   final bool? inDenial;
+  final bool? inDenialNotConfirmed;
+  final bool? inDenialConfirmed;
+  final int denialConfirmedCurrentPage;
   final bool? isDebatesOver;
   final bool? isDebatesTimeout;
   final bool? isDefendentInnocent;
@@ -22,6 +25,9 @@ class DebatesStageState extends GameStageState {
       this.selectedEventId,
       this.selectedEvidenceId,
       this.inDenial,
+      this.inDenialNotConfirmed,
+      this.inDenialConfirmed,
+      this.denialConfirmedCurrentPage = 0,
       this.isDebatesOver,
       this.isDebatesTimeout,
       this.isDefendentInnocent,
@@ -37,6 +43,13 @@ class DebatesStageState extends GameStageState {
             ? json['selectedEvidenceId'] as String
             : null,
         inDenial: json['inDenial'] != null ? json['inDenial'] as bool : null,
+        inDenialNotConfirmed: json['inDenialNotConfirmed'] != null
+            ? json['inDenialNotConfirmed'] as bool
+            : null,
+        inDenialConfirmed: json['inDenialConfirmed'] != null
+            ? json['inDenialConfirmed'] as bool
+            : null,
+        denialConfirmedCurrentPage: json['denialConfirmedCurrentPage'] as int,
         isDebatesOver: json['isDebatesOver'] != null
             ? json['isDebatesOver'] as bool
             : null,
@@ -62,12 +75,15 @@ class DebatesStageState extends GameStageState {
         'selectedEventId': selectedEventId,
         'selectedEvidenceId': selectedEvidenceId,
         'inDenial': inDenial,
+        'inDenialNotConfirmed': inDenialNotConfirmed,
+        'inDenialConfirmed': inDenialConfirmed,
+        'denialConfirmedCurrentPage': denialConfirmedCurrentPage,
         'isDebatesOver': isDebatesOver,
         'isDebatesTimeout': isDebatesTimeout,
         'isDefendentInnocent': isDefendentInnocent,
         'inPause': inPause,
         'incorrectAttempts': incorrectAttempts,
         'refusedEvents': refusedEvents,
-        'showedActId': showedActId.toString()
+        'showedActId': showedActId.toString(),
       };
 }

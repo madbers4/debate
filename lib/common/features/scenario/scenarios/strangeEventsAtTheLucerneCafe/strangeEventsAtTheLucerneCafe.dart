@@ -59,8 +59,8 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
               cardType: '',
               description:
                   'Кафе "Лютес", модное кофейное заведение Кур-де-Фонтейна.'),
-          ScenarioEvent(
-              id: generateUID(),
+          ScenarioFalsyEvent(
+              id: 'Торт',
               title: 'Торт',
               cardType: '',
               description:
@@ -85,12 +85,11 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
               description:
                   'Дедушка не успел сделать и глоток, как Мелюзина пропала из виду.'),
           ScenarioFalsyEvent(
-              id: generateUID(),
-              title: 'Тень',
-              cardType: '',
-              description: 'Тень, которая промчалась между столиками кофейни',
-              falsyDescription:
-                  'Тень, которая промчалась между столиками кофейни.'),
+            id: 'Тень',
+            title: 'Тень',
+            cardType: '',
+            description: 'Тень, которая промчалась между столиками кофейни',
+          ),
         ]),
     ScenarioAct(
         id: generateUID(),
@@ -146,20 +145,28 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
     ScenarioTruthyEvedence(
         id: generateUID(),
         title: 'Мелюзина',
-        falsyEventId: '',
+        falsyEventId: 'Тень',
+        falsyDescription:
+            'Мелюзина, воспользовавшись своим низким ростом, промчалась мимо столиков.',
         description:
             'Небольшие обитатели Фонтейна с ушками или небольшими рожками на голове. Имеют длинный хвост с кисточкой на конце.'),
     ScenarioEvedence(
         id: generateUID(),
-        title: 'Обвинение',
+        title: 'Фотосъемка',
         description: 'Лиония собиралась дать интервью паровой птице.'),
-    ScenarioEvedence(
+    ScenarioTruthyEvedence(
         id: generateUID(),
         title: 'Солнечный день',
+        falsyEventId: 'Торт',
+        falsyDescription:
+            'Торт не был в идеальном состоянии и частично растаял, из-за чего испачкал гостей при падении. Мелюзина просто хотела переставить его в тень.',
         description: 'Мог ли торт растаять в такой солнечный день?'),
     ScenarioEvedence(
         id: generateUID(),
         title: 'Клубника и тортики',
         description: 'Вообще-то я не люблю клубнику и тортики'),
   ],
+  transitionEvents: [
+    
+  ]
 );

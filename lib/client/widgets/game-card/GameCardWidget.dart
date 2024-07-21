@@ -79,10 +79,12 @@ class GameCardWidget extends StatelessWidget {
 
           if (isCardCardFlipped == true) {
             cardSide = CardSide.BACK;
+            state.isFront = false;
           }
 
           if (isCardCardFlipped == false) {
             cardSide = CardSide.FRONT;
+            state.isFront = true;
           }
 
           final front = AnimatedOpacity(

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/act-tile/ActTileV2.dart';
+import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/game/widgets/title/Title.dart';
 import 'package:v1/client/widgets/buttons/back/BackButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
@@ -25,8 +26,7 @@ class DebatesStageActTile extends StatelessWidget {
     final List<String> hiddenActIds =
         stageState.selectedEventId != null ? [stageState.selectedEventId!] : [];
 
-    return Container(
-        child: Stack(
+    return Stack(
       children: [
         Positioned(
           top: 0,
@@ -86,6 +86,6 @@ class DebatesStageActTile extends StatelessWidget {
           hiddenIds: hiddenActIds,
         ),
       ],
-    ));
+    );
   }
 }

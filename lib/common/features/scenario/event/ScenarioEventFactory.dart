@@ -7,7 +7,7 @@ class ScenarioEventFactory {
   ScenarioEventFactory({required Map<String, dynamic> json}) : _json = json;
 
   ScenarioEvent build() {
-    if (_json['falsyDescription'] != null) {
+    if (_json['fEvent'] != null) {
       return ScenarioFalsyEvent.fromJson(_json);
     }
 

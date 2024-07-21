@@ -15,23 +15,26 @@ class ScreenLayout extends StatelessWidget {
   final Widget? rightBottomContent;
   final Widget? topCenterContant;
   final String? background;
+  final Map<String, Widget>? overlays;
+  final String? activeOverlayId;
 
-  const ScreenLayout({
-    super.key,
-    required this.bodyContent,
-    this.leftTopContent,
-    this.rightTopContent,
-    this.leftBottomContent,
-    this.rightBottomContent,
-    this.topCenterContant,
-    this.background,
-  });
+  const ScreenLayout(
+      {super.key,
+      required this.bodyContent,
+      this.leftTopContent,
+      this.rightTopContent,
+      this.leftBottomContent,
+      this.rightBottomContent,
+      this.topCenterContant,
+      this.background,
+      this.overlays,
+      this.activeOverlayId});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.passthrough,
-      children: [
+      children: <Widget>[
         TransparentPointer(
             child: ScreenBackground(
                 src:
@@ -46,7 +49,7 @@ class ScreenLayout extends StatelessWidget {
         )),
 
         AnimatedOpacity(
-          duration: Duration(milliseconds: 2000),
+          duration: const Duration(milliseconds: 2000),
           opacity: background == 'black' ? 1.0 : 0,
           child: TransparentPointer(
               child: Container(
@@ -80,21 +83,27 @@ class ScreenLayout extends StatelessWidget {
           right: 45,
           child: rightBottomContent != null ? rightBottomContent! : Container(),
         ),
-        // Positioned(
-        //   top: 0,
-        //   left: 0,
-        //   child: Container(
-        //       width: MediaQuery.of(context).size.width,
-        //       height: MediaQuery.of(context).size.height,
-        //       decoration: BoxDecoration(
-        //           border: Border.all(
-        //         color: blueColor,
-        //         width: 40,
-        //       )),
-        //       child: const ClipRect(
-        //         child: Text('432'),
-        //       )),
-        // ),
+        TransparentPointer(
+          transparent: activeOverlayId == null,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 1000),
+            opacity: activeOverlayId != null ? 0.75 : 0,
+            child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: const BoxDecoration(color: Colors.black)),
+          ),
+        ),
+        ...(overlays?.entries.map((MapEntry<String, Widget> entry) {
+              return TransparentPointer(
+                  transparent: activeOverlayId != entry.key,
+                  child: AnimatedOpacity(
+                    opacity: activeOverlayId == entry.key ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 1000),
+                    child: entry.value,
+                  ));
+            }) ??
+            [])
       ],
     );
   }

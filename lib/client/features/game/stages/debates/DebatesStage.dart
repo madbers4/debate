@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/stages/debates/DebatesStageBodyV2.dart';
 import 'package:v1/client/features/game/GameState.dart';
-import 'package:v1/client/features/game/stages/debates/DebatesStageBottomContent.dart';
-import 'package:v1/client/features/game/stages/debates/DebatesStageLeftContent.dart';
+import 'package:v1/client/features/game/stages/debates/bottom-content/DebatesStageBottomContent.dart';
+import 'package:v1/client/features/game/stages/debates/left-content/DebatesStageLeftContent.dart';
+import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlay.dart';
+import 'package:v1/client/features/game/stages/debates/overlays/DebatesStageDenialNotConfirmedOverlay.dart';
+import 'package:v1/client/features/game/stages/debates/overlays/DebatesStageMatchingOverlay.dart';
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
@@ -21,16 +24,29 @@ class DebatesStage extends StatelessWidget {
     final stageState = game.stageStates.defendant;
     final scenario = game.scenario;
 
+    String? activeOverlayId = getActiveOverlayId(gameState);
+
     return LeftSnappingSheet(
+      isHidden: activeOverlayId != null,
       sheetContent: const DebatesStageLeftContent(),
       child: BottomSnappingSheet(
         sheetContent: const DebatesStageBottomContent(),
+        isHidden: activeOverlayId != null,
         child: ScreenLayout(
           bodyContent: const DebatesStageBodyV2(),
-          rightTopContent: SideTitle(
-            title: scenario.description.title,
+          rightBottomContent: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SideTitle(
+              title: scenario.description.title,
+            ),
           ),
-
+          activeOverlayId: activeOverlayId,
+          overlays: {
+            OverlayIds.Matching: const DebatesStageMatchingOverlay(),
+            OverlayIds.DenialNotConfirmed:
+                const DebatesStageDenialNotConfirmedOverlay(),
+            OverlayIds.DenialConfirmed: const DebatesStageConfirmedOverlay(),
+          },
           // leftTopContent: roomsState.selectedRole is! Defendant
           //     ? ExitButton()
           //     : Container(),
@@ -38,4 +54,30 @@ class DebatesStage extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract class OverlayIds {
+  static String Matching = '0';
+  static String DenialNotConfirmed = '1';
+  static String DenialConfirmed = '1';
+}
+
+String? getActiveOverlayId(GameState gameState) {
+  final game = gameState.game!;
+  final stageState = game.stageStates.debates;
+  final scenario = game.scenario;
+
+  if (stageState.inDenial == true) {
+    return OverlayIds.Matching;
+  }
+
+  if (stageState.inDenialNotConfirmed == true) {
+    return OverlayIds.DenialNotConfirmed;
+  }
+
+  if (stageState.inDenialConfirmed == true) {
+    return OverlayIds.DenialConfirmed;
+  }
+
+  return null;
 }

@@ -4,6 +4,8 @@ import 'package:v1/common/features/scenario/Scenario.dart';
 import 'package:v1/common/features/infrastructure/dto/DTO.dart';
 
 class Game implements DTO {
+  static int maxAttempts = 3;
+
   final String id;
   final Scenario scenario;
   final GameStage gameStage;

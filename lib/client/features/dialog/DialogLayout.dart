@@ -8,6 +8,7 @@ class DialogLayout extends StatelessWidget {
   final Widget? rightBottomContent;
   final Widget? topCenterContant;
   final AssetImage? background;
+  // final bool? whiteBackground;
 
   const DialogLayout({
     super.key,

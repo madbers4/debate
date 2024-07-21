@@ -1,23 +1,24 @@
 import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
 
 class ScenarioFalsyEvent extends ScenarioEvent {
-  final String falsyDescription;
   final bool? confirmsInnocence;
+  // HARDCODE для фабрики
+  final bool fEvent;
 
   ScenarioFalsyEvent(
       {required super.id,
       required super.title,
       required super.cardType,
-      required this.falsyDescription,
       this.confirmsInnocence,
       required super.description,
+      this.fEvent = true,
       super.fullDescription});
 
   ScenarioFalsyEvent.fromJson(Map<String, dynamic> json)
-      : falsyDescription = json['falsyDescription'] as String,
-        confirmsInnocence = json['confirmsInnocence'] != null
+      : confirmsInnocence = json['confirmsInnocence'] != null
             ? json['confirmsInnocence'] as bool
             : null,
+        fEvent = true,
         super(
             id: json['id'] as String,
             title: json['title'] as String,
@@ -31,9 +32,9 @@ class ScenarioFalsyEvent extends ScenarioEvent {
         'id': id,
         'title': title,
         'cardType': cardType,
-        'falsyDescription': falsyDescription,
         'description': description,
         'fullDescription': fullDescription,
         'confirmsInnocence': confirmsInnocence,
+        'fEvent': fEvent,
       };
 }
