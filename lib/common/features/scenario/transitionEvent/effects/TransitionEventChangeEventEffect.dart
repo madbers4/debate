@@ -1,29 +1,32 @@
 import 'package:v1/common/features/game/Game.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
+import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
 import 'package:v1/common/features/scenario/transitionEvent/TransitionEventEffect.dart';
+import 'package:v1/common/features/scenario/transitionEvent/TransitionEventType.dart';
 
 class TransitionEventChangeEventEffect extends TransitionEventEffect {
   String eventId;
   String actId;
-  ScenarioEvedence evedence;
+  ScenarioEvent event;
 
   TransitionEventChangeEventEffect(
       {required super.id,
       required this.actId,
       required this.eventId,
-      required this.evedence});
+      required this.event});
 
-  TransitionEventChangeEventEffect.fromJson(Map<String, dynamic> json)
+  TransitionEventChangeEventEffect.fromJson(Map<dynamic, dynamic> json)
       : eventId = json['eventId'],
         actId = json['actId'],
-        evedence = json['evedence'],
+        event = ScenarioEvent.fromJson(json['event']),
         super(id: json['id']);
 
   @override
   Map toJson() => {
+        'type': TransitionEventType.changeEvent,
         'id': id,
         'actId': actId,
-        'evedence': evedence,
+        'eventId': eventId,
+        'event': event.toJson(),
       };
 
   @override
@@ -36,15 +39,23 @@ class TransitionEventChangeEventEffect extends TransitionEventEffect {
         ...json['scenario'] as Map<dynamic, dynamic>,
         'acts': [
           ...(json['scenario']['acts'] as List<Map<dynamic, dynamic>>)
-              .map((act) => act['id'] == actId
-                  ? {
-                      ...act,
-                      [
-                        'events'
-                      ]: (act['events'] as List<Map<dynamic, dynamic>>).map(
-                          (e) => e['id'] == eventId ? evedence.toJson() : e),
-                    }
-                  : act),
+              .map((act) {
+            if (act['id'] == actId) {
+              return {
+                ...act,
+                'events':
+                    (act['events'] as List<Map<dynamic, dynamic>>).map((e) {
+                  if (e['id'] == eventId) {
+                    return event.toJson();
+                  }
+
+                  return e;
+                }),
+              };
+            }
+
+            return act;
+          }),
         ]
       }
     });

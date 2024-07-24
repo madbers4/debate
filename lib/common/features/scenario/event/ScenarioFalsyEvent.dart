@@ -8,13 +8,12 @@ class ScenarioFalsyEvent extends ScenarioEvent {
   ScenarioFalsyEvent(
       {required super.id,
       required super.title,
-      required super.cardType,
       this.confirmsInnocence,
       required super.description,
       this.fEvent = true,
       super.fullDescription});
 
-  ScenarioFalsyEvent.fromJson(Map<String, dynamic> json)
+  ScenarioFalsyEvent.fromJson(Map<dynamic, dynamic> json)
       : confirmsInnocence = json['confirmsInnocence'] != null
             ? json['confirmsInnocence'] as bool
             : null,
@@ -22,7 +21,6 @@ class ScenarioFalsyEvent extends ScenarioEvent {
         super(
             id: json['id'] as String,
             title: json['title'] as String,
-            cardType: json['cardType'] as String,
             description: json['description'] as String,
             fullDescription: json['fullDescription'] != null
                 ? json['fullDescription'] as String
@@ -31,7 +29,6 @@ class ScenarioFalsyEvent extends ScenarioEvent {
   Map toJson() => {
         'id': id,
         'title': title,
-        'cardType': cardType,
         'description': description,
         'fullDescription': fullDescription,
         'confirmsInnocence': confirmsInnocence,

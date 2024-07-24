@@ -125,7 +125,8 @@ class ActStageBody extends StatelessWidget {
                                         text: !stageState.isFirstCardShowed
                                             ? 'Показать'
                                             : 'Показано',
-                                        isEnabled: stageState.isFirstCardShowed,
+                                        isEnabled:
+                                            !stageState.isFirstCardShowed,
                                         onPressed: !stageState.isFirstCardShowed
                                             ? () {
                                                 gameState.updateGameState(
@@ -173,7 +174,7 @@ class ActStageBody extends StatelessWidget {
                                             ? 'Показать'
                                             : 'Показано',
                                         isEnabled:
-                                            stageState.isSecondCardShowed,
+                                            !stageState.isSecondCardShowed,
                                         onPressed: !stageState
                                                 .isSecondCardShowed
                                             ? () {
@@ -221,7 +222,8 @@ class ActStageBody extends StatelessWidget {
                                         text: !stageState.isThirdCardShowed
                                             ? 'Показать'
                                             : 'Показано',
-                                        isEnabled: stageState.isThirdCardShowed,
+                                        isEnabled:
+                                            !stageState.isThirdCardShowed,
                                         onPressed: !stageState.isThirdCardShowed
                                             ? () {
                                                 gameState.updateGameState(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioTruthyEvedence.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 
 class DebatesStagePlaintiffControls extends StatelessWidget {

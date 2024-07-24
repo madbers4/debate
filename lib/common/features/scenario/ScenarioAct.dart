@@ -14,7 +14,7 @@ class ScenarioAct implements DTO {
       required this.description,
       required this.events});
 
-  ScenarioAct.fromJson(Map<String, dynamic> json)
+  ScenarioAct.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         title = json['title'],
         description = json['description'],

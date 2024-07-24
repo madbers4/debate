@@ -1,15 +1,16 @@
 import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/scenario/transitionEvent/TransitionEventEffect.dart';
+import 'package:v1/common/features/scenario/transitionEvent/TransitionEventType.dart';
 
-class TransitionEventChangeActTitleEffect extends TransitionEventEffect {
+class TransitionEventChangeActEffect extends TransitionEventEffect {
   String actId;
   String? title;
   String? description;
 
-  TransitionEventChangeActTitleEffect(
-      {required super.id, required this.actId, required this.title});
+  TransitionEventChangeActEffect(
+      {required super.id, required this.actId, this.title, this.description});
 
-  TransitionEventChangeActTitleEffect.fromJson(Map<String, dynamic> json)
+  TransitionEventChangeActEffect.fromJson(Map<dynamic, dynamic> json)
       : actId = json['actId'],
         title = json['title'] != null ? json['title'] as String : null,
         description =
@@ -17,7 +18,9 @@ class TransitionEventChangeActTitleEffect extends TransitionEventEffect {
         super(id: json['id']);
 
   Map toJson() => {
+        'type': TransitionEventType.changeAct,
         'id': id,
+        'actId': actId,
         'title': title,
         'description': description,
       };

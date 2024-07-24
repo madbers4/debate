@@ -59,7 +59,7 @@ class DebatesStage extends StatelessWidget {
 abstract class OverlayIds {
   static String Matching = '0';
   static String DenialNotConfirmed = '1';
-  static String DenialConfirmed = '1';
+  static String DenialConfirmed = '2';
 }
 
 String? getActiveOverlayId(GameState gameState) {

@@ -11,7 +11,7 @@ import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioTruthyEvedence.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 
 class DebatesStageBody extends StatelessWidget {

@@ -12,7 +12,7 @@ class ScenarioDescription implements DTO {
       required this.description,
       required this.background});
 
-  ScenarioDescription.fromJson(Map<String, dynamic> json)
+  ScenarioDescription.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         title = json['title'],
         description = json['description'],

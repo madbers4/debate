@@ -1,6 +1,8 @@
 import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioEvedenceFactory.dart';
 import 'package:v1/common/features/scenario/transitionEvent/TransitionEventEffect.dart';
+import 'package:v1/common/features/scenario/transitionEvent/TransitionEventType.dart';
 
 class TransitionEventAddEvedencesEffect extends TransitionEventEffect {
   List<ScenarioEvedence> evedences;
@@ -8,16 +10,16 @@ class TransitionEventAddEvedencesEffect extends TransitionEventEffect {
   TransitionEventAddEvedencesEffect(
       {required super.id, required this.evedences});
 
-  TransitionEventAddEvedencesEffect.fromJson(Map<String, dynamic> json)
-      : evedences = List.from(json['evedences']
-            .map<ScenarioEvedence>((json) => ScenarioEvedence.fromJson(json))),
+  TransitionEventAddEvedencesEffect.fromJson(Map<dynamic, dynamic> json)
+      : evedences = List.from(json['evedences'].map<ScenarioEvedence>(
+            (json) => ScenarioEvedenceFactory(json: json).build())),
         super(id: json['id']);
 
   @override
   Map toJson() => {
-        'type': 'add-evedence',
+        'type': TransitionEventType.addEvedence,
         'id': id,
-        'evedences': evedences.map((e) => e.toJson()),
+        'evedences': evedences.map((e) => e.toJson()).toList(),
       };
 
   @override

@@ -9,7 +9,7 @@ class SocketClient {
   final id = generateUID();
   dynamic io;
   // TODO: type this from dynamic to Subscriber
-  Map<String, dynamic> _subscribers = {};
+  Map<dynamic, dynamic> _subscribers = {};
 
   SocketClient({required this.io}) {
     // print('CREATE SOCKET CLIENT');

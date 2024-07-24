@@ -6,24 +6,21 @@ class ScenarioFalsyFact extends ScenarioEvent {
   ScenarioFalsyFact(
       {required super.id,
       required super.title,
-      required super.cardType,
       required this.falsyDescription,
       required super.description,
       super.fullDescription});
 
-  ScenarioFalsyFact.fromJson(Map<String, dynamic> json)
+  ScenarioFalsyFact.fromJson(Map<dynamic, dynamic> json)
       : falsyDescription = json['falsyDescription'] as String,
         super(
             id: json['id'] as String,
             title: json['title'] as String,
-            cardType: json['cardType'] as String,
             description: json['description'] as String,
             fullDescription: json['fullDescription'] as String);
 
   Map toJson() => {
         'id': id,
         'title': title,
-        'cardType': cardType,
         'falsyDescription': falsyDescription,
         'description': description,
         'fullDescription': fullDescription,

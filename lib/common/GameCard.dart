@@ -18,7 +18,7 @@ class GameCard implements Id {
       this.backBackgroundPath,
       required this.type});
 
-  GameCard.fromJson(Map<String, dynamic> json)
+  GameCard.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'] as String,
         title = json['id'] as String,
         description = json['description'] as String,

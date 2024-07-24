@@ -4,7 +4,7 @@ import 'package:v1/common/features/scenario/ScenarioAct.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendant.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendantOrigin.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioTruthyEvedence.dart';
 import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyFact.dart';
@@ -27,17 +27,14 @@ final Scenario testScenario = Scenario(
             ScenarioEvent(
                 id: generateUID(),
                 title: '1 Событие 1 Акта',
-                cardType: 'Улика',
                 description: 'Описание 1 События 1 Акта'),
             ScenarioEvent(
                 id: generateUID(),
                 title: '2 Событие 1 Акта',
-                cardType: 'Событие',
                 description: 'Описание 2 События 1 Акта'),
             ScenarioEvent(
                 id: generateUID(),
                 title: '3 Событие 1 Акта',
-                cardType: 'Факт',
                 description: 'Описание 3 События 1 Акта'),
           ]),
       ScenarioAct(
@@ -48,18 +45,15 @@ final Scenario testScenario = Scenario(
             ScenarioEvent(
                 id: generateUID(),
                 title: '1 Событие 2 Акта',
-                cardType: 'Улика',
                 description: 'Описание 1 События 2 Акта'),
             ScenarioFalsyFact(
                 id: 'Не основное',
                 title: 'Не основное',
                 falsyDescription: '',
-                cardType: 'Событие',
                 description: 'Не основное ложное событие'),
             ScenarioEvent(
                 id: generateUID(),
                 title: '3 Событие 2 Акта',
-                cardType: 'Факт',
                 description: 'Описание 3 События 2 Акта'),
           ]),
       ScenarioAct(
@@ -70,17 +64,14 @@ final Scenario testScenario = Scenario(
             ScenarioEvent(
                 id: generateUID(),
                 title: '1 Событие 3 Акта',
-                cardType: 'Улика',
                 description: 'Описание 1 События 3 Акта'),
             ScenarioEvent(
                 id: generateUID(),
                 title: '2 Событие 3 Акта',
-                cardType: 'Событие',
                 description: 'Описание 2 События 3 Акта'),
             ScenarioEvent(
                 id: generateUID(),
                 title: '3 Событие 3 Акта',
-                cardType: 'Факт',
                 description: 'Описание 3 События 3 Акта'),
           ]),
       ScenarioAct(
@@ -91,18 +82,15 @@ final Scenario testScenario = Scenario(
             ScenarioFalsyEvent(
                 id: 'Основное ложное событие',
                 title: 'Основное ложное событие',
-                cardType: 'Улика',
                 description: 'Основное ложное событие',
                 confirmsInnocence: true),
             ScenarioEvent(
                 id: generateUID(),
                 title: '2 Событие 4 Акта',
-                cardType: 'Событие',
                 description: 'Описание 4 События 4 Акта'),
             ScenarioEvent(
                 id: generateUID(),
                 title: '3 Событие 4 Акта',
-                cardType: 'Факт',
                 description: 'Описание 3 События 4 Акта'),
           ]),
     ],
@@ -114,12 +102,14 @@ final Scenario testScenario = Scenario(
           title: 'Улика 2',
           falsyEventId: 'Не основное',
           description: 'Опровергающее ложное',
+          triggeredTransitionId: '',
           falsyDescription: ''),
       ScenarioTruthyEvedence(
           id: generateUID(),
           title: 'Улика 3',
           falsyEventId: 'Основное ложное событие',
           description: 'Опровергающее основное ложное',
+          triggeredTransitionId: '',
           falsyDescription: ''),
     ],
     transitionEvents: [],

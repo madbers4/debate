@@ -10,7 +10,7 @@ class SocketBus<T extends DTO> implements DTO {
 
   SocketBus(this.data, this.path);
 
-  static SocketBus<T> fromJson<T extends DTO>(Map<String, dynamic> json) {
+  static SocketBus<T> fromJson<T extends DTO>(Map<dynamic, dynamic> json) {
     return SocketBus(json['data'], json['room']);
   }
 

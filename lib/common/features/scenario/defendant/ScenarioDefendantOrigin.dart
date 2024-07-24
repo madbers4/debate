@@ -12,7 +12,7 @@ class ScenarioDefendantOrigin implements DTO {
       this.additionalTitle,
       required this.description});
 
-  ScenarioDefendantOrigin.fromJson(Map<String, dynamic> json)
+  ScenarioDefendantOrigin.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         title = json['title'],
         description = json['description'],

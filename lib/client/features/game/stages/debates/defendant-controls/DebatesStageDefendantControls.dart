@@ -6,7 +6,7 @@ import 'package:v1/client/features/game/stages/debates/defendant-controls/Dabate
 import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioTruthyEvedence.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 
 class DebatesStageDefendantControls extends StatelessWidget {

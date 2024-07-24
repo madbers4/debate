@@ -36,7 +36,7 @@ class Scenario implements DTO {
         Map.fromEntries(transitionEvents.map((e) => MapEntry(e.id, e)));
   }
 
-  static Scenario fromJson(Map<String, dynamic> json) {
+  static Scenario fromJson(Map<dynamic, dynamic> json) {
     return Scenario(
         id: json['id'],
         description: ScenarioDescription.fromJson(json['description']),
@@ -45,7 +45,7 @@ class Scenario implements DTO {
             .map<ScenarioAct>((json) => ScenarioAct.fromJson(json))),
         evedences: List.from(json['evedences'].map<ScenarioEvedence>(
             (json) => ScenarioEvedenceFactory(json: json).build())),
-        transitionEvents: List.from(json['acts']
+        transitionEvents: List.from(json['transitionEvents']
             .map<TransitionEvent>((json) => TransitionEvent.fromJson(json))));
   }
 

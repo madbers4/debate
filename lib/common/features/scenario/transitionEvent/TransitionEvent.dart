@@ -4,14 +4,21 @@ import 'package:v1/common/features/scenario/transitionEvent/TransitionEventEffec
 
 class TransitionEvent implements DTO {
   final String id;
+  final bool? afterNoEvedenceLeft;
   final List<TransitionEventEffect> effects;
 
-  TransitionEvent({required this.id, required this.effects});
+  TransitionEvent(
+      {required this.id, required this.effects, this.afterNoEvedenceLeft});
 
-  TransitionEvent.fromJson(Map<String, dynamic> json)
+  TransitionEvent.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
-        effects = List.from(json['evedences'].map<TransitionEventEffect>(
+        afterNoEvedenceLeft = json['afterNoEvedenceLeft'],
+        effects = List.from(json['effects'].map<TransitionEventEffect>(
             (json) => TransitionEventEffectFactory(json: json).build()));
 
-  Map toJson() => {'id': id, 'effects': effects.map((e) => e.toJson())};
+  Map toJson() => {
+        'id': id,
+        'afterNoEvedenceLeft': afterNoEvedenceLeft,
+        'effects': effects.map((e) => e.toJson()).toList()
+      };
 }

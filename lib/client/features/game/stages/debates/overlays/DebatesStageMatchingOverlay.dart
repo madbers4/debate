@@ -14,7 +14,7 @@ import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
+import 'package:v1/common/features/scenario/evedence/ScenarioTruthyEvedence.dart';
 import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 
 class DebatesStageMatchingOverlay extends StatefulWidget {
@@ -113,7 +113,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
+                            SizedBox(
                               width: 700,
                               child: GameDescription(
                                 child: selectedEvidence.falsyDescription,

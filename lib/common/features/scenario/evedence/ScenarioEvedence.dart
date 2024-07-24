@@ -8,7 +8,7 @@ class ScenarioEvedence implements DTO {
   ScenarioEvedence(
       {required this.id, required this.title, required this.description});
 
-  ScenarioEvedence.fromJson(Map<String, dynamic> json)
+  ScenarioEvedence.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         title = json['title'],
         description = json['description'];

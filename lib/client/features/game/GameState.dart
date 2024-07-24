@@ -35,6 +35,10 @@ class GameState extends ChangeNotifier {
         stageStates: updatedState));
   }
 
+  updateGame(Game game) {
+    _client!.updateGame(game);
+  }
+
   updateStage(GameStage stage) {
     _client!.updateGame(Game(
         id: game!.id,

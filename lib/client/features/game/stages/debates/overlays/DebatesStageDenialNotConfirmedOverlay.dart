@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:v1/client/colors.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
@@ -13,8 +12,6 @@ import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
-import 'package:v1/common/features/scenario/evedence/ScenarioFalsyEvedence.dart';
-import 'package:v1/common/features/scenario/event/ScenarioFalsyEvent.dart';
 
 class DebatesStageDenialNotConfirmedOverlay extends StatefulWidget {
   const DebatesStageDenialNotConfirmedOverlay({super.key});

@@ -19,7 +19,7 @@ class ScenarioDefendant implements DTO {
       required this.secretOrigin,
       required this.background});
 
-  ScenarioDefendant.fromJson(Map<String, dynamic> json)
+  ScenarioDefendant.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         name = json['name'],
         description = json['description'],
