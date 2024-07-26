@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_pointer/transparent_pointer.dart';
 import 'package:v1/client/colors.dart';
 
 class GameTitle extends StatelessWidget {
@@ -14,11 +15,13 @@ class GameTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      child,
-      textAlign: textAlign,
-      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          color: goldColor, fontFamily: 'Genshin', fontSize: fontSize),
+    return TransparentPointer(
+      child: Text(
+        child,
+        textAlign: textAlign,
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: goldColor, fontFamily: 'Genshin', fontSize: fontSize),
+      ),
     );
   }
 }

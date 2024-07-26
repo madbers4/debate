@@ -35,6 +35,8 @@ class _State extends State<DebatesStageMatchingOverlay> {
     final stageState = game.stageStates.debates;
     final scenario = game.scenario;
 
+    final enabled = stageState.inDenial ?? false;
+
     final selectedEvent = scenario.eventById[stageState.selectedEventId];
     final selectedEvidence =
         scenario.evidenceById[stageState.selectedEvidenceId];
@@ -133,7 +135,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                   )
                                 : Container(),
                             DebatesButton(
-                              isEnabled: true,
+                              isEnabled: enabled,
                               onPressed: () {
                                 if (selectedEvent.confirmsInnocence == true) {
                                   gameState.updateStage(GameStage.Judgement);
@@ -193,7 +195,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                               ],
                             ),
                             DebatesButton(
-                              isEnabled: true,
+                              isEnabled: enabled,
                               onPressed: () {
                                 gameState.updateGameState(
                                     GameStageStates.fromExisting(
