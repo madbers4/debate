@@ -67,6 +67,7 @@ class _State extends State<DebatesStageDenialNotConfirmedOverlay> {
                                           DebatesStageState.fromJson({
                                             ...stageState.toJson(),
                                             'inDenialNotConfirmed': false,
+                                            'inPause': false
                                           })));
                                 },
                                 text: 'Продолжить',

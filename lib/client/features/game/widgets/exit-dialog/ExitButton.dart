@@ -11,8 +11,11 @@ class ExitButton extends StatelessWidget {
       tooltip: 'Выйти',
       onPressed: () => showDialog<String>(
           context: context,
-          builder: (BuildContext context) => Dialog(
-                child: Container(width: 400, height: 150, child: ExitDialog()),
+          builder: (BuildContext context) => const Dialog(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                surfaceTintColor: Colors.transparent,
+                child: SizedBox(width: 400, height: 150, child: ExitDialog()),
               )),
     );
   }

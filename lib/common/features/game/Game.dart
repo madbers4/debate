@@ -10,15 +10,18 @@ class Game implements DTO {
   final Scenario scenario;
   final GameStage gameStage;
   final GameStageStates stageStates;
+  final int gameTime;
 
   Game(
       {required this.id,
       required this.scenario,
       required this.gameStage,
-      required this.stageStates});
+      required this.stageStates,
+      this.gameTime = 180000});
 
   Game.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
+        gameTime = json['gameTime'],
         scenario = Scenario.fromJson(json['scenario']),
         gameStage = GameStage.values
             .firstWhere((e) => e.toString() == json['gameStage']),
@@ -26,6 +29,7 @@ class Game implements DTO {
 
   Map toJson() => {
         'id': id,
+        'gameTime': gameTime,
         'scenario': scenario.toJson(),
         'gameStage': gameStage.toString(),
         'stageStates': stageStates.toJson(),

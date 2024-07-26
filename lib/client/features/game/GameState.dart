@@ -6,11 +6,14 @@ import 'package:v1/common/features/game/Game.dart';
 import 'package:provider/provider.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
+import 'package:v1/common/features/infrastructure/dto/Void.dart';
 
 class GameState extends ChangeNotifier {
   Game? game;
   Game? previousGame;
   String? gameSubscriptionId;
+  String? exSubscriptionId;
+  Duration gameTime = const Duration(minutes: 3);
 
   GameClient? _client;
 
@@ -19,11 +22,13 @@ class GameState extends ChangeNotifier {
   setClients(BuildContext context) {
     _client = Provider.of<GameClient>(context, listen: false);
     gameSubscriptionId = _client!.subGame(_onGame);
+    exSubscriptionId = _client!.subExit(_onExit);
   }
 
   @override
   void dispose() {
     _client!.unsubscribe(gameSubscriptionId!);
+    _client!.unsubscribe(exSubscriptionId!);
     super.dispose();
   }
 
@@ -32,7 +37,8 @@ class GameState extends ChangeNotifier {
         id: game!.id,
         gameStage: game!.gameStage,
         scenario: game!.scenario,
-        stageStates: updatedState));
+        stageStates: updatedState,
+        gameTime: gameTime.inMilliseconds));
   }
 
   updateGame(Game game) {
@@ -44,15 +50,28 @@ class GameState extends ChangeNotifier {
         id: game!.id,
         gameStage: stage,
         scenario: game!.scenario,
-        stageStates: game!.stageStates));
+        stageStates: game!.stageStates,
+        gameTime: gameTime.inMilliseconds));
+  }
+
+  exit() {
+    _client!.exit();
   }
 
   _onGame(Game g) {
     previousGame = game;
+
     game = g;
+    gameTime = Duration(milliseconds: g.gameTime);
 
     _updateRoute();
     notifyListeners();
+  }
+
+  _onExit(Void _) {
+    game = null;
+    previousGame = null;
+    router.go('/scenarious/right');
   }
 
   _updateRoute() {

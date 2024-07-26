@@ -8,6 +8,7 @@ import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
 import 'package:v1/client/widgets/buttons/back/BackButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
+import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
@@ -41,7 +42,12 @@ class EvidencesStage extends StatelessWidget {
       leftBottomContent: roomsState.selectedRole is Plaintiff
           ? BackButton2(
               onPressed: () {
-                gameState.updateStage(GameStage.Act4);
+                gameState.updateGame(Game(
+                  id: game!.id,
+                  gameStage: GameStage.Act4,
+                  scenario: game!.scenario,
+                  stageStates: game!.stageStates,
+                ));
               },
             )
           : Container(),

@@ -12,7 +12,8 @@ class DebatesStageState extends GameStageState {
   final bool? isDebatesOver;
   final bool? isDebatesTimeout;
   final bool? isDefendentInnocent;
-  final bool? inPause;
+  final bool inPause;
+  final bool? inPauseOvrl;
   final num incorrectAttempts;
   final List<String> refusedEvents;
   final ActId showedActId;
@@ -31,7 +32,8 @@ class DebatesStageState extends GameStageState {
       this.isDebatesOver,
       this.isDebatesTimeout,
       this.isDefendentInnocent,
-      this.inPause});
+      this.inPauseOvrl,
+      this.inPause = false});
 
   static DebatesStageState fromJson(Map<dynamic, dynamic> json) {
     return DebatesStageState(
@@ -56,10 +58,13 @@ class DebatesStageState extends GameStageState {
         isDebatesTimeout: json['isDebatesTimeout'] != null
             ? json['isDebatesTimeout'] as bool
             : null,
+        inPauseOvrl: json['inPauseOvrl'] != null
+            ? json['inPauseOvrl'] as bool
+            : null,
         isDefendentInnocent: json['isDefendentInnocent'] != null
             ? json['isDefendentInnocent'] as bool
             : null,
-        inPause: json['inPause'] != null ? json['inPause'] as bool : null,
+        inPause: json['inPause'] as bool,
         incorrectAttempts: json['incorrectAttempts'] != null
             ? json['incorrectAttempts'] as num
             : 0,
@@ -82,6 +87,7 @@ class DebatesStageState extends GameStageState {
         'isDebatesTimeout': isDebatesTimeout,
         'isDefendentInnocent': isDefendentInnocent,
         'inPause': inPause,
+        'inPauseOvrl': inPauseOvrl,
         'incorrectAttempts': incorrectAttempts,
         'refusedEvents': refusedEvents,
         'showedActId': showedActId.toString(),

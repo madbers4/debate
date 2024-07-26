@@ -35,6 +35,7 @@ class GameCardWidget extends StatelessWidget {
   final bool? isHightlighted;
   final bool? isTransparent;
   final bool? fullTransparent;
+  final Color? pColor;
   final VoidCallback? onFlip;
   final GameCardWidgetSize size;
 
@@ -47,6 +48,7 @@ class GameCardWidget extends StatelessWidget {
       this.isTransparent,
       this.fullTransparent,
       this.onFlip,
+      this.pColor,
       this.size = GameCardWidgetSize.S267});
 
   @override
@@ -112,7 +114,7 @@ class GameCardWidget extends StatelessWidget {
                         card.title,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: blueColor,
+                            color: pColor ?? blueColor,
                             fontSize: titleSize,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Genshin'),

@@ -6,9 +6,13 @@ import 'package:v1/client/features/game/stages/debates/bottom-content/DebatesSta
 import 'package:v1/client/features/game/stages/debates/defendant-description/DebatesStageDefendantDescriptionButton.dart';
 import 'package:v1/client/features/game/stages/debates/game-description/DebatesStageGameDescriptionButton.dart';
 import 'package:v1/client/features/game/stages/debates/left-content/DebatesStageLeftContent.dart';
+import 'package:v1/client/features/game/stages/debates/overlays/DebatesStagePauseOverlay.dart';
+import 'package:v1/client/features/game/stages/debates/overlays/DebatesStageTimeoutOverlay.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlay.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/DebatesStageDenialNotConfirmedOverlay.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/DebatesStageMatchingOverlay.dart';
+import 'package:v1/client/features/game/stages/debates/timer/DebatesStageTimer.dart';
+import 'package:v1/client/features/game/widgets/description/Description.dart';
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
@@ -42,6 +46,17 @@ class DebatesStage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                const Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GameDescription(child: 'Оставшееся время:  '),
+                    DebatesStageTimer()
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     SideTitle(
@@ -70,6 +85,8 @@ class DebatesStage extends StatelessWidget {
             OverlayIds.DenialNotConfirmed:
                 const DebatesStageDenialNotConfirmedOverlay(),
             OverlayIds.DenialConfirmed: const DebatesStageConfirmedOverlay(),
+            OverlayIds.Pause: const DebatesStagePauseOverlay(),
+            OverlayIds.Timeout: const DebatesStageTimeoutOverlay(),
           },
         ),
       ),
@@ -81,6 +98,8 @@ abstract class OverlayIds {
   static String Matching = '0';
   static String DenialNotConfirmed = '1';
   static String DenialConfirmed = '2';
+  static String Pause = '3';
+  static String Timeout = '4';
 }
 
 String? getActiveOverlayId(GameState gameState) {
@@ -98,6 +117,14 @@ String? getActiveOverlayId(GameState gameState) {
 
   if (stageState.inDenialConfirmed == true) {
     return OverlayIds.DenialConfirmed;
+  }
+
+  if (stageState.inPauseOvrl == true) {
+    return OverlayIds.Pause;
+  }
+
+  if (stageState.isDebatesTimeout == true) {
+    return OverlayIds.Timeout;
   }
 
   return null;

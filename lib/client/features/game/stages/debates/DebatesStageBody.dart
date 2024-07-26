@@ -61,7 +61,7 @@ class DebatesStageBody extends StatelessWidget {
             top: 370,
             right: 30,
             width: 350,
-            height: 600,
+            height: 200,
             child: (roomsState.selectedRole is Defendant
                     ? const DebatesStageDefendantControls()
                     : null) ??

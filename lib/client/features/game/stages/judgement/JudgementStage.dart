@@ -5,7 +5,10 @@ import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/judgement/JudgementStageBody.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/features/screen/ScreenLayout.dart';
+import 'package:v1/common/features/game/Game.dart';
 import 'package:v1/common/features/game/GameStage.dart';
+import 'package:v1/common/features/game/GameStageStates.dart';
+import 'package:v1/common/features/game/stage-states/JudgementStageState.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/player/Plaintiff.dart';
 
@@ -24,21 +27,39 @@ class JudgementStage extends StatelessWidget {
 
     return ScreenLayout(
       bodyContent: const JudgementStageBody(),
+      background: 'test-blue-background.png',
       leftTopContent:
           roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
       rightBottomContent: roomsState.selectedRole is Plaintiff
           ? TextButton(
-              child: Text('Признать виновным'),
+              child: const Text('Признать виновным'),
               onPressed: () {
-                gameState.updateStage(GameStage.Verdict);
+                gameState.updateGame(Game(
+                    id: game!.id,
+                    gameStage: GameStage.Verdict,
+                    scenario: game!.scenario,
+                    gameTime: game.gameTime,
+                    stageStates: GameStageStates.fromExisting(
+                      gameState.game!.stageStates,
+                      JudgementStageState(id: stageState.id, foundGuilty: true),
+                    )));
               },
             )
           : Container(),
       leftBottomContent: roomsState.selectedRole is Plaintiff
           ? TextButton(
-              child: Text('Признать невиновным'),
+              child: const Text('Признать невиновным'),
               onPressed: () {
-                gameState.updateStage(GameStage.Verdict);
+                gameState.updateGame(Game(
+                    id: game!.id,
+                    gameStage: GameStage.Verdict,
+                    scenario: game!.scenario,
+                    gameTime: game.gameTime,
+                    stageStates: GameStageStates.fromExisting(
+                      gameState.game!.stageStates,
+                      JudgementStageState(
+                          id: stageState.id, foundGuilty: false),
+                    )));
               },
             )
           : Container(),

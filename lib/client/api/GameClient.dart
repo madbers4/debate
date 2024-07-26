@@ -19,6 +19,10 @@ class GameClient extends ChangeNotifier {
     return socketClient!.subscribe(api.game, callback);
   }
 
+  String subExit(void Function(Void _) callback) {
+    return socketClient!.subscribe(api.exit, callback);
+  }
+
   unsubscribe(String id) {
     socketClient!.unsubscribe(id);
   }
@@ -32,6 +36,6 @@ class GameClient extends ChangeNotifier {
   }
 
   exit() {
-    socketClient!.send(api.update, Void());
+    socketClient!.send(api.exit, Void());
   }
 }

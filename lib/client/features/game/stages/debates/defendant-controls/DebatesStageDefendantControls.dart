@@ -28,7 +28,7 @@ class DebatesStageDefendantControls extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) => const Dialog(
                         backgroundColor: Colors.transparent,
-                        shadowColor: Color.fromARGB(244, 0, 0, 0),
+                        shadowColor: Colors.transparent,
                         surfaceTintColor: Colors.transparent,
                         child: SizedBox(
                             width: 400,

@@ -110,7 +110,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                   'Улика действительно опровергает данное событие',
                               fontSize: 14,
                             ),
-                             Container(
+                            Container(
                               height: 10,
                             ),
                             Container(
@@ -121,7 +121,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                 red: true,
                               ),
                             ),
-                             Container(
+                            Container(
                               height: 10,
                             ),
                             selectedEvent.confirmsInnocence == true
@@ -172,7 +172,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                   'Доказательство не опровергает это событие',
                               fontSize: 14,
                             ),
-                             Container(
+                            Container(
                               height: 20,
                             ),
                             Row(
@@ -209,7 +209,8 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                                           .incorrectAttempts +
                                                       1,
                                           'selectedEventId': null,
-                                          'selectedEvidenceId': null
+                                          'selectedEvidenceId': null,
+                                          'inPause': false
                                         })));
                               },
                               text: 'Принять',

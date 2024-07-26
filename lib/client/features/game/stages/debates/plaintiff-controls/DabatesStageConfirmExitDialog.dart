@@ -8,8 +8,8 @@ import 'package:v1/client/features/game/widgets/description/Description.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
 
-class DabatesStageConfirmMatchingDialog extends StatelessWidget {
-  const DabatesStageConfirmMatchingDialog({super.key});
+class DabatesStageConfirmExitDialog extends StatelessWidget {
+  const DabatesStageConfirmExitDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +19,12 @@ class DabatesStageConfirmMatchingDialog extends StatelessWidget {
 
     return DialogLayout(
       bodyContent: const TransparentPointer(
-          child: GameDescription(child: 'Вы уверены?')),
+          child: GameDescription(child: 'Вы уверены что хотите ЗАКРЫТЬ игру?')),
       rightBottomContent: DebatesButton(
           text: 'Да',
           isEnabled: true,
           onPressed: () {
-            gameState.updateGameState(GameStageStates.fromExisting(
-                game.stageStates,
-                DebatesStageState.fromJson({
-                  ...stageState.toJson(),
-                  'inDenial': true,
-                  'inPause': true
-                })));
+            gameState.exit();
             Navigator.pop(context);
           }),
       leftBottomContent: DebatesButton(

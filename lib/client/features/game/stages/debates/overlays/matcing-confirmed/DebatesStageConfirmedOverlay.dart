@@ -298,7 +298,8 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                                   as Map<dynamic, dynamic>,
                               'inDenialConfirmed': false,
                               'selectedEventId': null,
-                              'selectedEvidenceId': null
+                              'selectedEvidenceId': null,
+                              'inPause': false,
                             }
                           },
                           'scenario': {

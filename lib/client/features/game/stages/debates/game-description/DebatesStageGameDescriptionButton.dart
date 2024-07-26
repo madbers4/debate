@@ -15,7 +15,7 @@ class DebatesStageGameDescriptionButton extends StatelessWidget {
             context: context,
             builder: (BuildContext context) => Dialog(
                   backgroundColor: Colors.transparent,
-                  shadowColor: Color.fromARGB(244, 0, 0, 0),
+                  shadowColor: Colors.transparent,
                   surfaceTintColor: Colors.transparent,
                   child: SizedBox(
                       width: MediaQuery.of(context).size.width,

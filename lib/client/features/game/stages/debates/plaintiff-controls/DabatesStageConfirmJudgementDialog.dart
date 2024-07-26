@@ -5,11 +5,10 @@ import 'package:v1/client/features/dialog/DialogLayout.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
 import 'package:v1/client/features/game/widgets/description/Description.dart';
-import 'package:v1/common/features/game/GameStageStates.dart';
-import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 
-class DabatesStageConfirmMatchingDialog extends StatelessWidget {
-  const DabatesStageConfirmMatchingDialog({super.key});
+class DabatesStageConfirmJudgementDialog extends StatelessWidget {
+  const DabatesStageConfirmJudgementDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +18,12 @@ class DabatesStageConfirmMatchingDialog extends StatelessWidget {
 
     return DialogLayout(
       bodyContent: const TransparentPointer(
-          child: GameDescription(child: 'Вы уверены?')),
+          child: GameDescription(child: 'Перейти к приговору?')),
       rightBottomContent: DebatesButton(
           text: 'Да',
           isEnabled: true,
           onPressed: () {
-            gameState.updateGameState(GameStageStates.fromExisting(
-                game.stageStates,
-                DebatesStageState.fromJson({
-                  ...stageState.toJson(),
-                  'inDenial': true,
-                  'inPause': true
-                })));
+            gameState.updateStage(GameStage.Judgement);
             Navigator.pop(context);
           }),
       leftBottomContent: DebatesButton(

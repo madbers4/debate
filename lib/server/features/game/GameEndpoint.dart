@@ -28,4 +28,8 @@ class GameEndpoint {
   void sendGame(Game args) {
     socketClient.send(api.game, args);
   }
+
+  void exit() {
+    socketClient.send(api.exit, Void());
+  }
 }

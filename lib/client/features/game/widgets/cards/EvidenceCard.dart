@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v1/client/colors.dart';
 import 'package:v1/client/widgets/game-card/GameCardWidget.dart';
 import 'package:v1/common/GameCard.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
@@ -30,6 +31,7 @@ class EvidenceCard extends StatelessWidget {
         isDisabled: isDisabled,
         isTransparent: isTransparent,
         fullTransparent: fullTransparent,
+        pColor: goldColor,
         size: size ?? GameCardWidgetSize.S267,
         card: GameCard(
             id: evedence.id,
