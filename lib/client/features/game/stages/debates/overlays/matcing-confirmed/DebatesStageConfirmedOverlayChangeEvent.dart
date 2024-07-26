@@ -30,7 +30,7 @@ class _State extends State<DebatesStageConfirmedOverlayChangeEvent> {
     final stageState = game.stageStates.debates;
     final scenario = game.scenario;
 
-    final selectedEvent = scenario.eventById[stageState.selectedEventId];
+    final selectedEvent = scenario.eventById[widget.effect.eventId];
 
     if (selectedEvent == null) {
       return Container();
@@ -41,7 +41,7 @@ class _State extends State<DebatesStageConfirmedOverlayChangeEvent> {
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 500),
         opacity: widget.isVisible ? 1.0 : 0.0,
-        child: SizedBox(
+        child: Container(
             width: 450,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

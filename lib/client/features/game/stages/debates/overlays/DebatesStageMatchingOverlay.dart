@@ -60,7 +60,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                   child: 'Дебаты',
                   fontSize: 55,
                 ),
-                const SizedBox(
+                Container(
                   height: 25,
                 ),
                 GameDescription(
@@ -74,7 +74,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
             top: 230,
             width: MediaQuery.of(context).size.width,
             child: Center(
-                child: SizedBox(
+                child: Container(
                     width: 450,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,10 +110,10 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                   'Улика действительно опровергает данное событие',
                               fontSize: 14,
                             ),
-                            const SizedBox(
+                             Container(
                               height: 10,
                             ),
-                            SizedBox(
+                            Container(
                               width: 700,
                               child: GameDescription(
                                 child: selectedEvidence.falsyDescription,
@@ -121,7 +121,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                 red: true,
                               ),
                             ),
-                            const SizedBox(
+                             Container(
                               height: 10,
                             ),
                             selectedEvent.confirmsInnocence == true
@@ -172,7 +172,7 @@ class _State extends State<DebatesStageMatchingOverlay> {
                                   'Доказательство не опровергает это событие',
                               fontSize: 14,
                             ),
-                            const SizedBox(
+                             Container(
                               height: 20,
                             ),
                             Row(

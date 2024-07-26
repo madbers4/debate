@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/game/widgets/act-tile/ActTileV2.dart';
+import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
 import 'package:v1/client/features/game/widgets/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';

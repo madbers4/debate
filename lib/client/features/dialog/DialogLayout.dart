@@ -7,6 +7,7 @@ class DialogLayout extends StatelessWidget {
   final Widget? leftBottomContent;
   final Widget? rightBottomContent;
   final Widget? topCenterContant;
+  final Widget? bottomCenterContant;
   final AssetImage? background;
   // final bool? whiteBackground;
 
@@ -18,6 +19,7 @@ class DialogLayout extends StatelessWidget {
     this.leftBottomContent,
     this.rightBottomContent,
     this.topCenterContant,
+    this.bottomCenterContant,
     this.background,
   });
 
@@ -46,6 +48,11 @@ class DialogLayout extends StatelessWidget {
           right: 40,
           child: rightBottomContent != null ? rightBottomContent! : Container(),
         ),
+        Positioned(
+            bottom: 10,
+            child: bottomCenterContant != null
+                ? Center(child: bottomCenterContant!)
+                : Container()),
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: bodyContent,

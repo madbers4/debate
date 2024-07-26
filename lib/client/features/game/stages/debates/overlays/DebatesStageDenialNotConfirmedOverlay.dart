@@ -42,7 +42,7 @@ class _State extends State<DebatesStageDenialNotConfirmedOverlay> {
                   child: 'Улика не опровергает это событие',
                   fontSize: 40,
                 ),
-                const SizedBox(
+                Container(
                   height: 25,
                 ),
                 GameDescription(child: 'Оставшиеся попытки: ${attempts}')
@@ -82,7 +82,7 @@ class _State extends State<DebatesStageDenialNotConfirmedOverlay> {
                                 fontSize: 16,
                                 text: 'Перейти к приговору',
                               ),
-                              const SizedBox(
+                              Container(
                                 height: 40,
                               ),
                               DebatesButton(

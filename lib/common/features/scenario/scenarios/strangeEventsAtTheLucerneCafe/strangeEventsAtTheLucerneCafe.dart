@@ -102,8 +102,8 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
                 title: 'Задержание',
                 description:
                     'Мелюзина, увидев Шарлотту и Лионию, испугалась и уронила торт.'),
-            ScenarioEvent(
-                id: generateUID(),
+            ScenarioFalsyEvent(
+                id: 'Остатки торта',
                 title: 'Остатки торта',
                 description:
                     'Как утверждает Лиония, в торте были размещены дюжина шпионских жучков.'),
@@ -119,8 +119,8 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
           description:
               'После того, как Лиония пришла в себя, она постарась довести данное событие до дела, а после и до суда. Лиония удтверждает, что она регулярно находила у себя в доме различные устройства для слежения, которые, по слухам, размещает Шпионская Тень, таинственный преступник, регулярно следящий за местной знатью и промышляющий продажей сплетней.',
           events: [
-            ScenarioEvent(
-                id: generateUID(),
+            ScenarioFalsyEvent(
+                id: 'Шпионская тень',
                 title: 'Шпионская тень',
                 description: 'Преступник, промышляющий продажей сплетен.'),
             ScenarioEvent(
@@ -128,11 +128,11 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
                 title: 'Обвинение',
                 description:
                     'Лиония обвиняет Шпионскую Тень в размещении жучков.'),
-            ScenarioEvent(
-                id: generateUID(),
-                title: 'Мелюзина',
-                description: 'Разве Мелюзина может быть Шпионской Тенью?',
-                isHidden: true),
+            ScenarioFalsyEvent(
+              id: 'Мелюзина',
+              title: 'Мелюзина',
+              description: 'Разве Мелюзина может быть Шпионской Тенью?',
+            ),
           ]),
     ],
     evedences: [
@@ -195,14 +195,24 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
             id: generateUID(),
             evedenceIds: ['Фотосъемка', 'Клубника и тортики']),
         TransitionEventAddEvedencesEffect(id: generateUID(), evedences: [
-          ScenarioEvedence(
+          ScenarioTruthyEvedence(
               id: 'Сдача',
               title: 'Сдача',
-              description: 'Мелюзина просто сдалась, подняв руки вверх.'),
-          ScenarioEvedence(
+              description: 'Мелюзина просто сдалась, подняв руки вверх.',
+              falsyDescription:
+                  'Разве, так называемая, Шпионская Тень так просто сдалась бы?',
+              falsyEventId: 'Шпионская тень',
+              triggeredTransitionId:
+                  'Преступник, известный торговлей сплетнями. Но разве он мог так просто сдаться?'),
+          ScenarioTruthyEvedence(
               id: 'Жучки',
               title: 'Жучки',
-              description: 'Механические жучки, обнаруженные в торте.'),
+              description: 'Механические жучки, обнаруженные в торте.',
+              falsyDescription:
+                  'Факт того, что обнаруженные жучки являются шпионскими устройствами, не доказан.',
+              falsyEventId: 'Остатки торта',
+              triggeredTransitionId:
+                  'В остатках торта обнаружены механические жучки.'),
           ScenarioEvedence(
               id: 'Фото разбитого торта',
               title: 'Фото разбитого торта',
@@ -214,4 +224,60 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
                   'Разве Шпионская Тень не занимается торговлей сплетнями?'),
         ]),
       ]),
+      TransitionEvent(
+          id: 'В остатках торта обнаружены механические жучки.',
+          effects: [
+            TransitionEventChangeEventEffect(
+                id: generateUID(),
+                actId: '3',
+                eventId: 'Остатки торта',
+                event: ScenarioEvent(
+                    id: 'Торт',
+                    title: 'Растаявший торт',
+                    description:
+                        'В остатках торта обнаружены механические жучки.')),
+          ]),
+      TransitionEvent(
+          id: 'Преступник, известный торговлей сплетнями. Но разве он мог так просто сдаться?',
+          effects: [
+            TransitionEventChangeEventEffect(
+                id: generateUID(),
+                actId: '4',
+                eventId: 'Шпионская тень',
+                event: ScenarioEvent(
+                    id: 'Шпионская тень',
+                    title: 'Шпионская тень',
+                    description:
+                        'Преступник, известный торговлей сплетнями. Но разве он мог так просто сдаться?')),
+          ]),
+      TransitionEvent(id: generateUID(), afterNoEvedenceLeft: true, effects: [
+        TransitionEventRemoveEvedenceEffect(
+            id: generateUID(),
+            evedenceIds: ['Торговля сплетнями', 'Фото разбитого торта']),
+        TransitionEventAddEvedencesEffect(id: generateUID(), evedences: [
+          ScenarioEvedence(
+            id: 'Лиония',
+            title: 'Лиония',
+            description:
+                'Если у Лионии были обнаружены жучки в доме, может ли она быть Шпионской Тенью?',
+          ),
+          ScenarioTruthyEvedence(
+              id: 'Алиби',
+              title: 'Алиби',
+              description:
+                  'В городе все хорошо знают Мелюзину, она просто находилась посреди своей повседневной рутины и хотела помочь.',
+              falsyDescription: '...',
+              falsyEventId: 'Мелюзина',
+              triggeredTransitionId: 'Игра завершается невиновностью игрока.'),
+          ScenarioEvedence(
+              id: 'Приготовление',
+              title: 'Приготовление',
+              description:
+                  'Возможно, во время приготовления кто-то другой подложил жучки в торт.'),
+        ]),
+      ]),
+      TransitionEvent(
+          id: 'Игра завершается невиновностью игрока.',
+          endGame: true,
+          effects: []),
     ]);

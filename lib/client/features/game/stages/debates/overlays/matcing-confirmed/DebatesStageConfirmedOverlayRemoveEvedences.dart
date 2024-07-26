@@ -31,7 +31,8 @@ class _State extends State<DebatesStageConfirmedOverlayRemoveEvedences> {
 
     final evedences = widget.effects
         .expand((e) => e.evedenceIds)
-        .map((id) => scenario.evidenceById[id]!);
+        .map((id) => scenario.evidenceById[id])
+        .whereType<ScenarioEvedence>();
 
     final sbWidth =
         (widthBySize[GameCardWidgetSize.S267]! + 30) * evedences.length;
@@ -41,7 +42,7 @@ class _State extends State<DebatesStageConfirmedOverlayRemoveEvedences> {
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 500),
         opacity: widget.isVisible ? 1.0 : 0.0,
-        child: SizedBox(
+        child: Container(
             width: sbWidth > 450 ? sbWidth : 450,
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

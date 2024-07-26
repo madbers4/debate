@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/game/widgets/act-tile/ActTileV2.dart';
+import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
 import 'package:v1/client/features/game/widgets/side-tile/SideTitle.dart';
 import 'package:v1/client/features/game/widgets/title/Title.dart';
 import 'package:v1/client/widgets/buttons/back/BackButton.dart';
@@ -61,25 +61,25 @@ class DebatesStageActTile extends StatelessWidget {
             ],
           ),
         ),
-        ActTileV2(
+        ActTile(
           actId: ActId.One,
           event: scenario.acts[0],
           isShowed: stageState.showedActId == ActId.One,
           hiddenIds: hiddenActIds,
         ),
-        ActTileV2(
+        ActTile(
           actId: ActId.Two,
           event: scenario.acts[1],
           isShowed: stageState.showedActId == ActId.Two,
           hiddenIds: hiddenActIds,
         ),
-        ActTileV2(
+        ActTile(
           actId: ActId.Three,
           event: scenario.acts[2],
           isShowed: stageState.showedActId == ActId.Three,
           hiddenIds: hiddenActIds,
         ),
-        ActTileV2(
+        ActTile(
           actId: ActId.Four,
           event: scenario.acts[3],
           isShowed: stageState.showedActId == ActId.Four,

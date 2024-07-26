@@ -58,7 +58,7 @@ class ActStageBody extends StatelessWidget {
                     child: actTitle,
                     fontSize: 60,
                   ),
-                  const SizedBox(
+                   Container(
                     height: 15,
                   ),
                   GameTitle(
@@ -115,7 +115,7 @@ class ActStageBody extends StatelessWidget {
                                           : !stageState.isFirstCardShowed,
                                   isDisabled: true,
                                 ),
-                                SizedBox(
+                                Container(
                                   width: roomsState.selectedRole is Plaintiff
                                       ? 20
                                       : 0,
@@ -163,7 +163,7 @@ class ActStageBody extends StatelessWidget {
                                           : !stageState.isSecondCardShowed,
                                   isDisabled: true,
                                 ),
-                                SizedBox(
+                                Container(
                                   width: roomsState.selectedRole is Plaintiff
                                       ? 20
                                       : 0,
@@ -212,7 +212,7 @@ class ActStageBody extends StatelessWidget {
                                           ? false
                                           : !stageState.isThirdCardShowed,
                                 ),
-                                SizedBox(
+                                Container(
                                   width: roomsState.selectedRole is Plaintiff
                                       ? 20
                                       : 0,

@@ -1,60 +1,112 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_pointer/transparent_pointer.dart';
+import 'package:v1/client/colors.dart';
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
+import 'package:v1/client/features/game/widgets/title/Title.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
+import 'package:v1/client/widgets/game-card/GameCardWidget.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
+import 'package:v1/common/features/scenario/ScenarioActId.dart';
 
 class ActTile extends StatelessWidget {
-  final String actId;
+  final ActId actId;
   final ScenarioAct event;
+  final bool isShowed;
   final List<String> hiddenIds;
 
   const ActTile(
-      {required this.actId, required this.event, required this.hiddenIds});
+      {super.key,
+      required this.actId,
+      required this.event,
+      required this.isShowed,
+      required this.hiddenIds});
 
   @override
   Widget build(BuildContext context) {
     final roomsState = context.watch<RoomsState>();
 
-    return Card(
-        child: Container(
-      height: 300,
-      width: 500,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(event.title),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: event.events.indexed
-                .map((e) {
-                  final index = e.$1;
-                  final value = e.$2;
-                  final List<Widget> res = [];
+    const double width = 550;
+    const double titleTopMargin = 80;
+    const double descriptionTopMargin = titleTopMargin + 45;
+    const double cardsTopMargin = descriptionTopMargin + 160;
 
-                  if (index != 0) {
-                    res.add(const SizedBox(
-                      width: 10,
-                    ));
-                  }
+    return Positioned(
+      top: 0,
+      left: 0,
+      width: width,
+      height: 650,
+      child: AnimatedOpacity(
+        opacity: isShowed ? 1.0 : 0.0,
+        duration: const Duration(milliseconds: 750),
+        child: Stack(
+          children: [
+            Positioned(
+              top: titleTopMargin,
+              left: 0,
+              width: width,
+              child: GameTitle(
+                child: event.title,
+                fontSize: 18,
+              ),
+            ),
+            Positioned(
+              top: descriptionTopMargin,
+              left: 0,
+              width: width,
+              child: Text(
+                event.description,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: whiteColor, fontFamily: 'Genshin', fontSize: 14),
+              ),
+            ),
+            Positioned(
+              top: cardsTopMargin,
+              left: 0,
+              width: width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: event.events.indexed
+                    .map((e) {
+                      final index = e.$1;
+                      final value = e.$2;
+                      final List<Widget> res = [];
 
-                  final isDisabled = roomsState.selectedRole is! Defendant;
-                  res.add(FactCard(
-                    fact: value,
-                    isTransparent:
-                        hiddenIds.any((element) => element == value.id),
-                    isDisabled: isDisabled,
-                    isCardCardFlipped: isDisabled ? false : null,
-                  ));
-                  return res;
-                })
-                .expand((e) => e)
-                .toList(),
-          )
-        ],
+                      if (index != 0) {
+                        res.add(Container(
+                          width: 10,
+                        ));
+                      }
+
+                      final isSelected =
+                          hiddenIds.any((element) => element == value.id);
+                      final isDisabled =
+                          roomsState.selectedRole is! Defendant ||
+                              !isShowed ||
+                              isSelected;
+
+                      res.add(TransparentPointer(
+                        transparent: !isShowed,
+                        child: FactCard(
+                          fact: value,
+                          size: GameCardWidgetSize.S267,
+                          isTransparent: isSelected,
+                          isDisabled: isDisabled,
+                          isCardCardFlipped: isDisabled ? false : null,
+                        ),
+                      ));
+                      return res;
+                    })
+                    .expand((e) => e)
+                    .toList(),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/game/stages/debates/DebatesStageBodyV2.dart';
+import 'package:v1/client/features/game/stages/debates/DebatesStageBody.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/debates/bottom-content/DebatesStageBottomContent.dart';
+import 'package:v1/client/features/game/stages/debates/defendant-description/DebatesStageDefendantDescriptionButton.dart';
+import 'package:v1/client/features/game/stages/debates/game-description/DebatesStageGameDescriptionButton.dart';
 import 'package:v1/client/features/game/stages/debates/left-content/DebatesStageLeftContent.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlay.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/DebatesStageDenialNotConfirmedOverlay.dart';
@@ -33,11 +35,33 @@ class DebatesStage extends StatelessWidget {
         sheetContent: const DebatesStageBottomContent(),
         isHidden: activeOverlayId != null,
         child: ScreenLayout(
-          bodyContent: const DebatesStageBodyV2(),
+          bodyContent: const DebatesStageBody(),
           rightBottomContent: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SideTitle(
-              title: scenario.description.title,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Row(
+                  children: [
+                    SideTitle(
+                      title: scenario.description.title,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Row(
+                  children: [
+                    DebatesStageDefendantDescriptionButton(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    DebatesStageGameDescriptionButton()
+                  ],
+                ),
+              ],
             ),
           ),
           activeOverlayId: activeOverlayId,
@@ -47,9 +71,6 @@ class DebatesStage extends StatelessWidget {
                 const DebatesStageDenialNotConfirmedOverlay(),
             OverlayIds.DenialConfirmed: const DebatesStageConfirmedOverlay(),
           },
-          // leftTopContent: roomsState.selectedRole is! Defendant
-          //     ? ExitButton()
-          //     : Container(),
         ),
       ),
     );

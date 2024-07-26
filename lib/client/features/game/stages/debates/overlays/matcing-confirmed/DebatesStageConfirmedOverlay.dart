@@ -19,6 +19,7 @@ import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/widgets/buttons/back/BackButton.dart';
 import 'package:v1/client/widgets/buttons/next/NextButton.dart';
 import 'package:v1/common/features/game/Game.dart';
+import 'package:v1/common/features/game/GameStage.dart';
 import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/DebatesStageState.dart';
 import 'package:v1/common/features/scenario/evedence/ScenarioTruthyEvedence.dart';
@@ -62,7 +63,8 @@ class _State extends State<DebatesStageConfirmedOverlay> {
     }
 
     if (scenario.evedences.where((e) => e is ScenarioTruthyEvedence).length ==
-        1) {
+            1 &&
+        scenario.transitionEvents.any((e) => e.afterNoEvedenceLeft == true)) {
       transitions.add(scenario.transitionEvents
           .firstWhere((e) => e.afterNoEvedenceLeft == true));
     }
@@ -92,6 +94,12 @@ class _State extends State<DebatesStageConfirmedOverlay> {
     int pageId = 0;
     int descriptionId = 0;
 
+    bool endGame = transitions.any((e) => e.endGame == true);
+
+    if (endGame) {
+      pages = 1;
+    }
+
     return Stack(
       children: [
         Positioned(
@@ -104,10 +112,10 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                   child: 'Улика опровергает это событие',
                   fontSize: 45,
                 ),
-                const SizedBox(
+                Container(
                   height: 25,
                 ),
-                SizedBox(
+                Container(
                   width: 800,
                   child: Stack(
                     children: [
@@ -117,11 +125,14 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                                   descriptionId++
                               ? 1.0
                               : 0.0,
-                          child: GameDescription(
-                              fontSize: 14.5,
-                              child: selectedEvidence is ScenarioTruthyEvedence
-                                  ? selectedEvidence.falsyDescription
-                                  : '...')),
+                          child: Center(
+                            child: GameDescription(
+                                fontSize: 14.5,
+                                child:
+                                    selectedEvidence is ScenarioTruthyEvedence
+                                        ? selectedEvidence.falsyDescription
+                                        : '...'),
+                          )),
                       ...changeActEffects.map((e) => AnimatedOpacity(
                           duration: const Duration(milliseconds: 500),
                           opacity: stageState.denialConfirmedCurrentPage ==
@@ -192,7 +203,7 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                                 stageState.denialConfirmedCurrentPage - 1,
                           })));
                     }),
-                const SizedBox(
+                Container(
                   width: 10,
                 ),
                 // NOTE: Не заменять
@@ -242,7 +253,7 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                     ],
                   ),
                 ),
-                const SizedBox(
+                Container(
                   width: 10,
                 ),
                 NextButton(
@@ -259,7 +270,7 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                     }),
               ],
             ))),
-        stageState.denialConfirmedCurrentPage == pages - 1
+        stageState.denialConfirmedCurrentPage == pages - 1 && !endGame
             ? Positioned(
                 top: 530,
                 width: MediaQuery.of(context).size.width,
@@ -289,6 +300,14 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                               'selectedEventId': null,
                               'selectedEvidenceId': null
                             }
+                          },
+                          'scenario': {
+                            ...updatedGameJson['scenario']
+                                as Map<dynamic, dynamic>,
+                            'transitionEvents': (updatedGameJson['scenario']
+                                    ['transitionEvents'] as List<dynamic>)
+                                .where((e) => !transitions
+                                    .any((element) => element.id == e['id']))
                           }
                         });
 
@@ -296,6 +315,24 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                         gameState.updateGame(updatedGame);
                       },
                       text: 'Продолжить',
+                    )
+                  ],
+                ),
+              )
+            : Container(),
+        stageState.denialConfirmedCurrentPage == pages - 1 && endGame
+            ? Positioned(
+                top: 530,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DebatesButton(
+                      isEnabled: true,
+                      onPressed: () {
+                        gameState.updateStage(GameStage.Judgement);
+                      },
+                      text: 'Перейти к приговору',
                     )
                   ],
                 ),

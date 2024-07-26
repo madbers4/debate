@@ -45,7 +45,7 @@ class _State extends State<DebatesStageConfirmedOverlayChangeAct> {
                   child: act.title,
                   fontSize: 18,
                 ),
-                const SizedBox(
+                Container(
                   height: 10,
                 ),
                 GameDescription(
@@ -54,7 +54,7 @@ class _State extends State<DebatesStageConfirmedOverlayChangeAct> {
                 ),
               ],
             ),
-            const SizedBox(
+            Container(
               height: 10,
             ),
             const Icon(
@@ -62,7 +62,7 @@ class _State extends State<DebatesStageConfirmedOverlayChangeAct> {
               color: whiteColor,
               size: 75,
             ),
-            const SizedBox(
+            Container(
               height: 10,
             ),
             Column(
@@ -71,7 +71,7 @@ class _State extends State<DebatesStageConfirmedOverlayChangeAct> {
                   child: widget.effect.title ?? act.title,
                   fontSize: 18,
                 ),
-                const SizedBox(
+                Container(
                   height: 10,
                 ),
                 GameDescription(

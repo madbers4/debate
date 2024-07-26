@@ -27,7 +27,7 @@ class _State extends State<DebatesStageConfirmedOverlayAddEvedence> {
       child: AnimatedOpacity(
         duration: const Duration(milliseconds: 500),
         opacity: widget.isVisible ? 1.0 : 0.0,
-        child: SizedBox(
+        child: Container(
             width:
                 (widthBySize[GameCardWidgetSize.S267]! + 30) * evedences.length,
             child: Row(
@@ -37,6 +37,7 @@ class _State extends State<DebatesStageConfirmedOverlayAddEvedence> {
                   .map((e) => EvidenceCard(
                         evedence: e,
                         isCardCardFlipped: false,
+                        isDisabled: true,
                       ))
                   .toList(),
             )),
