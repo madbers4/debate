@@ -100,7 +100,9 @@ class ScreenLayout extends StatelessWidget {
                   child: AnimatedOpacity(
                     opacity: activeOverlayId == entry.key ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 1000),
-                    child: entry.value,
+                    child: activeOverlayId == entry.key
+                        ? entry.value
+                        : Container(),
                   ));
             }) ??
             [])

@@ -12,15 +12,13 @@ class GameDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TransparentPointer(
-      child: Text(
-        child,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            fontFamily: 'Genshin',
-            color: red == true ? redColor : whiteColor,
-            fontSize: fontSize ?? 20),
-      ),
+    return Text(
+      child,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+          fontFamily: 'Genshin',
+          color: red == true ? redColor : whiteColor,
+          fontSize: fontSize ?? 20),
     );
   }
 }

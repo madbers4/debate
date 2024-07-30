@@ -122,7 +122,8 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
             ScenarioFalsyEvent(
                 id: 'Шпионская тень',
                 title: 'Шпионская тень',
-                description: 'Преступник, промышляющий продажей сплетен.'),
+                description:
+                    'Преступник, промышляющий продажей сплетен. Его никто, никогда не видел.'),
             ScenarioEvent(
                 id: generateUID(),
                 title: 'Обвинение',

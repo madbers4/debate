@@ -93,6 +93,8 @@ class GameService extends SocketService {
       endpoint.exit();
       gameIdByClient.removeWhere((key, value) => key == playerClient);
     }
+
+    gameById = {};
   }
 
   void _updateGame(Game game, SocketClient client) {

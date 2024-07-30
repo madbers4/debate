@@ -38,61 +38,51 @@ class _State extends State<DebatesStageTimeoutOverlay> {
             left: 0,
             right: 0,
             top: titleStartPos,
-            child: TransparentPointer(
-              transparent: stageState.isDebatesTimeout != true,
-              child: Center(
-                child: Column(
-                  children: [
-                    const GameTitle(
-                      child: 'Таймаут',
-                    ),
-                    const GameDescription(
-                      child: 'Дебаты зашли в тупик и время объявить приговор?',
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    roomsState.selectedRole is Plaintiff
-                        ? DebatesButton(
-                            isEnabled: true,
-                            text: 'Перейти к приговору',
-                            red: true,
-                            fontSize: 18,
-                            onPressed: () {
-                              if (stageState.isDebatesTimeout != true) {
-                                return;
-                              }
-
-                              gameState.updateStage(GameStage.Judgement);
-                            },
-                          )
-                        : Container(),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    roomsState.selectedRole is Plaintiff
-                        ? DebatesButton(
-                            isEnabled: true,
-                            fontSize: 12,
-                            text: 'Еще одну минуту...',
-                            onPressed: () {
-                              if (stageState.isDebatesTimeout != true) {
-                                return;
-                              }
-
-                              gameState.gameTime = const Duration(minutes: 1);
-                              gameState
-                                  .updateGameState(GameStageStates.fromExisting(
-                                      game.stageStates,
-                                      DebatesStageState.fromJson({
-                                        ...stageState.toJson(),
-                                        'isDebatesTimeout': false,
-                                      })));
-                            },
-                          )
-                        : Container(),
-                  ],
-                ),
+            child: Center(
+              child: Column(
+                children: [
+                  const GameTitle(
+                    child: 'Таймаут',
+                  ),
+                  const GameDescription(
+                    child: 'Дебаты зашли в тупик и время объявить приговор?',
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  roomsState.selectedRole is Plaintiff
+                      ? DebatesButton(
+                          isEnabled: true,
+                          text: 'Перейти к приговору',
+                          red: true,
+                          fontSize: 18,
+                          onPressed: () {
+                            gameState.updateStage(GameStage.Judgement);
+                          },
+                        )
+                      : Container(),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  roomsState.selectedRole is Plaintiff &&
+                          stageState.isDebatesTimeout == true
+                      ? DebatesButton(
+                          isEnabled: true,
+                          fontSize: 12,
+                          text: 'Еще одну минуту...',
+                          onPressed: () {
+                            gameState.gameTime = const Duration(minutes: 1);
+                            gameState
+                                .updateGameState(GameStageStates.fromExisting(
+                                    game.stageStates,
+                                    DebatesStageState.fromJson({
+                                      ...stageState.toJson(),
+                                      'isDebatesTimeout': false,
+                                    })));
+                          },
+                        )
+                      : Container(),
+                ],
               ),
             ),
           ),

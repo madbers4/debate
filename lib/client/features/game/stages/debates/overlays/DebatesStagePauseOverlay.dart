@@ -48,7 +48,8 @@ class _State extends State<DebatesStagePauseOverlay> {
                     const SizedBox(
                       height: 100,
                     ),
-                    roomsState.selectedRole is Plaintiff
+                    roomsState.selectedRole is Plaintiff &&
+                            stageState.inPauseOvrl == true
                         ? DebatesButton(
                             isEnabled: true,
                             text: 'Продолжить',
@@ -56,7 +57,7 @@ class _State extends State<DebatesStagePauseOverlay> {
                               if (stageState.inPauseOvrl != true) {
                                 return;
                               }
-              
+
                               gameState.updateGameState(
                                   GameStageStates.fromExisting(
                                       game.stageStates,
