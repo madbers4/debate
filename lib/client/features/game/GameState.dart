@@ -59,6 +59,10 @@ class GameState extends ChangeNotifier {
   }
 
   _onGame(Game g) {
+    if (g.id != game?.id) {
+      game = null;
+    }
+
     previousGame = game;
 
     game = g;
@@ -96,31 +100,10 @@ class GameState extends ChangeNotifier {
         }
         break;
       case GameStage.Act1:
-        if (previousGame?.gameStage == GameStage.Act2) {
+        if (previousGame?.gameStage == GameStage.Debates) {
           gameRouter.go('/act/1/left');
         } else {
           gameRouter.go('/act/1/right');
-        }
-        break;
-      case GameStage.Act2:
-        if (previousGame?.gameStage == GameStage.Act3) {
-          gameRouter.go('/act/2/left');
-        } else {
-          gameRouter.go('/act/2/right');
-        }
-        break;
-      case GameStage.Act3:
-        if (previousGame?.gameStage == GameStage.Act4) {
-          gameRouter.go('/act/3/left');
-        } else {
-          gameRouter.go('/act/3/right');
-        }
-        break;
-      case GameStage.Act4:
-        if (previousGame?.gameStage == GameStage.Evidences) {
-          gameRouter.go('/act/4/left');
-        } else {
-          gameRouter.go('/act/4/right');
         }
         break;
       case GameStage.Evidences:

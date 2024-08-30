@@ -8,7 +8,6 @@ import 'package:v1/client/features/settings/SettingsFormState.dart';
 
 class SettingsDialog extends StatelessWidget {
   final BuildContext globalContext;
-  final TextEditingController _apiController = TextEditingController(text: '');
 
   SettingsDialog({super.key, required this.globalContext});
 
@@ -20,7 +19,6 @@ class SettingsDialog extends StatelessWidget {
         create: (_) => SettingsFormState(globalContext),
         builder: (context, child) {
           final state = context.watch<SettingsFormState>();
-          _apiController.text = state.getFields().apiHost;
 
           return Form(
             key: state.formKey,
@@ -67,10 +65,8 @@ class SettingsDialog extends StatelessWidget {
                       SizedBox(
                         width: 200,
                         child: TextFormField(
-                          controller: _apiController,
-
+                          initialValue: state.getFields().apiHost,
                           maxLength: 30,
-                          // controller: _apiController,
                           onChanged: (value) {
                             SettingsFields fields = state.getFields();
 
@@ -102,12 +98,10 @@ class SettingsDialog extends StatelessWidget {
                       ),
                       TextButton(
                           onPressed: () {
-                            _apiController.text = 'https://test.com';
-
                             SettingsFields fields = state.getFields();
                             state.setFields(SettingsFields(
                                 username: fields.username,
-                                apiHost: _apiController.text,
+                                apiHost: fields.apiHost,
                                 timeousSec: fields.timeousSec));
                           },
                           child: const Text('Глобальный'))

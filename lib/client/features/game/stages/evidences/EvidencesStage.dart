@@ -44,7 +44,7 @@ class EvidencesStage extends StatelessWidget {
               onPressed: () {
                 gameState.updateGame(Game(
                   id: game!.id,
-                  gameStage: GameStage.Act4,
+                  gameStage: GameStage.Act1,
                   scenario: game!.scenario,
                   stageStates: game!.stageStates,
                 ));

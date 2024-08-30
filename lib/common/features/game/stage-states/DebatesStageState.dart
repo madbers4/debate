@@ -16,12 +16,12 @@ class DebatesStageState extends GameStageState {
   final bool? inPauseOvrl;
   final num incorrectAttempts;
   final List<String> refusedEvents;
-  final ActId showedActId;
+  final String showedActId;
 
   const DebatesStageState(
       {this.id = '1',
       this.refusedEvents = const [],
-      this.showedActId = ActId.One,
+      this.showedActId = actOneId,
       this.incorrectAttempts = 0,
       this.selectedEventId,
       this.selectedEvidenceId,
@@ -58,9 +58,8 @@ class DebatesStageState extends GameStageState {
         isDebatesTimeout: json['isDebatesTimeout'] != null
             ? json['isDebatesTimeout'] as bool
             : null,
-        inPauseOvrl: json['inPauseOvrl'] != null
-            ? json['inPauseOvrl'] as bool
-            : null,
+        inPauseOvrl:
+            json['inPauseOvrl'] != null ? json['inPauseOvrl'] as bool : null,
         isDefendentInnocent: json['isDefendentInnocent'] != null
             ? json['isDefendentInnocent'] as bool
             : null,
@@ -71,8 +70,7 @@ class DebatesStageState extends GameStageState {
         refusedEvents: json['refusedEvents'] != null
             ? List.from(json['refusedEvents'])
             : [],
-        showedActId: ActId.values
-            .firstWhere((e) => e.toString() == json['showedActId']));
+        showedActId: json['showedActId']);
   }
 
   Map toJson() => {
@@ -90,6 +88,6 @@ class DebatesStageState extends GameStageState {
         'inPauseOvrl': inPauseOvrl,
         'incorrectAttempts': incorrectAttempts,
         'refusedEvents': refusedEvents,
-        'showedActId': showedActId.toString(),
+        'showedActId': showedActId,
       };
 }

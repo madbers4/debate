@@ -27,25 +27,7 @@ class GameRouter {
           path: '/act/1/:direction',
           pageBuilder: (context, state) {
             return createSliderBuilder(
-                context, state, const ActStage(actId: ActId.One));
-          }),
-      GoRoute(
-          path: '/act/2/:direction',
-          pageBuilder: (context, state) {
-            return createSliderBuilder(
-                context, state, const ActStage(actId: ActId.Two));
-          }),
-      GoRoute(
-          path: '/act/3/:direction',
-          pageBuilder: (context, state) {
-            return createSliderBuilder(
-                context, state, const ActStage(actId: ActId.Three));
-          }),
-      GoRoute(
-          path: '/act/4/:direction',
-          pageBuilder: (context, state) {
-            return createSliderBuilder(
-                context, state, const ActStage(actId: ActId.Four));
+                context, state, const ActStage(actId: actOneId));
           }),
       GoRoute(
         path: '/evidences/:direction',

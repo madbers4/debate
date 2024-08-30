@@ -2,6 +2,7 @@ import 'package:v1/common/features/scenario/event/ScenarioEvent.dart';
 
 class ScenarioFalsyEvent extends ScenarioEvent {
   final bool? confirmsInnocence;
+  // final String? confirmsInnocence;
   // HARDCODE для фабрики
   final bool fEvent;
 

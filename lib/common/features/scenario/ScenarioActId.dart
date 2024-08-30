@@ -1,45 +1,38 @@
-enum ActId { One, Two, Three, Four }
+const String actOneId = 'АКТ I';
+const String actTwoId = 'АКТ II';
+const String actThreeId = 'АКТ III';
+const String actFourId = 'АКТ IV';
+const String actFiveId = 'АКТ V';
 
-String getActTitleByActId(ActId actId) {
+String? getNextActId(String actId) {
   switch (actId) {
-    case ActId.One:
-      return 'АКТ I';
-    case ActId.Two:
-      return 'АКТ II';
-    case ActId.Three:
-      return 'АКТ III';
-    case ActId.Four:
-      return 'АКТ IV';
-    default:
-      return 'Не верный акт';
-  }
-}
-
-ActId? getNextActId(ActId actId) {
-  switch (actId) {
-    case ActId.One:
-      return ActId.Two;
-    case ActId.Two:
-      return ActId.Three;
-    case ActId.Three:
-      return ActId.Four;
-    case ActId.Four:
+    case actOneId:
+      return actTwoId;
+    case actTwoId:
+      return actThreeId;
+    case actThreeId:
+      return actFourId;
+    case actFourId:
+      return actFiveId;
+    case actFiveId:
       return null;
     default:
       return null;
   }
 }
 
-ActId? getPrevActId(ActId actId) {
+String? getPrevActId(String actId) {
   switch (actId) {
-    case ActId.One:
+    case actOneId:
       return null;
-    case ActId.Two:
-      return ActId.One;
-    case ActId.Three:
-      return ActId.Two;
-    case ActId.Four:
-      return ActId.Three;
+    case actTwoId:
+      return actOneId;
+    case actThreeId:
+      return actTwoId;
+    case actFourId:
+      return actThreeId;
+    case actFiveId:
+      return actFourId;
     default:
       return null;
   }

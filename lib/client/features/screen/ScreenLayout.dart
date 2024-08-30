@@ -47,7 +47,6 @@ class ScreenLayout extends StatelessWidget {
           ),
           starsConfig: StarsConfig(starCount: 20),
         )),
-
         AnimatedOpacity(
           duration: const Duration(milliseconds: 2000),
           opacity: background == 'black' ? 1.0 : 0,
@@ -57,8 +56,6 @@ class ScreenLayout extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(color: Colors.black))),
         ),
-        // const ScreenStarry(),
-
         Padding(
           padding: const EdgeInsets.all(50.0),
           child: bodyContent,

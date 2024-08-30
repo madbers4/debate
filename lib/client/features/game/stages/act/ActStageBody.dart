@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/colors.dart';
 import 'package:v1/client/features/game/GameState.dart';
-import 'package:v1/client/features/game/stages/act/ShowButton.dart';
 
 import 'package:v1/client/features/game/widgets/cards/FactCard.dart';
-import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
 import 'package:v1/client/features/game/widgets/description/Description.dart';
 import 'package:v1/client/features/game/widgets/title/Title.dart';
 import 'package:v1/client/features/rooms/RoomsState.dart';
-import 'package:v1/common/features/game/GameStageStates.dart';
 import 'package:v1/common/features/game/stage-states/ActStageState.dart';
-import 'package:v1/common/features/player/Plaintiff.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
 
 class ActStageBody extends StatelessWidget {
@@ -58,7 +53,7 @@ class ActStageBody extends StatelessWidget {
                     child: actTitle,
                     fontSize: 60,
                   ),
-                   Container(
+                  Container(
                     height: 15,
                   ),
                   GameTitle(
@@ -102,156 +97,15 @@ class ActStageBody extends StatelessWidget {
                       Container(
                         width: 800,
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                FactCard(
-                                  fact: event.events[0],
-                                  isCardCardFlipped:
-                                      roomsState.selectedRole is Plaintiff
-                                          ? false
-                                          : !stageState.isFirstCardShowed,
-                                  isDisabled: true,
-                                ),
-                                Container(
-                                  width: roomsState.selectedRole is Plaintiff
-                                      ? 20
-                                      : 0,
-                                ),
-                                roomsState.selectedRole is Plaintiff
-                                    ? DebatesButton(
-                                        text: !stageState.isFirstCardShowed
-                                            ? 'Показать'
-                                            : 'Показано',
-                                        isEnabled:
-                                            !stageState.isFirstCardShowed,
-                                        onPressed: !stageState.isFirstCardShowed
-                                            ? () {
-                                                gameState.updateGameState(
-                                                    GameStageStates.fromExisting(
-                                                        gameState
-                                                            .game!.stageStates,
-                                                        ActStageState(
-                                                            id: stageState.id,
-                                                            isCardsShowed:
-                                                                stageState
-                                                                    .isCardsShowed,
-                                                            isFirstCardShowed:
-                                                                true,
-                                                            isSecondCardShowed:
-                                                                stageState
-                                                                    .isSecondCardShowed,
-                                                            isThirdCardShowed:
-                                                                stageState
-                                                                    .isThirdCardShowed),
-                                                        actKey));
-                                              }
-                                            : null,
-                                      )
-                                    : Container()
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                FactCard(
-                                  fact: event.events[1],
-                                  isCardCardFlipped:
-                                      roomsState.selectedRole is Plaintiff
-                                          ? false
-                                          : !stageState.isSecondCardShowed,
-                                  isDisabled: true,
-                                ),
-                                Container(
-                                  width: roomsState.selectedRole is Plaintiff
-                                      ? 20
-                                      : 0,
-                                ),
-                                roomsState.selectedRole is Plaintiff
-                                    ? DebatesButton(
-                                        text: !stageState.isSecondCardShowed
-                                            ? 'Показать'
-                                            : 'Показано',
-                                        isEnabled:
-                                            !stageState.isSecondCardShowed,
-                                        onPressed: !stageState
-                                                .isSecondCardShowed
-                                            ? () {
-                                                gameState.updateGameState(
-                                                    GameStageStates.fromExisting(
-                                                        gameState
-                                                            .game!.stageStates,
-                                                        ActStageState(
-                                                            id: stageState.id,
-                                                            isCardsShowed:
-                                                                stageState
-                                                                    .isCardsShowed,
-                                                            isFirstCardShowed:
-                                                                stageState
-                                                                    .isFirstCardShowed,
-                                                            isSecondCardShowed:
-                                                                true,
-                                                            isThirdCardShowed:
-                                                                stageState
-                                                                    .isThirdCardShowed),
-                                                        actKey));
-                                              }
-                                            : null,
-                                      )
-                                    : Container()
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                FactCard(
-                                  fact: event.events[2],
-                                  isDisabled: true,
-                                  isCardCardFlipped:
-                                      roomsState.selectedRole is Plaintiff
-                                          ? false
-                                          : !stageState.isThirdCardShowed,
-                                ),
-                                Container(
-                                  width: roomsState.selectedRole is Plaintiff
-                                      ? 20
-                                      : 0,
-                                ),
-                                roomsState.selectedRole is Plaintiff
-                                    ? DebatesButton(
-                                        text: !stageState.isThirdCardShowed
-                                            ? 'Показать'
-                                            : 'Показано',
-                                        isEnabled:
-                                            !stageState.isThirdCardShowed,
-                                        onPressed: !stageState.isThirdCardShowed
-                                            ? () {
-                                                gameState.updateGameState(
-                                                    GameStageStates.fromExisting(
-                                                        gameState
-                                                            .game!.stageStates,
-                                                        ActStageState(
-                                                            id: stageState.id,
-                                                            isCardsShowed:
-                                                                stageState
-                                                                    .isCardsShowed,
-                                                            isFirstCardShowed:
-                                                                stageState
-                                                                    .isFirstCardShowed,
-                                                            isSecondCardShowed:
-                                                                stageState
-                                                                    .isSecondCardShowed,
-                                                            isThirdCardShowed:
-                                                                true),
-                                                        actKey));
-                                              }
-                                            : null,
-                                      )
-                                    : Container()
-                              ],
-                            ),
-                          ],
-                        ),
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: event.events
+                                .map(
+                                  (e) => FactCard(
+                                    fact: e,
+                                  ),
+                                )
+                                .toList()),
                       )
                     ],
                   ),

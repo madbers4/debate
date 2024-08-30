@@ -7,7 +7,7 @@ class ScenarioEvedenceFactory {
   ScenarioEvedenceFactory({required Map<dynamic, dynamic> json}) : _json = json;
 
   ScenarioEvedence build() {
-    if (_json['falsyEventId'] != null) {
+    if (_json['falsyEventIds'] != null) {
       return ScenarioTruthyEvedence.fromJson(_json);
     }
 

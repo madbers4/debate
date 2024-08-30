@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlayAddEvedence.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlayChangeAct.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlayChangeEvent.dart';
+import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlayChangeNextAct.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlayChangedCards.dart';
 import 'package:v1/client/features/game/stages/debates/overlays/matcing-confirmed/DebatesStageConfirmedOverlayRemoveEvedences.dart';
 import 'package:v1/client/features/game/widgets/debates-button/DebatesButton.dart';
@@ -28,6 +29,7 @@ import 'package:v1/common/features/scenario/transitionEvent/TransitionEventEffec
 import 'package:v1/common/features/scenario/transitionEvent/effects/TransitionEventAddEvedenceEffect.dart';
 import 'package:v1/common/features/scenario/transitionEvent/effects/TransitionEventChangeActEffect.dart';
 import 'package:v1/common/features/scenario/transitionEvent/effects/TransitionEventChangeEventEffect.dart';
+import 'package:v1/common/features/scenario/transitionEvent/effects/TransitionEventNextActEffect.dart';
 import 'package:v1/common/features/scenario/transitionEvent/effects/TransitionEventRemoveEvedenceEffect.dart';
 import 'package:v1/common/utils/generateUID.dart';
 
@@ -76,6 +78,16 @@ class _State extends State<DebatesStageConfirmedOverlay> {
           id: 'rem-1', evedenceIds: [selectedEvidence.id]));
     }
 
+    final nextAct = transitions.any((element) => element.nextActId != null)
+        ? transitions
+            .lastWhere((element) => element.nextActId != null)
+            .nextActId
+        : null;
+
+    if (nextAct != null) {
+      effects.add(TransitionEventNextActEffect(id: generateUID()));
+    }
+
     List<TransitionEventAddEvedencesEffect> addEvedencesEffects =
         effects.whereType<TransitionEventAddEvedencesEffect>().toList();
     List<TransitionEventChangeActEffect> changeActEffects =
@@ -84,12 +96,15 @@ class _State extends State<DebatesStageConfirmedOverlay> {
         effects.whereType<TransitionEventChangeEventEffect>().toList();
     List<TransitionEventRemoveEvedenceEffect> removeEvedenceEffect =
         effects.whereType<TransitionEventRemoveEvedenceEffect>().toList();
+    List<TransitionEventNextActEffect> nextActTitleEffect =
+        effects.whereType<TransitionEventNextActEffect>().toList();
 
     int pages = 1 +
         (addEvedencesEffects.isNotEmpty ? 1 : 0) +
         changeActEffects.length +
         changeEventEffect.length +
-        (removeEvedenceEffect.isNotEmpty ? 1 : 0);
+        (removeEvedenceEffect.isNotEmpty ? 1 : 0) +
+        (nextActTitleEffect.isNotEmpty ? 1 : 0);
 
     int pageId = 0;
     int descriptionId = 0;
@@ -178,6 +193,18 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                                     fontSize: 18, child: 'Улики удалены'),
                               ))
                           : Container(),
+                      nextActTitleEffect.isNotEmpty
+                          ? AnimatedOpacity(
+                              duration: const Duration(milliseconds: 500),
+                              opacity: stageState.denialConfirmedCurrentPage ==
+                                      descriptionId++
+                                  ? 1.0
+                                  : 0.0,
+                              child: Center(
+                                child: GameDescription(
+                                    fontSize: 30, child: nextAct!),
+                              ))
+                          : Container(),
                     ],
                   ),
                 )
@@ -250,6 +277,15 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                               effects: removeEvedenceEffect,
                             ))
                           : Container(),
+                      nextActTitleEffect.isNotEmpty
+                          ? Center(
+                              child: DebatesStageConfirmedOverlayChangeNextAct(
+                              isVisible:
+                                  stageState.denialConfirmedCurrentPage ==
+                                      pageId++,
+                              actId: nextAct!,
+                            ))
+                          : Container(),
                     ],
                   ),
                 ),
@@ -300,6 +336,7 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                               'selectedEventId': null,
                               'selectedEvidenceId': null,
                               'inPause': false,
+                              'showedActId': nextAct ?? stageState.showedActId
                             }
                           },
                           'scenario': {

@@ -80,11 +80,11 @@ class GameService extends SocketService {
     final observers = room.observers;
 
     List<SocketClient> playersClients = roomsService.playerByClient.entries
-        .where((e) =>
-            e.value == plaintiff ||
-            // TODO: REPLACE THIS
-            e.value == defendant ||
-            observers.any((element) => element == e.value))
+        // .where((e) =>
+        //     e.value == plaintiff ||
+        //     // TODO: REPLACE THIS
+        //     e.value == defendant ||
+        //     observers.any((element) => element == e.value))
         .map((e) => e.key)
         .toList();
 
@@ -113,11 +113,11 @@ class GameService extends SocketService {
     final observers = room.observers;
 
     List<SocketClient> playersClients = roomsService.playerByClient.entries
-        .where((e) =>
-            e.value == plaintiff ||
-            // TODO: REPLACE THIS
-            e.value == defendant ||
-            observers.any((element) => element == e.value))
+        // .where((e) =>
+        //     e.value == plaintiff ||
+        //     // TODO: REPLACE THIS
+        //     e.value == defendant ||
+        //     observers.any((element) => element == e.value))
         .map((e) => e.key)
         .toList();
 
@@ -128,6 +128,4 @@ class GameService extends SocketService {
       gameIdByClient[playerClient] = game.id;
     }
   }
-
-  void _exit(Game game, SocketClient client) {}
 }

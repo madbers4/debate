@@ -41,7 +41,8 @@ class _State extends State<DebatesStageMatchingOverlay> {
 
     final isCardMatched = selectedEvent is ScenarioFalsyEvent &&
         selectedEvidence is ScenarioTruthyEvedence &&
-        selectedEvidence.falsyEventId == selectedEvent.id;
+        selectedEvidence.falsyEventIds
+            .any((element) => selectedEvent.id == element);
 
     if (selectedEvidence == null || selectedEvent == null) {
       return Container();

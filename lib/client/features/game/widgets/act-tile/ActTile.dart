@@ -9,17 +9,14 @@ import 'package:v1/client/features/rooms/RoomsState.dart';
 import 'package:v1/client/widgets/game-card/GameCardWidget.dart';
 import 'package:v1/common/features/player/Defendant.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
-import 'package:v1/common/features/scenario/ScenarioActId.dart';
 
 class ActTile extends StatelessWidget {
-  final ActId actId;
   final ScenarioAct event;
   final bool isShowed;
   final List<String> hiddenIds;
 
   const ActTile(
       {super.key,
-      required this.actId,
       required this.event,
       required this.isShowed,
       required this.hiddenIds});
@@ -67,7 +64,7 @@ class ActTile extends StatelessWidget {
               left: 0,
               width: width,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: event.events.indexed
                     .map((e) {

@@ -83,7 +83,7 @@ class _State extends State<DebatesStageTimer> {
     String seconds = _t.inSeconds.remainder(60).toString().padLeft(2, '0');
 
     return SizedBox(
-      width: 77,
+      width: 100,
       child: GameTitle(
         fontSize: 30,
         textAlign: TextAlign.left,

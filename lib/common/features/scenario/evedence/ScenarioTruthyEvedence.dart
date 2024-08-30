@@ -1,7 +1,7 @@
 import 'package:v1/common/features/scenario/evedence/ScenarioEvedence.dart';
 
 class ScenarioTruthyEvedence extends ScenarioEvedence {
-  final String falsyEventId;
+  final List<String> falsyEventIds;
   final String falsyDescription;
   final String triggeredTransitionId;
 
@@ -10,11 +10,13 @@ class ScenarioTruthyEvedence extends ScenarioEvedence {
       required super.title,
       required super.description,
       required this.falsyDescription,
-      required this.falsyEventId,
+      required this.falsyEventIds,
       required this.triggeredTransitionId});
 
   ScenarioTruthyEvedence.fromJson(Map<dynamic, dynamic> json)
-      : falsyEventId = json['falsyEventId'] as String,
+      : falsyEventIds = json['falsyEventIds'] != null
+            ? List.from(json['falsyEventIds'])
+            : [],
         falsyDescription = json['falsyDescription'] as String,
         triggeredTransitionId = json['triggeredTransitionId'] as String,
         super(
@@ -27,7 +29,7 @@ class ScenarioTruthyEvedence extends ScenarioEvedence {
         'id': id,
         'title': title,
         'description': description,
-        'falsyEventId': falsyEventId,
+        'falsyEventIds': falsyEventIds,
         'falsyDescription': falsyDescription,
         'triggeredTransitionId': triggeredTransitionId,
       };

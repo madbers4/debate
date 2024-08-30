@@ -75,7 +75,7 @@ class EvidencesStageBody extends StatelessWidget {
                         width: 800,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: evidences.indexed
                               .map((e) {
                                 final value = e.$2;

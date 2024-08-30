@@ -1,5 +1,6 @@
 import 'package:v1/common/features/scenario/Scenario.dart';
 import 'package:v1/common/features/scenario/ScenarioAct.dart';
+import 'package:v1/common/features/scenario/ScenarioActId.dart';
 import 'package:v1/common/features/scenario/ScenarioDescription.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendant.dart';
 import 'package:v1/common/features/scenario/defendant/ScenarioDefendantOrigin.dart';
@@ -47,16 +48,16 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
         )),
     acts: [
       ScenarioAct(
-          id: '1',
+          id: actOneId,
           title: 'Место преступление - кафе «Лютес»',
           description:
               'В тот прекрасный солнечный день Шарлотта должна была взять интервью у Лионии, известного кондитера и владелицы кафе, о ее клубничном торте.',
           events: [
-            ScenarioEvent(
-                id: generateUID(),
-                title: 'Погода',
-                description:
-                    'Преступление произошло в самый жаркий день года, примерно в полдень.'),
+            // ScenarioEvent(
+            //     id: generateUID(),
+            //     title: 'Погода',
+            //     description:
+            //         'Преступление произошло в самый жаркий день года, примерно в полдень.'),
             ScenarioEvent(
                 id: generateUID(),
                 title: 'Место',
@@ -69,7 +70,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
                     'Он был идеален, в нем не было ни единого изъяна, и казалось, что он вовсе игрушечный.'),
           ]),
       ScenarioAct(
-          id: '2',
+          id: actTwoId,
           title: 'Еще один день, еще один патруль',
           description:
               'В середине дня жандарм Мелюзина остановилась во время своего патруля, после чего неожиданно исчезла на глазах у опрошенных свидетелей. Посетители утверждают, что видели промчавшуюся между столиками тень. Когда Лиония с Шарлоттой подошли к столу, на котором стоял торт, они увидели макушку головы Мелюзины.',
@@ -90,55 +91,55 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
               description: 'Тень промчалась между столиками кофейни к торту.',
             ),
           ]),
-      ScenarioAct(
-          id: '3',
-          title: 'Интервью',
-          description:
-              'Торт упал, разлетевшись на мелкие кусочки, которые тут же начали плавиться от горячего асфальта. Это привлекло внимание Шарлотты и Лионии. Милюзина испугалась и подняла руки вверх. Лиония подошла поближе к упавшему торту и заметила механических жучков внутри торта. Она испуганно закричала и потеряла сознание.',
-          events: [
-            ScenarioEvent(
-                id: generateUID(),
-                title: 'Задержание',
-                description:
-                    'Мелюзина, увидев Шарлотту и Лионию, испугалась и подняла руки.'),
-            ScenarioFalsyEvent(
-                id: 'Остатки торта',
-                title: 'Остатки торта',
-                description:
-                    'Как утверждает Лиония, в торте были размещены дюжина шпионских жучков.'),
-            ScenarioEvent(
-                id: generateUID(),
-                title: 'Обморок',
-                description:
-                    'Лиония запаниковала и потеряла сознание, как только увидела жучков.'),
-          ]),
-      ScenarioAct(
-          id: '4',
-          title: 'Шпионская тень',
-          description:
-              'После того, как Лиония пришла в себя, она постаралась собрать остатки сил в кулак и довести данное событие до суда. Девушка утверждает, что регулярно находила у себя в доме различные устройства для слежения, которые размещает Шпионская Тень, таинственный преступник, который продает сплетни подслушанные у местной знати.',
-          events: [
-            ScenarioFalsyEvent(
-                id: 'Шпионская тень',
-                title: 'Шпионская тень',
-                description: 'Преступник промышляющий продажей сплетен.'),
-            ScenarioEvent(
-                id: generateUID(),
-                title: 'Обвинение',
-                description:
-                    'Лиония обвиняет Шпионскую Тень в размещении жучков.'),
-            ScenarioFalsyEvent(
-              id: 'Мелюзина',
-              title: 'Мелюзина',
-              description: 'Разве Мелюзина может быть Шпионской Тенью?',
-            ),
-          ]),
+      // ScenarioAct(
+      //     id: actThreeId,
+      //     title: 'Интервью',
+      //     description:
+      //         'Торт упал, разлетевшись на мелкие кусочки, которые тут же начали плавиться от горячего асфальта. Это привлекло внимание Шарлотты и Лионии. Милюзина испугалась и подняла руки вверх. Лиония подошла поближе к упавшему торту и заметила механических жучков внутри торта. Она испуганно закричала и потеряла сознание.',
+      //     events: [
+      //       ScenarioEvent(
+      //           id: generateUID(),
+      //           title: 'Задержание',
+      //           description:
+      //               'Мелюзина, увидев Шарлотту и Лионию, испугалась и подняла руки.'),
+      //       ScenarioFalsyEvent(
+      //           id: 'Остатки торта',
+      //           title: 'Остатки торта',
+      //           description:
+      //               'Как утверждает Лиония, в торте были размещены дюжина шпионских жучков.'),
+      //       ScenarioEvent(
+      //           id: generateUID(),
+      //           title: 'Обморок',
+      //           description:
+      //               'Лиония запаниковала и потеряла сознание, как только увидела жучков.'),
+      //     ]),
+      // ScenarioAct(
+      //     id: actFourId,
+      //     title: 'Шпионская тень',
+      //     description:
+      //         'После того, как Лиония пришла в себя, она постаралась собрать остатки сил в кулак и довести данное событие до суда. Девушка утверждает, что регулярно находила у себя в доме различные устройства для слежения, которые размещает Шпионская Тень, таинственный преступник, который продает сплетни подслушанные у местной знати.',
+      //     events: [
+      //       ScenarioFalsyEvent(
+      //           id: 'Шпионская тень',
+      //           title: 'Шпионская тень',
+      //           description: 'Преступник промышляющий продажей сплетен.'),
+      //       ScenarioEvent(
+      //           id: generateUID(),
+      //           title: 'Обвинение',
+      //           description:
+      //               'Лиония обвиняет Шпионскую Тень в размещении жучков.'),
+      //       ScenarioFalsyEvent(
+      //         id: 'Мелюзина',
+      //         title: 'Мелюзина',
+      //         description: 'Разве Мелюзина может быть Шпионской Тенью?',
+      //       ),
+      //     ]),
     ],
     evedences: [
       ScenarioTruthyEvedence(
           id: generateUID(),
           title: 'Мелюзина',
-          falsyEventId: 'Тень',
+          falsyEventIds: ['Тень'],
           falsyDescription:
               'Мелюзина низкая и проворная, так что она могла быстро добежать до торта, и остаться незамеченной.',
           triggeredTransitionId: 'Мелюзина с низким ростом',
@@ -151,7 +152,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
       ScenarioTruthyEvedence(
           id: generateUID(),
           title: 'Солнечный день',
-          falsyEventId: 'Торт',
+          falsyEventIds: ['Торт'],
           falsyDescription:
               'Торт не был в идеальном состоянии и частично растаял на солнце. Мелюзина просто хотела переставить его в тень.',
           triggeredTransitionId: 'Мелюзна хотела переставить торт в тень',
@@ -162,21 +163,24 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
           description: 'Вообще-то я не люблю клубнику и тортики. (ложь)'),
     ],
     transitionEvents: [
-      TransitionEvent(id: 'Мелюзна хотела переставить торт в тень', effects: [
-        TransitionEventChangeEventEffect(
-            id: generateUID(),
-            actId: '1',
-            eventId: 'Торт',
-            event: ScenarioEvent(
-                id: 'Торт',
-                title: 'Растаявший торт',
-                description:
-                    'Торт уже некоторое время стоял на жарком солнце и начал таять.'))
-      ]),
+      TransitionEvent(
+          id: 'Мелюзна хотела переставить торт в тень',
+          nextActId: actTwoId,
+          effects: [
+            TransitionEventChangeEventEffect(
+                id: generateUID(),
+                actId: '1',
+                eventId: 'Торт',
+                event: ScenarioEvent(
+                    id: 'Торт',
+                    title: 'Растаявший торт',
+                    description:
+                        'Торт уже некоторое время стоял на жарком солнце и начал таять.'))
+          ]),
       TransitionEvent(id: 'Мелюзина с низким ростом', effects: [
         TransitionEventChangeEventEffect(
             id: generateUID(),
-            actId: '2',
+            actId: actTwoId,
             eventId: 'Тень',
             event: ScenarioEvent(
                 id: 'Тень',
@@ -187,7 +191,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
       TransitionEvent(id: generateUID(), afterNoEvedenceLeft: true, effects: [
         TransitionEventChangeActEffect(
             id: generateUID(),
-            actId: '2',
+            actId: actTwoId,
             description:
                 'В середине дня жандарм Мелюзина, находясь во время своего патруля, промчалась мимо столиков прямо к торту. Когда Лиония с Шарлоттой подошли к упавшему торту, они увидели макушку головы Мелюзины.'),
         TransitionEventRemoveEvedenceEffect(
@@ -200,7 +204,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
               description: 'Мелюзина просто сдалась, подняв руки вверх.',
               falsyDescription:
                   'Разве, так называемая, Шпионская Тень так просто сдалась бы?',
-              falsyEventId: 'Шпионская тень',
+              falsyEventIds: ['Шпионская тень'],
               triggeredTransitionId:
                   'Преступник, известный торговлей сплетнями. Но разве он мог так просто сдаться?'),
           ScenarioTruthyEvedence(
@@ -209,7 +213,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
               description: 'Механические жучки, обнаруженные в торте.',
               falsyDescription:
                   'Нет прямых доказательств тому, что жучки в торте были прослушивающими устройствами.',
-              falsyEventId: 'Остатки торта',
+              falsyEventIds: ['Остатки торта'],
               triggeredTransitionId:
                   'В остатках торта обнаружены механические жучки.'),
           ScenarioEvedence(
@@ -266,7 +270,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
               description:
                   'Все знают, что Милюзина очень серьезно относится к своим обязанностям жандарма и не стала бы нарушать права жителей Фонтейна на частную жизнь, раскладывая везде жучки. Но всегда стремиться всем помочь.',
               falsyDescription: '...',
-              falsyEventId: 'Мелюзина',
+              falsyEventIds: ['Мелюзина'],
               triggeredTransitionId: 'Игра завершается невиновностью игрока.'),
           ScenarioEvedence(
               id: 'Приготовление',

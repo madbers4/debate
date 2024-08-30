@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:v1/client/features/game/widgets/act-tile/ActTile.dart';
 import 'package:v1/client/features/game/widgets/exit-dialog/ExitButton.dart';
 import 'package:v1/client/features/game/GameState.dart';
 import 'package:v1/client/features/game/stages/act/ActStageBody.dart';
@@ -18,7 +17,7 @@ import 'package:v1/common/features/scenario/ScenarioAct.dart';
 import 'package:v1/common/features/scenario/ScenarioActId.dart';
 
 class ActStage extends StatelessWidget {
-  final ActId actId;
+  final String actId;
   const ActStage({super.key, required this.actId});
 
   @override
@@ -29,34 +28,16 @@ class ActStage extends StatelessWidget {
     final scenario = game.scenario;
     ActStageState stageState;
     ScenarioAct event;
-    String actTitle = getActTitleByActId(actId);
+    String actTitle = actId;
     String actKey;
     GameStage previousStage;
 
     switch (actId) {
-      case ActId.One:
+      case actOneId:
         actKey = 'act1';
         stageState = game.stageStates.act1;
         event = game.scenario.acts[0];
         previousStage = GameStage.Defendant;
-        break;
-      case ActId.Two:
-        actKey = 'act2';
-        stageState = game.stageStates.act2;
-        event = game.scenario.acts[1];
-        previousStage = GameStage.Act1;
-        break;
-      case ActId.Three:
-        actKey = 'act3';
-        stageState = game.stageStates.act3;
-        event = game.scenario.acts[2];
-        previousStage = GameStage.Act2;
-        break;
-      case ActId.Four:
-        actKey = 'act4';
-        stageState = game.stageStates.act4;
-        event = game.scenario.acts[3];
-        previousStage = GameStage.Act3;
         break;
       default:
         actKey = 'null';
@@ -75,40 +56,23 @@ class ActStage extends StatelessWidget {
       ),
       leftTopContent:
           roomsState.selectedRole is! Defendant ? ExitButton() : Container(),
-      rightBottomContent: roomsState.selectedRole is Plaintiff &&
-              (!stageState.isCardsShowed ||
-                  stageState.isFirstCardShowed &&
-                      stageState.isSecondCardShowed &&
-                      stageState.isThirdCardShowed)
-          ? NextButton(
-              onPressed: () {
-                if (!stageState.isCardsShowed) {
-                  gameState.updateGameState(GameStageStates.fromExisting(
-                      game.stageStates,
-                      ActStageState(
-                          id: stageState.id,
-                          isCardsShowed: true,
-                          isFirstCardShowed: stageState.isFirstCardShowed,
-                          isSecondCardShowed: stageState.isSecondCardShowed,
-                          isThirdCardShowed: stageState.isThirdCardShowed),
-                      actKey));
-                  return;
-                }
+      rightBottomContent: roomsState.selectedRole is Plaintiff
+          ? NextButton(onPressed: () {
+              if (!stageState.isCardsShowed) {
+                gameState.updateGameState(GameStageStates.fromExisting(
+                    game.stageStates,
+                    ActStageState(
+                        id: stageState.id,
+                        isCardsShowed: true,
+                        isFirstCardShowed: stageState.isFirstCardShowed,
+                        isSecondCardShowed: stageState.isSecondCardShowed,
+                        isThirdCardShowed: stageState.isThirdCardShowed),
+                    actKey));
+                return;
+              }
 
-                if (actId == ActId.One) {
-                  gameState.updateStage(GameStage.Act2);
-                }
-                if (actId == ActId.Two) {
-                  gameState.updateStage(GameStage.Act3);
-                }
-                if (actId == ActId.Three) {
-                  gameState.updateStage(GameStage.Act4);
-                }
-                if (actId == ActId.Four) {
-                  gameState.updateStage(GameStage.Evidences);
-                }
-              },
-            )
+              gameState.updateStage(GameStage.Evidences);
+            })
           : Container(),
       leftBottomContent: roomsState.selectedRole is Plaintiff
           ? BackButton2(

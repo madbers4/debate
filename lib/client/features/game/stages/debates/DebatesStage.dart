@@ -124,7 +124,7 @@ String? getActiveOverlayId(GameState gameState) {
   }
 
   if (stageState.isDebatesTimeout == true) {
-    // return OverlayIds.Timeout;
+    return OverlayIds.Timeout;
   }
 
   return null;

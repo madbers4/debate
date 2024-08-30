@@ -31,7 +31,7 @@ class SettingsFormState extends ChangeNotifier {
 
   setFields(SettingsFields newFields) {
     _fields = newFields;
-    notifyListeners();
+    // notifyListeners();
   }
 
   save() {
