@@ -34,7 +34,7 @@ class ScenarionScreenState extends ChangeNotifier {
     final selectedScenario =
         scenarious_.firstWhere((element) => element.id == selectedScenarioId)!;
 
-    _gameClient.createGame(Game(
+    _gameClient.updateGame(Game(
         id: generateUID(),
         gameStage: GameStage.Title,
         scenario: selectedScenario,

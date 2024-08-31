@@ -15,7 +15,7 @@ class GameService extends SocketService {
   late AutorizationService authService;
   Map<SocketClient, String> gameIdByClient = {};
   // Map<SocketClient, String> gameByRoom = {};
-  Map<String, Game> gameById = {};
+  Game? tgame;
 
   GameService({required super.serviceProvider}) {
     authService = serviceProvider.get<AutorizationService>();
@@ -94,7 +94,7 @@ class GameService extends SocketService {
       gameIdByClient.removeWhere((key, value) => key == playerClient);
     }
 
-    gameById = {};
+    tgame = null;
   }
 
   void _updateGame(Game game, SocketClient client) {
@@ -102,7 +102,7 @@ class GameService extends SocketService {
       return;
     }
 
-    gameById[game.id] = game;
+    tgame = game;
 
     final roomsService = serviceProvider.get<RoomsService>();
     final roomId = roomsService.roomIdByClient[client]!;

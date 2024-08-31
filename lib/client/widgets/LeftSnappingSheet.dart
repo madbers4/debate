@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
+import 'package:transparent_pointer/transparent_pointer.dart';
 import 'package:v1/client/colors.dart';
 
 class LeftSnappingSheet extends StatelessWidget {
@@ -17,29 +18,33 @@ class LeftSnappingSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SnappingSheet.horizontal(
       grabbingWidth: isHidden == true ? 0 : 25,
-      grabbing: AnimatedOpacity(
-          duration: const Duration(milliseconds: 1000),
-          opacity: isHidden == true ? 0.0 : 1.0,
-          child: Container(
-            color: Colors.transparent,
-            height: 250,
-            child: Center(
+      grabbing: TransparentPointer(
+          transparent: isHidden == true,
+          child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 1000),
+              opacity: isHidden == true ? 0.0 : 1.0,
               child: Container(
-                width: 5,
-                height: 200,
-                decoration: const BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
-              ),
-            ),
-          )),
+                color: Colors.transparent,
+                height: 250,
+                child: Center(
+                  child: Container(
+                    width: 5,
+                    height: 200,
+                    decoration: const BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
+                  ),
+                ),
+              ))),
       sheetLeft: SnappingSheetContent(
         draggable: false,
         sizeBehavior: SheetSizeStatic(size: 100.0, expandOnOverflow: false),
-        child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 1000),
-            opacity: isHidden == true ? 0.0 : 1.0,
-            child: sheetContent),
+        child: TransparentPointer(
+            transparent: isHidden == true,
+            child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 1000),
+                opacity: isHidden == true ? 0.0 : 1.0,
+                child: sheetContent)),
       ),
       snappingPositions: const [
         SnappingPosition.factor(

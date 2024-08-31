@@ -169,16 +169,16 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                             child: GameDescription(
                                 fontSize: 18, child: 'Событие изменено'),
                           ))),
-                      addEvedencesEffects.isNotEmpty
+                      nextActTitleEffect.isNotEmpty
                           ? AnimatedOpacity(
                               duration: const Duration(milliseconds: 500),
                               opacity: stageState.denialConfirmedCurrentPage ==
                                       descriptionId++
                                   ? 1.0
                                   : 0.0,
-                              child: const Center(
+                              child: Center(
                                 child: GameDescription(
-                                    fontSize: 18, child: 'Улики добавлены'),
+                                    fontSize: 30, child: nextAct!),
                               ))
                           : Container(),
                       removeEvedenceEffect.isNotEmpty
@@ -193,16 +193,16 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                                     fontSize: 18, child: 'Улики удалены'),
                               ))
                           : Container(),
-                      nextActTitleEffect.isNotEmpty
+                      addEvedencesEffects.isNotEmpty
                           ? AnimatedOpacity(
                               duration: const Duration(milliseconds: 500),
                               opacity: stageState.denialConfirmedCurrentPage ==
                                       descriptionId++
                                   ? 1.0
                                   : 0.0,
-                              child: Center(
+                              child: const Center(
                                 child: GameDescription(
-                                    fontSize: 30, child: nextAct!),
+                                    fontSize: 18, child: 'Улики добавлены'),
                               ))
                           : Container(),
                     ],
@@ -258,13 +258,13 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                                 pageId++,
                             effect: e,
                           ))),
-                      addEvedencesEffects.isNotEmpty
+                      nextActTitleEffect.isNotEmpty
                           ? Center(
-                              child: DebatesStageConfirmedOverlayAddEvedence(
+                              child: DebatesStageConfirmedOverlayChangeNextAct(
                               isVisible:
                                   stageState.denialConfirmedCurrentPage ==
                                       pageId++,
-                              effects: addEvedencesEffects,
+                              actId: nextAct!,
                             ))
                           : Container(),
                       removeEvedenceEffect.isNotEmpty
@@ -277,13 +277,13 @@ class _State extends State<DebatesStageConfirmedOverlay> {
                               effects: removeEvedenceEffect,
                             ))
                           : Container(),
-                      nextActTitleEffect.isNotEmpty
+                      addEvedencesEffects.isNotEmpty
                           ? Center(
-                              child: DebatesStageConfirmedOverlayChangeNextAct(
+                              child: DebatesStageConfirmedOverlayAddEvedence(
                               isVisible:
                                   stageState.denialConfirmedCurrentPage ==
                                       pageId++,
-                              actId: nextAct!,
+                              effects: addEvedencesEffects,
                             ))
                           : Container(),
                     ],

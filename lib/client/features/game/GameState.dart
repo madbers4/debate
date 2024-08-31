@@ -61,6 +61,7 @@ class GameState extends ChangeNotifier {
   _onGame(Game g) {
     if (g.id != game?.id) {
       game = null;
+      previousGame = null;
     }
 
     previousGame = game;
