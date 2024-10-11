@@ -17,7 +17,7 @@ class LeftSnappingSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SnappingSheet.horizontal(
-      grabbingWidth: isHidden == true ? 0 : 25,
+      grabbingWidth: isHidden == true ? 0 : 50,
       grabbing: TransparentPointer(
           transparent: isHidden == true,
           child: AnimatedOpacity(

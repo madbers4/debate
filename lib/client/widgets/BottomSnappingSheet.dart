@@ -17,14 +17,16 @@ class BottomSnappingSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SnappingSheet(
-      grabbingHeight: isHidden == true ? 0 : 25,
+      grabbingHeight: isHidden == true ? 0 : 50,
       grabbing: TransparentPointer(
         transparent: isHidden == true,
         child: AnimatedOpacity(
             duration: const Duration(milliseconds: 1000),
             opacity: isHidden == true ? 0.0 : 1.0,
             child: Container(
-              color: Colors.transparent,
+              width: 100,
+              height: 10,
+              color: Color.fromARGB(62, 0, 0, 0),
               alignment: Alignment.bottomCenter,
               child: Center(
                 child: Container(
@@ -39,7 +41,7 @@ class BottomSnappingSheet extends StatelessWidget {
       ),
       snappingPositions: const [
         SnappingPosition.factor(
-          positionFactor: 0.05,
+          positionFactor: 0.015,
           grabbingContentOffset: GrabbingContentOffset.top,
         ),
         SnappingPosition.factor(
@@ -53,13 +55,14 @@ class BottomSnappingSheet extends StatelessWidget {
       ],
       sheetBelow: SnappingSheetContent(
           draggable: false,
-          sizeBehavior: SheetSizeStatic(size: 300, expandOnOverflow: false),
+          sizeBehavior: SheetSizeStatic(size: 290, expandOnOverflow: false),
           child: TransparentPointer(
             transparent: isHidden == true,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 1000),
               opacity: isHidden == true ? 0.0 : 1.0,
-              child: sheetContent,
+              child: Container(
+                  color: Color.fromARGB(183, 0, 0, 0), child: sheetContent),
             ),
           )),
       child: child,

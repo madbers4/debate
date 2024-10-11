@@ -41,7 +41,7 @@ class DebatesStage extends StatelessWidget {
         child: ScreenLayout(
           bodyContent: const DebatesStageBody(),
           rightBottomContent: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -55,7 +55,7 @@ class DebatesStage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Row(
                   children: [
@@ -65,7 +65,7 @@ class DebatesStage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 const Row(
                   children: [
