@@ -65,7 +65,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
                 id: 'Докопаться до мелочей',
                 title: 'Докопаться до мелочей',
                 description:
-                    'Если присмотреться, то на фотографии заметны жучки в торте.'),
+                    'Если присмотреться, то на фотографии заметны жучки, измазанные в торте.'),
           ]),
       ScenarioAct(
           id: actTwoId,
@@ -76,7 +76,7 @@ final Scenario strangeEventsAtTheLucerneCafe = Scenario(
             ScenarioEvent(
                 id: 'Шпионская тень',
                 title: 'Шпионская тень',
-                description: 'Преступник, промышляющий продажей сплетен. '),
+                description: 'Преступник, промышляющий продажей сплетен.'),
             ScenarioFalsyEvent(
                 id: 'Внимание к деталям',
                 title: 'Внимание к деталям',
