@@ -64,7 +64,13 @@ class GameState extends ChangeNotifier {
       previousGame = null;
     }
 
-    previousGame = game;
+    if (game?.gameStage != GameStage.Title) {
+      previousGame = game;
+    }
+
+    if (game == null) {
+      previousGame = null;
+    }
 
     game = g;
     gameTime = Duration(milliseconds: g.gameTime);
@@ -82,6 +88,7 @@ class GameState extends ChangeNotifier {
   _updateRoute() {
     if (previousGame == null) {
       router.go('/game/right');
+
       return;
     }
 
